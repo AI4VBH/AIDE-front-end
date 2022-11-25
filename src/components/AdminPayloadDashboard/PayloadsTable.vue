@@ -43,8 +43,9 @@
                         :options.sync="tableOptions"
                         show-expand
                         expand-icon="mdi-menu-down"
+                        @item-key="onExpand"
                         single-expand
-                        @item-expanded="onExpand"
+                        :expanded.sync="expanded"
                         item-key="payload_id"
                         class="elevation-1"
                         data-cy="payload"
@@ -78,7 +79,11 @@
                         </template>
                         <template v-slot:[`expanded-item`]="{ item }">
                             <td :colspan="5">
-                                <ExecutionTree :key="renderKey" :payload-id="item.payload_id" />
+                                <ExecutionTree
+                                    :key="renderKey"
+                                    :payload-id="item.payload_id"
+                                    :selectedExecutionId="selectedExecutionID"
+                                />
                             </td>
                         </template>
                     </v-data-table>
@@ -106,6 +111,11 @@ import { throttle } from "underscore";
     components: {
         ExecutionTree,
     },
+    // data() {
+    //     return {
+    //         expanded: [],
+    //     };
+    // },
 })
 export default class PayloadsTable extends Vue {
     loading = false;
@@ -117,6 +127,9 @@ export default class PayloadsTable extends Vue {
         page: 1,
         itemsPerPage: 10,
     } as DataOptions;
+    selectedPayloadID = 0;
+    selectedExecutionID = "";
+    expanded: any[] = [];
 
     headers = [
         { text: "Patient Name", value: "patient_name", sortable: false },
@@ -130,9 +143,21 @@ export default class PayloadsTable extends Vue {
         this.renderKey++;
     }
 
+    created() {
+        this.selectedPayloadID = parseInt(this.$route.query.payload_id as string);
+        this.selectedExecutionID = this.$route.query.execution_id as string;
+
+        this.expanded = [this.paginatedPayloads.data[0]];
+    }
+
     private throttledGetPaginatedPayloads = throttle(() => {
         this.getPaginatedPayloads();
     }, 500);
+
+    @Watch("expanded")
+    async expandedChaange() {
+        console.log(this.expanded);
+    }
 
     @Watch("tableOptions")
     async tableOptionsChanged() {
@@ -158,6 +183,15 @@ export default class PayloadsTable extends Vue {
             ...this.tableOptions,
         });
         formatDateAndTimeOfArray(this.paginatedPayloads.data, "payload_received");
+
+        if (this.selectedPayloadID) {
+            this.paginatedPayloads.data.map((payload: IPayload) => {
+                if (payload.payload_id === this.selectedPayloadID) {
+                    return (this.expanded = [payload]);
+                }
+                return;
+            });
+        }
     }
 }
 </script>

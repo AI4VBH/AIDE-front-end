@@ -8,6 +8,7 @@ export interface IIssue {
     patient_name: string;
     patient_id: string;
     execution_time: string;
+    failure_reason?: string;
 }
 
 export interface IIndexedIssue {

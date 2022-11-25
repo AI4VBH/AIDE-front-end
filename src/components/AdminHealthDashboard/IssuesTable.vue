@@ -60,7 +60,10 @@
                                 text-color="red darken-3"
                                 data-cy="status"
                             >
-                                <strong>{{ item.status }}</strong>
+                                <strong v-if="item.failure_reason === 'rejected'">
+                                    {{ item.failure_reason }}
+                                </strong>
+                                <strong v-else>{{ item.status }}</strong>
                             </v-chip>
                         </template>
                         <template v-slot:[`item.patient_name`]="{ item }">
@@ -84,11 +87,16 @@
                                 small
                                 class="my-1 mr-1 secondary-button"
                                 @click.stop="
-                                    openLogsDialog(item.execution_id, item.workflow_instance_id)
+                                    viewIssueDetails(item.execution_id, item.workflow_instance_id)
                                 "
                                 data-cy="view-logs-button"
+                                width="110px"
                             >
-                                View Logs
+                                {{
+                                    item.failure_reason === "rejected"
+                                        ? "View Rejection"
+                                        : "View Logs"
+                                }}
                             </v-btn>
                             <v-btn
                                 elevation="0"
@@ -132,8 +140,6 @@ import Component from "vue-class-component";
 import { dismissIssue, getIssues } from "@/api/Admin/AdminStatisticsService";
 import { Watch } from "vue-property-decorator";
 import { formatDateAndTimeOfArray } from "@/utils/date-utilities";
-import { EventBus } from "@/event-bus";
-import { JSONViewerModalType } from "../Shared/JSONViewerDialog.vue";
 import { IIndexedIssue, IIssue } from "@/models/Admin/IIssue";
 import ConfirmationModal from "../Shared/ConfirmationModal.vue";
 
@@ -154,7 +160,7 @@ export default class IssuesTable extends Vue {
         { text: "Patient", value: "patient_name" },
         { text: "Patient ID", value: "patient_id" },
         { text: "Time", value: "execution_time" },
-        { text: "Actions", value: "actions", width: "220px" },
+        { text: "Actions", value: "actions", width: "250px" },
     ];
 
     async created(): Promise<void> {
@@ -233,14 +239,21 @@ export default class IssuesTable extends Vue {
         });
     }
 
-    openLogsDialog(execution_id: string, workflow_id: string): void {
-        EventBus.$emit(
-            "openJSONViewerDialog",
-            true,
-            JSONViewerModalType.logs,
-            execution_id,
-            workflow_id,
-        );
+    viewIssueDetails(payload_id: string, execution_id: string): void {
+        this.$router.push({
+            name: "AdminPayloadDashboard",
+            query: { payload_id: payload_id, execution_id: execution_id },
+        });
     }
+
+    // openLogsDialog(execution_id: string, workflow_id: string): void {
+    //     EventBus.$emit(
+    //         "openJSONViewerDialog",
+    //         true,
+    //         JSONViewerModalType.logs,
+    //         execution_id,
+    //         workflow_id,
+    //     );
+    // }
 }
 </script>
