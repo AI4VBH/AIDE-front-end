@@ -101,6 +101,7 @@ import { formatDateAndTimeOfString } from "@/utils/date-utilities";
 import ModelDetailsSection from "./ModelDetailsSection.vue";
 import { Prop } from "vue-property-decorator";
 import { mapToExecutionTree } from "@/utils/workflow-instance-mapper";
+import { TaskExecution, WorkflowInstance } from "@/models/Admin/IPayload";
 
 Vue.component("vue-tree", VueTree);
 
@@ -117,6 +118,9 @@ export default class ExecutionTree extends Vue {
     @Prop({ required: true })
     payloadId!: string;
 
+    @Prop()
+    selectedExecutionId?: string;
+
     loading = false;
     selectedNode: any = null;
     payloadExecutions: object = {};
@@ -124,6 +128,12 @@ export default class ExecutionTree extends Vue {
 
     mounted() {
         this.getPayloadExecutionsForTree();
+
+        //if (this.selectedExecutionId) {
+        this.selectedNode.id = this.selectedExecutionId;
+        console.log(this.selectedExecutionId);
+        console.log("in mounted");
+        //}
     }
 
     async getPayloadExecutionsForTree(): Promise<void> {
@@ -132,10 +142,23 @@ export default class ExecutionTree extends Vue {
         const workflowInstances = await getPayloadExecutions(this.payloadId);
         this.payloadExecutions = mapToExecutionTree(workflowInstances);
 
+        if (this.selectedExecutionId) {
+            workflowInstances.map((workflowInstance: WorkflowInstance, index) => {
+                workflowInstances[index].tasks.map((task: TaskExecution) => {
+                    if (task.execution_id === this.selectedExecutionId) {
+                        this.selectedNode = task;
+                        this.selectedNode.id = task.execution_id;
+                    }
+                    return;
+                });
+            });
+        }
+
         this.loading = false;
     }
 
     setSelectedNode(node: any): void {
+        console.log(node);
         if (node.id === "root-node" || node.id === "workflow-instance") {
             return;
         }

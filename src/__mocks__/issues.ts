@@ -20,14 +20,15 @@ const issuesData = [
     {
         task_id: 1,
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26111",
-        status: "Error",
         workflow_name: "Test model 1",
+        status: "partial_fail",
         model_name: "Test model 1",
         patient_name: "Test patient",
         patient_id: "1",
         execution_time: "20220516T151114",
         workflow_instance_id: "345435",
         execution_id: "45435341",
+        failure_reason: "rejected",
     },
     {
         task_id: 2,
