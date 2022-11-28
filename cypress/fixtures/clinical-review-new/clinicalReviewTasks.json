@@ -2,7 +2,7 @@
     "pageNumber": 1,
     "pageSize": 10,
     "totalPages": 10,
-    "totalRecords": 1,
+    "totalRecords": 100,
     "succeeded": true,
     "errors": null,
     "message": null,
@@ -12,7 +12,7 @@
             "clinical_review_message": {
                 "task_id": "0000-0000-0001",
                 "reviewed_task_id": "cde",
-                "execution_id": "677",
+                "execution_id": "001",
                 "reviewed_execution_id": "abc",
                 "correlation_id": "123",
                 "workflow_name": "workflow 1",
@@ -21,7 +21,7 @@
                     "patient_id": "000-000-000-001",
                     "patient_sex": "M",
                     "patient_Dob": "10-10-2000",
-                    "patient_Age": "23"
+                    "patient_age": "23"
                 },
                 "files": [],
                 "reviewer_roles": [
@@ -38,20 +38,20 @@
             "received": "1995-12-17T03:24:00"
         },
         {
-            "id": "678",
+            "id": "700",
             "clinical_review_message": {
                 "task_id": "0000-0000-0002",
                 "reviewed_task_id": "cde",
-                "execution_id": "678",
+                "execution_id": "002",
                 "reviewed_execution_id": "abc",
-                "correlation_id": "123",
+                "correlation_id": "125",
                 "workflow_name": "workflow 2",
                 "patient_metadata": {
                     "patient_name": "Alexis Bazin",
                     "patient_id": "000-000-000-002",
                     "patient_sex": "M",
-                    "patient_Dob": "10-10-2000",
-                    "patient_Age": "23"
+                    "patient_Dob": "10-12-2000",
+                    "patient_age": "72"
                 },
                 "files": [],
                 "reviewer_roles": [
@@ -72,7 +72,7 @@
             "clinical_review_message": {
                 "task_id": "0000-0000-0003",
                 "reviewed_task_id": "cde",
-                "execution_id": "677",
+                "execution_id": "003",
                 "reviewed_execution_id": "abc",
                 "correlation_id": "123",
                 "workflow_name": "workflow 3",
@@ -81,7 +81,7 @@
                     "patient_id": "000-000-000-003",
                     "patient_sex": "M",
                     "patient_Dob": "03-11-2022",
-                    "patient_Age": "09"
+                    "patient_age": "09"
                 },
                 "files": [],
                 "reviewer_roles": [
@@ -102,7 +102,7 @@
             "clinical_review_message": {
                 "task_id": "0000-0000-0003",
                 "reviewed_task_id": "cde",
-                "execution_id": "677",
+                "execution_id": "004",
                 "reviewed_execution_id": "abc",
                 "correlation_id": "123",
                 "workflow_name": "workflow 3",
@@ -111,7 +111,7 @@
                     "patient_id": "000-000-000-004",
                     "patient_sex": "F",
                     "patient_Dob": "02-09-2022",
-                    "patient_Age": "99"
+                    "patient_age": "99"
                 },
                 "files": [],
                 "reviewer_roles": [
@@ -132,7 +132,7 @@
             "clinical_review_message": {
                 "task_id": "0000-0000-0003",
                 "reviewed_task_id": "cde",
-                "execution_id": "677",
+                "execution_id": "005",
                 "reviewed_execution_id": "abc",
                 "correlation_id": "123",
                 "workflow_name": "workflow 3",
@@ -141,7 +141,7 @@
                     "patient_id": "000-000-000-005",
                     "patient_sex": "F",
                     "patient_Dob": "12-12-2010",
-                    "patient_Age": "99"
+                    "patient_age": "99"
                 },
                 "files": [],
                 "reviewer_roles": [
@@ -162,7 +162,7 @@
             "clinical_review_message": {
                 "task_id": "0000-0000-0003",
                 "reviewed_task_id": "cde",
-                "execution_id": "677",
+                "execution_id": "006",
                 "reviewed_execution_id": "abc",
                 "correlation_id": "123",
                 "workflow_name": "workflow 3",
@@ -171,7 +171,7 @@
                     "patient_id": "000-000-000-007",
                     "patient_sex": "M",
                     "patient_Dob": "12-12-2010",
-                    "patient_Age": "45"
+                    "patient_age": "45"
                 },
                 "files": [],
                 "reviewer_roles": [
@@ -192,7 +192,7 @@
             "clinical_review_message": {
                 "task_id": "0000-0000-0003",
                 "reviewed_task_id": "cde",
-                "execution_id": "677",
+                "execution_id": "007",
                 "reviewed_execution_id": "abc",
                 "correlation_id": "123",
                 "workflow_name": "workflow 3",
@@ -201,7 +201,7 @@
                     "patient_id": "000-000-000-008",
                     "patient_sex": "M",
                     "patient_Dob": "12-12-2010",
-                    "patient_Age": "45"
+                    "patient_age": "45"
                 },
                 "files": [],
                 "reviewer_roles": [

@@ -1,8 +1,24 @@
+<!--
+  ~ Copyright 2022 Crown Copyright
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
 # Table of Contents
 1. [Overview](#overview)
 2. [Component props](#component-props)
 
-# Overview 
+# Overview
 - Uses [vanilla-jsoneditor library](https://openbase.com/js/vanilla-jsoneditor/documentation).
 - JSON viewer component is used to display JSON data to the user.
 - It's available in `display` and `edit` modes.
@@ -21,7 +37,7 @@
 - `tabSize: number` - default value is 4 (only applicable to text mode).
 - `escapeControlCharacters: boolean` - default value is 'false' (only applicable to tree mode).
 - `escapeUnicodeCharacters: boolean` - default value is 'true'.
-- `validator: function (json: JSONData): ValidationError[]` - validate JSON document. 
+- `validator: function (json: JSONData): ValidationError[]` - validate JSON document.
 - `onError(err: Error)` - callback fired when an error occurs.
 - `onChange(content: Content, previousContent: Content, changeStatus: { contentErrors: ContentErrors, patchResult: JSONPatchResult | null })` - callback invoked when a change happens.
 - `onChangeMode(mode: 'tree' | 'text')` - callback invoked when the mode is changed.
@@ -32,4 +48,4 @@
 - `queryLanguagesId` - id of currently selected query language.
 - `onChangeQueryLanguage: (queryLanguageId: string) => void` - callback invoked when user changes selected query language.
 - `onFocus()` - callback invoked when editor gets focus.
-- `onBlur()` - callback invoked when editor loses focus. 
+- `onBlur()` - callback invoked when editor loses focus.

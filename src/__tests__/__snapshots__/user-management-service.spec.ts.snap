@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserManagementService createRole returns expected OK result 1`] = `
+Object {
+  "name": "new-role",
+}
+`;
+
+exports[`UserManagementService createUser returns expected OK result 1`] = `
+Object {
+  "email": "joe.b@email.com",
+  "enabled": true,
+  "firstName": "Joe",
+  "id": "5f446d6d-98ae-42c8-aa23-e234e8906882",
+  "lastName": "Bloggs",
+  "realmRoles": Array [
+    Object {
+      "id": "953bac4f-bba3-443f-b341-82a3f9ab9d85",
+      "name": "Admin",
+    },
+  ],
+}
+`;
+
+exports[`UserManagementService getAllRoles returns expected OK result 1`] = `
+Array [
+  Object {
+    "id": "953bac4f-bba3-443f-b341-82a3f9ab9d85",
+    "name": "Admin",
+  },
+]
+`;
+
+exports[`UserManagementService getAllUsers passes params correctly 1`] = `
+Object {
+  "totalFilteredUserCount": 0,
+  "totalUserCount": 0,
+  "users": Array [],
+}
+`;
+
+exports[`UserManagementService getAllUsers passes params correctly 2`] = `
+Object {
+  "totalFilteredUserCount": 0,
+  "totalUserCount": 0,
+  "users": Array [],
+}
+`;
+
+exports[`UserManagementService getPaginatedRoles passes params correctly 1`] = `
+Object {
+  "totalFilteredUserCount": 0,
+  "totalUserCount": 0,
+  "users": Array [],
+}
+`;
+
+exports[`UserManagementService getPaginatedRoles passes params correctly 2`] = `
+Object {
+  "totalFilteredUserCount": 0,
+  "totalUserCount": 0,
+  "users": Array [],
+}
+`;
+
+exports[`UserManagementService updateRole returns expected OK result 1`] = `
+Object {
+  "id": "750bbc11-ad19-4925-a640-5ed629452db5",
+  "name": "role-edit",
+}
+`;
+
+exports[`UserManagementService updateUserDetails returns expected OK result 1`] = `
+Object {
+  "email": "joe.b@email.com",
+  "enabled": true,
+  "firstName": "Joe",
+  "id": "5f446d6d-98ae-42c8-aa23-e234e8906882",
+  "lastName": "Bloggs",
+  "realmRoles": Array [
+    Object {
+      "id": "953bac4f-bba3-443f-b341-82a3f9ab9d85",
+      "name": "Admin",
+    },
+  ],
+}
+`;

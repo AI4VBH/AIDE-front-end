@@ -21,7 +21,7 @@
                     "patient_id": "8821-123-232-0909",
                     "patient_sex": "M",
                     "patient_Dob": "12-09-2003",
-                    "patient_Age": "23"
+                    "patient_age": "23"
                 },
                 "files": [],
                 "reviewer_roles": [

@@ -1,15 +1,31 @@
+/*
+ * Copyright 2022 Crown Copyright
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 export default class ApiMocks {
-    //Health Dashboard
-    public static ADMIN_DASHBOARD_MODELS = require("./health-dashboard/adminDashboardModels.json");
-    public static ADMIN_DASHBOARD_MODEL_DETAILS_ONE_DAY = require("./health-dashboard/adminDashboardModelDetailsOneDay.json");
-    public static ADMIN_DASHBOARD_MODEL_DETAILS_TEN_DAYS = require("./health-dashboard/adminDashboardModelDetailsTenDays.json");
-    public static ADMIN_DASHBOARD_MODEL_DETAILS_ONE_HUNDRED_DAYS = require("./health-dashboard/adminDashboardModelDetailsOneHundredDays.json");
-    public static ADMIN_DASHBOARD_EXECUTION_LOGS = require("./health-dashboard/adminDashboardExecutionLogs.json");
-    public static ADMIN_DASHBOARD_NO_FAILED_MODELS = require("./health-dashboard/adminDashboardNoFailedModels.json");
-    public static ADMIN_DASHBOARD_FAILED_MODELS = require("./health-dashboard/adminDashboardFailedModels.json");
-    public static ADMIN_DASHBOARD_TASKS = require("./health-dashboard/adminDashboardIssues.json");
-    public static ADMIN_DASHBOARD_SINGLE_TASK = require("./health-dashboard/adminDashboardSingleIssue.json");
-    public static ADMIN_DASHBOARD_ISSUES_DISMISS = require("./health-dashboard/adminDashboardIssuesDismiss.json");
+    //System Dashboard
+    public static ADMIN_DASHBOARD_MODELS = require("./system-dashboard/adminDashboardModels.json");
+    public static ADMIN_DASHBOARD_MODEL_DETAILS_ONE_DAY = require("./system-dashboard/adminDashboardModelDetailsOneDay.json");
+    public static ADMIN_DASHBOARD_MODEL_DETAILS_TEN_DAYS = require("./system-dashboard/adminDashboardModelDetailsTenDays.json");
+    public static ADMIN_DASHBOARD_MODEL_DETAILS_ONE_HUNDRED_DAYS = require("./system-dashboard/adminDashboardModelDetailsOneHundredDays.json");
+    public static ADMIN_DASHBOARD_EXECUTION_LOGS = require("./system-dashboard/adminDashboardExecutionLogs.json");
+    public static ADMIN_DASHBOARD_NO_FAILED_MODELS = require("./system-dashboard/adminDashboardNoFailedModels.json");
+    public static ADMIN_DASHBOARD_FAILED_MODELS = require("./system-dashboard/adminDashboardFailedModels.json");
+    public static ADMIN_DASHBOARD_TASKS = require("./system-dashboard/adminDashboardIssues.json");
+    public static ADMIN_DASHBOARD_SINGLE_TASK = require("./system-dashboard/adminDashboardSingleIssue.json");
+    public static ADMIN_DASHBOARD_ISSUES_DISMISS = require("./system-dashboard/adminDashboardIssuesDismiss.json");
     //Payload Dashboard
     public static ADMIN_DASHBOARD_PAYLOAD_TABLE = require("./payload-dashboard/payloadTable.json");
     public static ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS = require("./payload-dashboard/payloadExecutions.json");
@@ -44,19 +60,16 @@ export default class ApiMocks {
     public static WORKFLOW_EXAMPLE = require("./workflows/workflowExample.json");
     public static WORKFLOW_EMPTY = require("./workflows/workflowEmpty.json");
     public static WORKFLOW_ERRORS = require("./workflows/workflowsErrors.json");
-    //Clinical Review
-    public static CLINICAL_REVIEW_ALL_EXECUTIONS = require("./clinical-review/allExecutionsForReview.json");
-    public static CLINICAL_REVIEW_PAGE_1 = require("./clinical-review/clinicalReviewPage1.json");
-    public static CLINICAL_REVIEW_PAGE_2 = require("./clinical-review/clinicalReviewPage2.json");
-    public static CLINICAL_REVIEW_REVIEWED = require("./clinical-review/clinicalReviewed.json");
-    public static CLINICAL_REVIEW_RESPONSE = require("./clinical-review/clinicalReviewResponse.json");
-    public static REMOTE_DICOM_METADATA = require("./clinical-review/remoteDicomMetadata.json");
     //Clinical Review NEW
     public static CLINICAL_REVIEW_TASKS = require("./clinical-review-new/clinicalReviewTasks.json");
     public static CLINICAL_REVIEW_SEARCH_PATIENT_ID = require("./clinical-review-new/searchPatientId.json");
     public static CLINICAL_REVIEW_SEARCH_PATIENT_NAME = require("./clinical-review-new/searchPatientName.json");
     public static CLINICAL_REVIEW_SEARCH_APPLICATION_NAME = require("./clinical-review-new/searchApplicationName.json");
-    public static CLINICAL_REVIEW_PAGINATION = require("./clinical-review-new/pagination.json");
+    public static CLINICAL_REVIEW_PAGINATION_PAGE_2 = require("./clinical-review-new/paginationPage2.json");
+    public static CLINICAL_REVIEW_PAGINATION_PAGE_9 = require("./clinical-review-new/paginationPage9.json");
+    public static CLINICAL_REVIEW_PAGINATION_PAGE_10 = require("./clinical-review-new/paginationPage10.json");
+    public static CLINICAL_REVIEW_EXECUTION_1 = require("./clinical-review-new/executionIdRequest1.json");
+    public static CLINICAL_REVIEW_EXECUTION_2 = require("./clinical-review-new/executionIdRequest2.json");
     //App Store
     public static APP_STORE_ALL_PERMUTATIONS = require("./app-store/appStoreAllPermutations.json");
     public static APP_STORE_SPECIALITY_DROP_DOWN = require("./app-store/appStoreSpecialityDropDown.json");

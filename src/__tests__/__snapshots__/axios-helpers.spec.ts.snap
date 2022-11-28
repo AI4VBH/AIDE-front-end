@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`axios-helpers provideDefaultResult returns expected result when status is OK 1`] = `
+Array [
+  "hello",
+  "world",
+]
+`;
+
+exports[`axios-helpers provideDefaultResult returns expected result when status is not OK 1`] = `
+Array [
+  ":(",
+]
+`;

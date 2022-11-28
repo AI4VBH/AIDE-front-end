@@ -1,3 +1,19 @@
+/*
+ * Copyright 2022 Crown Copyright
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 import UserManagement from "pages/userManagement";
 import { UserData } from "../data/user-management/users";
 import { RoleData } from "data/user-management/roles";
@@ -194,42 +210,26 @@ describe("Error statuscode responses", () => {
             beforeEach(() => {
                 userManagementPage.initPageOneUser();
             });
-            const getUserErrorMessage = "Something unexpected went wrong retrieving users";
-            const getRolesErrorMessage = "Something unexpected went wrong retrieving roles";
+
             const addUserErrorMessage = "Something unexpected went wrong creating the user";
             const editErrorMessage = "Something unexpected went wrong updating the user details";
-            const deleteErrorMessage = "Something unexpected went wrong deleting the user";
-            it(`Toast displayed if a ${statusCode} error is returned from the API on getting roles on users tab`, () => {
-                userManagementPage.errorRoles(statusCode);
-                userManagementPage.assertToast(getRolesErrorMessage);
-            });
-            it(`Toast displayed if a ${statusCode} error is returned from the API on searching for users`, () => {
-                userManagementPage.errorSearch(statusCode);
-                userManagementPage.assertToast(getUserErrorMessage);
-            });
-            it(`Toast displayed if a ${statusCode} error is returned from the API on going to next page`, () => {
-                userManagementPage.errorPagination(statusCode);
-                userManagementPage.assertToast(getUserErrorMessage);
-            });
+
             it(`Toast displayed if a ${statusCode} error is returned on adding new user`, () => {
                 userManagementPage.clickDataCy("add-user");
                 userManagementPage.enterAddUserDetails();
                 userManagementPage.errorAddUser(statusCode);
                 userManagementPage.assertToast(addUserErrorMessage);
             });
+
             it(`Toast displayed if a ${statusCode} error is returned on editing existing user`, () => {
                 userManagementPage.clickEditButtonUsers(0);
                 userManagementPage.clickDataCy("user-modal-save");
                 userManagementPage.errorEditUser(statusCode);
                 userManagementPage.assertToast(editErrorMessage);
             });
-            it(`Toast displayed if a ${statusCode} error is returned on deleting existing user`, () => {
-                userManagementPage.clickDeleteButtonUsers(0);
-                userManagementPage.errorDeleteUser(statusCode);
-                userManagementPage.assertToast(deleteErrorMessage);
-            });
         });
     });
+
     [400, 404, 500].forEach((statusCode) => {
         describe(`Roles - ${statusCode}`, () => {
             beforeEach(() => {
@@ -237,37 +237,20 @@ describe("Error statuscode responses", () => {
             });
             const addRoleErrorMessage = "Something unexpected went wrong creating the role";
             const editErrorMessage = "Something unexpected went wrong updating the role details";
-            const deleteErrorMessage = "Something unexpected went wrong deleting the role";
-            const getRolesErrorMessage = "Something unexpected went wrong retrieving roles";
-            it(`Toast displayed if a ${statusCode} error is returned on getting roles`, () => {
-                userManagementPage.errorRoles(statusCode);
-                userManagementPage.assertToast(getRolesErrorMessage);
-            });
-            it(`Toast displayed if a ${statusCode} error is returned on searching for a role`, () => {
-                userManagementPage.errorSearchRoles(statusCode);
-                userManagementPage.assertToast(getRolesErrorMessage);
-            });
-            it(`Toast displayed if a ${statusCode} error is returned on going to next page`, () => {
-                userManagementPage.errorNextPageRoles(statusCode);
-                userManagementPage.assertToast(getRolesErrorMessage);
-            });
+
             it(`Toast displayed if a ${statusCode} error is returned on adding new role`, () => {
                 userManagementPage.clickDataCy("add-role");
                 userManagementPage.enterNewRoleName();
                 userManagementPage.errorAddingRole(statusCode);
                 userManagementPage.assertToast(addRoleErrorMessage);
             });
+
             it(`Toast displayed if a ${statusCode} error is returned on editing existing role`, () => {
                 userManagementPage.clickEditButtonRoles();
                 userManagementPage.editRoles();
                 userManagementPage.clickDataCy("role-modal-save");
                 userManagementPage.errorEditingRole(statusCode);
                 userManagementPage.assertToast(editErrorMessage);
-            });
-            it(`Toast displayed if a ${statusCode} error is returned on deleting existing role`, () => {
-                userManagementPage.clickDeleteButtonRoles();
-                userManagementPage.errorDeletingRole(statusCode);
-                userManagementPage.assertToast(deleteErrorMessage);
             });
         });
     });

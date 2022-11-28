@@ -1,13 +1,29 @@
+/*
+ * Copyright 2022 Crown Copyright
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 import ApiMocks from "../fixtures/mockIndex";
 import { IOverview } from "../../src/models/Admin/IOverview";
 import { IIssue } from "../../src/models/Admin/IIssue";
 import { IModelDetails, IModelSummary } from "../../src/models/Admin/IModel";
-import { ExecStatistics } from "data/health-dashboard/statistics";
-import { ModelDetailsData } from "../data/health-dashboard/graph";
+import { ExecStatistics } from "data/system-dashboard/statistics";
+import { ModelDetailsData } from "../data/system-dashboard/graph";
 import moment from "moment";
 import { NhsDateTimeFormat } from "../../src/utils/date-utilities";
 
-export default class AdminHealthDashboardPage {
+export default class AdminSystemDashboardPage {
     //OVERVIEW
     static MODEL_FAILURES = `model-failures`;
     static MODEL_EXECUTIONS = `model-failures-executions`;
@@ -47,11 +63,11 @@ export default class AdminHealthDashboardPage {
     public assertTableDataCorrect(task: IIssue): void {
         this.getTask(task.task_id).within(() => {
             const dateTime = this.formatTaskDate(task.execution_time, false);
-            cy.dataCy(AdminHealthDashboardPage.TASK_ID).should(`contain`, task.task_id);
-            cy.dataCy(AdminHealthDashboardPage.STATUS).should(`contain`, task.status);
-            cy.dataCy(AdminHealthDashboardPage.PATIENT_NAME).should(`contain`, task.patient_name);
-            cy.dataCy(AdminHealthDashboardPage.PATIENT_ID).should(`contain`, task.patient_id);
-            cy.dataCy(AdminHealthDashboardPage.EXECUTION_DATE_TIME).should(`contain`, dateTime);
+            cy.dataCy(AdminSystemDashboardPage.TASK_ID).should(`contain`, task.task_id);
+            cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, task.status);
+            cy.dataCy(AdminSystemDashboardPage.PATIENT_NAME).should(`contain`, task.patient_name);
+            cy.dataCy(AdminSystemDashboardPage.PATIENT_ID).should(`contain`, task.patient_id);
+            cy.dataCy(AdminSystemDashboardPage.EXECUTION_DATE_TIME).should(`contain`, dateTime);
         });
     }
 
@@ -65,7 +81,7 @@ export default class AdminHealthDashboardPage {
     public assertLogsDisplayed(task: IIssue): void {
         cy.intercept(`/logs/4543531`, ApiMocks.ADMIN_DASHBOARD_EXECUTION_LOGS).as(`Logs`);
         this.getTask(task.task_id).within(() => {
-            cy.dataCy(AdminHealthDashboardPage.VIEW_LOGS_BUTTON).click();
+            cy.dataCy(AdminSystemDashboardPage.VIEW_LOGS_BUTTON).click();
             cy.wait([`@Logs`]);
             Cypress.on(`uncaught:exception`, () => {
                 return false;
@@ -74,12 +90,12 @@ export default class AdminHealthDashboardPage {
         this.assertExecutionLogs(ApiMocks.ADMIN_DASHBOARD_EXECUTION_LOGS[0].msg);
     }
     public assertExecutionLogs(text: string): void {
-        cy.dataCy(AdminHealthDashboardPage.LOG).should("contain.text", text);
+        cy.dataCy(AdminSystemDashboardPage.LOG).should("contain.text", text);
     }
 
     public assertTaskCanBeDismissed(task: IIssue): void {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
-            cy.dataCy(AdminHealthDashboardPage.DISMISS_BUTTON).click();
+            cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
         cy.intercept(`/workflowinstances/345435/executions/4543531/acknowledge`, {
             statusCode: 200,
@@ -87,46 +103,46 @@ export default class AdminHealthDashboardPage {
         cy.intercept(`/issues/failed`, {
             body: ApiMocks.ADMIN_DASHBOARD_ISSUES_DISMISS,
         }).as(`FailedIssues`);
-        cy.dataCy(AdminHealthDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
+        cy.dataCy(AdminSystemDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
         cy.wait(`@AcknowledgedIssues`);
         cy.wait(`@FailedIssues`);
         Cypress.on(`uncaught:exception`, () => {
             return false;
         });
-        cy.dataCy(AdminHealthDashboardPage.TASK_ID)
+        cy.dataCy(AdminSystemDashboardPage.TASK_ID)
             .contains(` ${task.task_id} `)
             .should(`not.exist`);
     }
 
     public assertDismisalOfTaskFailure(task: IIssue): void {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
-            cy.dataCy(AdminHealthDashboardPage.DISMISS_BUTTON).click();
+            cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
         cy.intercept(`/workflowinstances/345435/executions/4543531/acknowledge`, {
             statusCode: 400,
         }).as(`FailedDismiss`);
-        cy.dataCy(AdminHealthDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
+        cy.dataCy(AdminSystemDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
         cy.wait(`@FailedDismiss`);
         Cypress.on(`uncaught:exception`, () => {
             return false;
         });
-        cy.dataCy(AdminHealthDashboardPage.TASK_ID).contains(` ${task.task_id} `).should(`exist`);
+        cy.dataCy(AdminSystemDashboardPage.TASK_ID).contains(` ${task.task_id} `).should(`exist`);
     }
 
     public assertOverviewModelDataCorrect(executionStatistics: IOverview): void {
-        cy.dataCy(AdminHealthDashboardPage.MODEL_NUMBERS).should(
+        cy.dataCy(AdminSystemDashboardPage.MODEL_NUMBERS).should(
             `contain`,
             executionStatistics.deployed_models,
         );
-        cy.dataCy(AdminHealthDashboardPage.MODEL_EXECUTIONS).should(
+        cy.dataCy(AdminSystemDashboardPage.MODEL_EXECUTIONS).should(
             `contain`,
             executionStatistics.model_executions,
         );
-        cy.dataCy(AdminHealthDashboardPage.MODEL_EXECUTIONS2).should(
+        cy.dataCy(AdminSystemDashboardPage.MODEL_EXECUTIONS2).should(
             `contain`,
             executionStatistics.model_executions,
         );
-        cy.dataCy(AdminHealthDashboardPage.MODEL_FAILURES).should(
+        cy.dataCy(AdminSystemDashboardPage.MODEL_FAILURES).should(
             `contain`,
             executionStatistics.model_failures,
         );
@@ -134,26 +150,26 @@ export default class AdminHealthDashboardPage {
 
     public assertCorrectHighlightAroundTile(executionStatistics: ExecStatistics): void {
         if (executionStatistics.model_failures >= 1) {
-            cy.dataCy(AdminHealthDashboardPage.FAILURES_HIGHLIGHT)
+            cy.dataCy(AdminSystemDashboardPage.FAILURES_HIGHLIGHT)
                 .should(`be.visible`)
                 .should(`have.css`, `border`, `1px solid rgb(211, 47, 47)`);
         } else {
-            cy.dataCy(AdminHealthDashboardPage.FAILURES_HIGHLIGHT)
+            cy.dataCy(AdminSystemDashboardPage.FAILURES_HIGHLIGHT)
                 .should(`be.visible`)
                 .should(`have.css`, `border`, `1px solid rgb(255, 255, 255)`);
         }
     }
 
     public selectAllIssues(): void {
-        cy.get(AdminHealthDashboardPage.SELECT_ALL).click();
+        cy.get(AdminSystemDashboardPage.SELECT_ALL).click();
     }
 
     public selectDismissSelectedButton(): void {
-        cy.dataCy(AdminHealthDashboardPage.DISMISS_SELECTED).click();
+        cy.dataCy(AdminSystemDashboardPage.DISMISS_SELECTED).click();
     }
 
     public AssertDismissButtonUnclickable(): void {
-        cy.dataCy(AdminHealthDashboardPage.DISMISS_SELECTED).should(`be.disabled`);
+        cy.dataCy(AdminSystemDashboardPage.DISMISS_SELECTED).should(`be.disabled`);
     }
 
     public getTask(taskId: string): Cypress.Chainable<JQuery> {
@@ -161,7 +177,7 @@ export default class AdminHealthDashboardPage {
     }
 
     public unselectAllIssues(): void {
-        cy.get(AdminHealthDashboardPage.SELECT_ALL).click();
+        cy.get(AdminSystemDashboardPage.SELECT_ALL).click();
     }
 
     public assertCheckboxesSelected(): void {
@@ -173,7 +189,7 @@ export default class AdminHealthDashboardPage {
     }
 
     public assertNoIssues(): void {
-        cy.dataCy(AdminHealthDashboardPage.TASK_ID).should(`not.exist`);
+        cy.dataCy(AdminSystemDashboardPage.TASK_ID).should(`not.exist`);
     }
 
     public selectOKValidation(): void {
@@ -183,13 +199,13 @@ export default class AdminHealthDashboardPage {
         cy.intercept(`/issues/failed`, {
             body: [],
         }).as(`EmptyIssues`);
-        cy.dataCy(AdminHealthDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
+        cy.dataCy(AdminSystemDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
         cy.wait(`@AcknowledgedIssues`);
         cy.wait(`@EmptyIssues`);
     }
 
     public selectCancelValidation(): void {
-        cy.dataCy(AdminHealthDashboardPage.VALIDATION_CANCEL).click({
+        cy.dataCy(AdminSystemDashboardPage.VALIDATION_CANCEL).click({
             multiple: true,
             force: true,
         });
@@ -197,20 +213,20 @@ export default class AdminHealthDashboardPage {
 
     public searchIssuesTable(text: string): void {
         if (text !== ``) {
-            cy.dataCy(AdminHealthDashboardPage.SEARCH_ISSUES_TABLE).clear().type(text);
+            cy.dataCy(AdminSystemDashboardPage.SEARCH_ISSUES_TABLE).clear().type(text);
         } else {
-            cy.dataCy(AdminHealthDashboardPage.SEARCH_ISSUES_TABLE).clear();
+            cy.dataCy(AdminSystemDashboardPage.SEARCH_ISSUES_TABLE).clear();
         }
     }
 
     public assertCorrectTaskReturned(task: IIssue): void {
-        cy.dataCy(AdminHealthDashboardPage.TASK)
+        cy.dataCy(AdminSystemDashboardPage.TASK)
             .should(`contain`, task.task_id)
             .should(`contain`, task.patient_name);
     }
 
     public assertModelsVisible(modelData: IModelSummary): void {
-        cy.dataCy(AdminHealthDashboardPage.DROPDOWN).click();
+        cy.dataCy(AdminSystemDashboardPage.DROPDOWN).click();
         cy.wait(250);
         cy.get(`.model-names .v-list-item__content > .v-list-item__title`).should(
             `contain`,
@@ -225,16 +241,16 @@ export default class AdminHealthDashboardPage {
             `/graph/${modelDetails.model_id}?start_date=${startDate}&end_date=${endDate}`,
             modelDetails,
         ).as(`FirstModel`);
-        cy.dataCy(AdminHealthDashboardPage.DROPDOWN).click();
+        cy.dataCy(AdminSystemDashboardPage.DROPDOWN).click();
         cy.wait(500);
         cy.get(".model-names .v-list-item__content").eq(model_array_order).click();
-        cy.dataCy(AdminHealthDashboardPage.STATUS2).should(`contain`, modelDetails.status);
-        cy.dataCy(AdminHealthDashboardPage.EXECUTIONS).should(
+        cy.dataCy(AdminSystemDashboardPage.STATUS2).should(`contain`, modelDetails.status);
+        cy.dataCy(AdminSystemDashboardPage.EXECUTIONS).should(
             `contain`,
             modelDetails.total_executions,
         );
-        cy.dataCy(AdminHealthDashboardPage.FAILURES).should(`contain`, modelDetails.total_failures);
-        cy.dataCy(AdminHealthDashboardPage.FAILURE_RATE).should(
+        cy.dataCy(AdminSystemDashboardPage.FAILURES).should(`contain`, modelDetails.total_failures);
+        cy.dataCy(AdminSystemDashboardPage.FAILURE_RATE).should(
             `contain`,
             this.calculateFailureRate(modelDetails),
         );
@@ -271,7 +287,7 @@ export default class AdminHealthDashboardPage {
             `/graph/${ModelDetailsData.MODEL_DETAILS_ASDA.model_id}?start_date=${startDate}&end_date=${endDate}`,
             ApiMocks.ADMIN_DASHBOARD_MODEL_DETAILS_ONE_DAY,
         ).as(`FirstModel`);
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@Issues`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;
@@ -288,7 +304,7 @@ export default class AdminHealthDashboardPage {
             `/graph/${ModelDetailsData.MODEL_DETAILS_ASDA.model_id}?start_date=${startDate}&end_date=${endDate}`,
             ApiMocks.ADMIN_DASHBOARD_MODEL_DETAILS_ONE_DAY,
         ).as(`FirstModel`);
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@Model stats`, `@Issues`, `@Models`, `@FirstModel`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;
@@ -307,7 +323,7 @@ export default class AdminHealthDashboardPage {
             `/graph/${ModelDetailsData.MODEL_DETAILS_ASDA.model_id}?start_date=${startDate}&end_date=${endDate}`,
             ApiMocks.ADMIN_DASHBOARD_MODEL_DETAILS_ONE_DAY,
         ).as(`FirstModel`);
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@Issues`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;
@@ -326,7 +342,7 @@ export default class AdminHealthDashboardPage {
             `/graph/${ModelDetailsData.MODEL_DETAILS_ASDA.model_id}?start_date=${startDate}&end_date=${endDate}`,
             ApiMocks.ADMIN_DASHBOARD_MODEL_DETAILS_ONE_DAY,
         ).as(`FirstModel`);
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@Issues`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;
@@ -345,7 +361,7 @@ export default class AdminHealthDashboardPage {
             `/graph/${ModelDetailsData.MODEL_DETAILS_ASDA.model_id}?start_date=${startDate}&end_date=${endDate}`,
             { statusCode: error },
         ).as(`FirstModel`);
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@Issues`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;
@@ -356,7 +372,7 @@ export default class AdminHealthDashboardPage {
         cy.intercept(`/overview?period=day`, ApiMocks.ADMIN_DASHBOARD_NO_FAILED_MODELS).as(
             `No models fail`,
         );
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@No models fail`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;
@@ -368,7 +384,7 @@ export default class AdminHealthDashboardPage {
             `Model stats`,
         );
         cy.intercept(`/issues/failed`, ApiMocks.ADMIN_DASHBOARD_SINGLE_TASK).as(`Task`);
-        cy.visit(`/admin-health-dashboard`);
+        cy.visit(`/admin-system-dashboard`);
         cy.wait([`@Model stats`, `@Task`]);
         Cypress.on(`uncaught:exception`, () => {
             return false;

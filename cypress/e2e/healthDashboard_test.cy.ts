@@ -1,74 +1,90 @@
-import { TaskData } from "../data/health-dashboard/issues";
-import { ModelSummaryData } from "../data/health-dashboard/models";
-import { ModelDetailsData } from "../data/health-dashboard/graph";
-import { ExecStatistics } from "../data/health-dashboard/statistics";
-import AdminHealthDashboardPage from "../pages/healthDashboard";
+/*
+ * Copyright 2022 Crown Copyright
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+import { TaskData } from "../data/system-dashboard/issues";
+import { ModelSummaryData } from "../data/system-dashboard/models";
+import { ModelDetailsData } from "../data/system-dashboard/graph";
+import { ExecStatistics } from "../data/system-dashboard/statistics";
+import AdminSystemDashboardPage from "../pages/systemDashboard";
 import { AbstractPage } from "pages/abstractPage";
 
-const adminHealthPage = new AdminHealthDashboardPage();
+const adminSystemPage = new AdminSystemDashboardPage();
 const abstractPage = new AbstractPage();
 
-describe.skip(`Admin health - Overview section`, () => {
+describe.skip(`Admin System - Overview section`, () => {
     it(`when I pass in data with failed models,
     I can see the correct data and highlight around the model failure tile`, () => {
-        adminHealthPage.initPage();
-        adminHealthPage.assertCorrectHighlightAroundTile(ExecStatistics.FAILED_MODELS_DATA);
+        adminSystemPage.initPage();
+        adminSystemPage.assertCorrectHighlightAroundTile(ExecStatistics.FAILED_MODELS_DATA);
     });
     it(`when I pass in data with no failed models,
     I can see the correct data and highlight around the model failure tile`, () => {
-        adminHealthPage.initPageWithNoFailedModels();
-        adminHealthPage.assertCorrectHighlightAroundTile(ExecStatistics.NO_FAILED_MODELS_DATA);
+        adminSystemPage.initPageWithNoFailedModels();
+        adminSystemPage.assertCorrectHighlightAroundTile(ExecStatistics.NO_FAILED_MODELS_DATA);
     });
     it(`I can see the correct data returned from the API for the overview section`, () => {
-        adminHealthPage.initPage();
-        adminHealthPage.assertOverviewModelDataCorrect(ExecStatistics.FAILED_MODELS_DATA);
+        adminSystemPage.initPage();
+        adminSystemPage.assertOverviewModelDataCorrect(ExecStatistics.FAILED_MODELS_DATA);
     });
 });
 
-describe(`Admin health - Issues table section`, () => {
+describe(`Admin System - Issues table section`, () => {
     beforeEach(() => {
-        adminHealthPage.initPage();
+        adminSystemPage.initPage();
         cy.injectAxe();
     });
     it(`I can view the task data in the issues table`, () => {
-        adminHealthPage.assertTableDataCorrect(TaskData.TASK_DATA_1);
-        adminHealthPage.assertTableDataCorrect(TaskData.TASK_DATA_2);
+        adminSystemPage.assertTableDataCorrect(TaskData.TASK_DATA_1);
+        adminSystemPage.assertTableDataCorrect(TaskData.TASK_DATA_2);
     });
     it(`I can select all and unselect all issues`, () => {
-        adminHealthPage.selectAllIssues();
-        adminHealthPage.assertCheckboxesSelected();
-        adminHealthPage.unselectAllIssues();
-        adminHealthPage.assertCheckboxesUnselected();
+        adminSystemPage.selectAllIssues();
+        adminSystemPage.assertCheckboxesSelected();
+        adminSystemPage.unselectAllIssues();
+        adminSystemPage.assertCheckboxesUnselected();
     });
     it(`I can view a task's execution logs`, () => {
-        adminHealthPage.assertLogsDisplayed(TaskData.TASK_DATA_1);
+        adminSystemPage.assertLogsDisplayed(TaskData.TASK_DATA_1);
     });
     it(`I am able to remove individual issues by clicking the dismiss button on each task`, () => {
-        adminHealthPage.assertTaskCanBeDismissed(TaskData.TASK_DATA_1);
+        adminSystemPage.assertTaskCanBeDismissed(TaskData.TASK_DATA_1);
         abstractPage.assertToast(`You have successfully dismissed 1 task.`);
     });
     it(`I am able to dismiss all selected issues by clicking the 'Dismiss selected' button`, () => {
-        adminHealthPage.selectAllIssues();
-        adminHealthPage.selectDismissSelectedButton();
-        adminHealthPage.selectCancelValidation();
-        adminHealthPage.selectDismissSelectedButton();
-        adminHealthPage.selectOKValidation();
-        adminHealthPage.assertNoIssues();
+        adminSystemPage.selectAllIssues();
+        adminSystemPage.selectDismissSelectedButton();
+        adminSystemPage.selectCancelValidation();
+        adminSystemPage.selectDismissSelectedButton();
+        adminSystemPage.selectOKValidation();
+        adminSystemPage.assertNoIssues();
         abstractPage.assertToast(`You have successfully dismissed 5 tasks.`);
     });
     it(`I am unable to dismiss a task when there is an error`, () => {
-        adminHealthPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
+        adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
         abstractPage.assertToast(`Something unexpected went wrong with your dismissal request!`);
     });
 
     it(`I cannot click the 'Dismiss selected' button if no issues have been selected`, () => {
-        adminHealthPage.AssertDismissButtonUnclickable();
+        adminSystemPage.AssertDismissButtonUnclickable();
     });
 });
 
-describe.skip(`Admin health - Graph section`, () => {
+describe.skip(`Admin System - Graph section`, () => {
     beforeEach(() => {
-        adminHealthPage.initPage();
+        adminSystemPage.initPage();
         cy.injectAxe();
     });
     const tuple = [
@@ -79,7 +95,7 @@ describe.skip(`Admin health - Graph section`, () => {
     tuple.forEach(($type) => {
         const [model_data, test_name] = $type;
         it(`I can view the ${test_name} model from the dropdown`, () => {
-            adminHealthPage.assertModelsVisible(model_data as ModelSummaryData);
+            adminSystemPage.assertModelsVisible(model_data as ModelSummaryData);
         });
     });
     const tuple2 = [
@@ -90,7 +106,7 @@ describe.skip(`Admin health - Graph section`, () => {
     tuple2.forEach(($type) => {
         const [modelDetails_data, model_array_order, test_name] = $type;
         it(`I can view the correct model statistics for the ${test_name} model`, () => {
-            adminHealthPage.assertModelDataDisplayed(
+            adminSystemPage.assertModelDataDisplayed(
                 modelDetails_data as ModelDetailsData,
                 model_array_order as number,
             );
@@ -98,30 +114,30 @@ describe.skip(`Admin health - Graph section`, () => {
     });
 });
 
-describe(`Admin health - API errors`, () => {
+describe(`Admin System - API errors`, () => {
     const text = "Something unexpected went wrong retrieving executions!";
     const dismissalText = "Something unexpected went wrong with your dismissal request!";
     [400, 404, 500].forEach((error_code) => {
         it.skip(`Toast displayed on an overview GET request when a ${error_code} status is returned`, () => {
-            adminHealthPage.initPageOverviewApiErrors(error_code as number);
-            adminHealthPage.assertLatestErrorContainsMessage(text);
+            adminSystemPage.initPageOverviewApiErrors(error_code as number);
+            adminSystemPage.assertLatestErrorContainsMessage(text);
         });
         it(`Toast displayed on an issues/tasks GET request when a ${error_code} status is returned`, () => {
-            adminHealthPage.initPageIssuesApiErrors(error_code as number);
-            adminHealthPage.assertLatestErrorContainsMessage(text);
+            adminSystemPage.initPageIssuesApiErrors(error_code as number);
+            adminSystemPage.assertLatestErrorContainsMessage(text);
         });
         it(`Toast displayed on a task dismissal request when a ${error_code} status is returned`, () => {
-            adminHealthPage.initPage();
-            adminHealthPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
+            adminSystemPage.initPage();
+            adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
             abstractPage.assertToast(dismissalText);
         });
         it.skip(`Toast displayed on a models section GET request when a ${error_code} status is returned`, () => {
-            adminHealthPage.initPageModelsApiErrors(error_code as number);
-            adminHealthPage.assertLatestErrorContainsMessage(text);
+            adminSystemPage.initPageModelsApiErrors(error_code as number);
+            adminSystemPage.assertLatestErrorContainsMessage(text);
         });
         it.skip(`Toast displayed on a model statistics GET request when a ${error_code} status is returned`, () => {
-            adminHealthPage.initPageModelStatisticsApiErrors(error_code as number);
-            adminHealthPage.assertLatestErrorContainsMessage(text);
+            adminSystemPage.initPageModelStatisticsApiErrors(error_code as number);
+            adminSystemPage.assertLatestErrorContainsMessage(text);
         });
     });
 });

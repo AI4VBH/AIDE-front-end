@@ -1,3 +1,19 @@
+<!--
+  Copyright 2022 Crown Copyright
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+  -->
+
 <template>
     <v-container fluid class="clinical-review-container">
         <patient-header
@@ -42,9 +58,11 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { defineComponent } from "vue";
 import DicomView from "@/components/clinical-review/dicom-view.vue";
 import ClinicalReviewTaskList from "@/components/clinical-review/tasks/task-list.vue";
+import { updateClinicalReview } from "../api/ClinicalReview/ClinicalReviewService";
 import PatientHeader from "@/components/clinical-review/patient-header.vue";
 import AcceptRejectDialog from "@/components/clinical-review/accept-reject-dialog.vue";
 import {
@@ -101,15 +119,52 @@ export default defineComponent({
             this.actionModal = true;
             this.reject = true;
         },
-        performAction(
+        async performAction(
             data: { reason: string | undefined; description: string },
             fetchTasks: () => void,
         ) {
-            // TODO in another ticket
-            // call the right endpoint based on `this.reject`
-            console.log(data);
-            this.actionModal = false;
-            fetchTasks();
+            let executionId = "";
+            if (typeof this.currentTaskExecutionId === "string") {
+                executionId = this.currentTaskExecutionId;
+            }
+
+            const accepted = data.reason === "";
+            if (accepted) {
+                const responseOk = await updateClinicalReview(
+                    executionId,
+                    true,
+                    "",
+                    data.description,
+                );
+
+                if (responseOk) {
+                    Vue.$toast.success("Clinical Review has been accepted");
+                    this.actionModal = false;
+                    fetchTasks();
+                } else {
+                    Vue.$toast.warning("Something unexpected went wrong. Please try again.");
+                }
+            } else {
+                let reason = "";
+                if (typeof data.reason === "string") {
+                    reason = data.reason;
+                }
+
+                const responseOk = await updateClinicalReview(
+                    executionId,
+                    false,
+                    reason,
+                    data.description,
+                );
+
+                if (responseOk) {
+                    Vue.$toast.error("Clinical Review has been rejected");
+                    this.actionModal = false;
+                    fetchTasks();
+                } else {
+                    Vue.$toast.warning("Something unexpected went wrong. Please try again.");
+                }
+            }
         },
     },
 });
