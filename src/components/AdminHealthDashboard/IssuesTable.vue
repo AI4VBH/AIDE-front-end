@@ -76,7 +76,7 @@
                                 text-color="red darken-3"
                                 data-cy="status"
                             >
-                                <strong v-if="item.failure_reason === 'rejected'">
+                                <strong v-if="item.failure_reason === 'Rejected'">
                                     {{ item.failure_reason }}
                                 </strong>
                                 <strong v-else>{{ item.status }}</strong>
@@ -109,7 +109,7 @@
                                 width="110px"
                             >
                                 {{
-                                    item.failure_reason === "rejected"
+                                    item.failure_reason === "Rejected"
                                         ? "View Rejection"
                                         : "View Logs"
                                 }}
@@ -262,15 +262,5 @@ export default class IssuesTable extends Vue {
             query: { payload_id: payload_id, execution_id: execution_id },
         });
     }
-
-    // openLogsDialog(execution_id: string, workflow_id: string): void {
-    //     EventBus.$emit(
-    //         "openJSONViewerDialog",
-    //         true,
-    //         JSONViewerModalType.logs,
-    //         execution_id,
-    //         workflow_id,
-    //     );
-    // }
 }
 </script>

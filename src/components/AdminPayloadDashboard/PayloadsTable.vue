@@ -59,7 +59,7 @@
                         :options.sync="tableOptions"
                         show-expand
                         expand-icon="mdi-menu-down"
-                        @item-key="onExpand"
+                        @item-expanded="onExpand"
                         single-expand
                         :expanded.sync="expanded"
                         item-key="payload_id"
@@ -128,11 +128,6 @@ import { IPagedResponse } from "@/models/common/IPagedResponse";
     components: {
         ExecutionTree,
     },
-    // data() {
-    //     return {
-    //         expanded: [],
-    //     };
-    // },
 })
 export default class PayloadsTable extends Vue {
     loading = false;
@@ -146,7 +141,7 @@ export default class PayloadsTable extends Vue {
     } as DataOptions;
     selectedPayloadID = 0;
     selectedExecutionID = "";
-    expanded: any[] = [];
+    expanded: unknown[] = [];
 
     headers = [
         { text: "Patient Name", value: "patient_name", sortable: false },
@@ -160,21 +155,14 @@ export default class PayloadsTable extends Vue {
         this.renderKey++;
     }
 
-    created() {
+    mounted() {
         this.selectedPayloadID = parseInt(this.$route.query.payload_id as string);
         this.selectedExecutionID = this.$route.query.execution_id as string;
-
-        this.expanded = [this.paginatedPayloads.data[0]];
     }
 
     private throttledGetPaginatedPayloads = throttle(() => {
         this.getPaginatedPayloads();
     }, 500);
-
-    @Watch("expanded")
-    async expandedChaange() {
-        console.log(this.expanded);
-    }
 
     @Watch("tableOptions")
     async tableOptionsChanged() {
