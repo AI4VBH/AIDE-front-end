@@ -11,7 +11,7 @@ const issuesData = [
         execution_time: "20220516T151114",
         workflow_instance_id: "345435",
         execution_id: "45435341",
-        failure_reason: "rejected",
+        failure_reason: "Rejected",
     },
     {
         task_id: 2,

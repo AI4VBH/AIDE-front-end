@@ -108,27 +108,15 @@ export default class ExecutionTree extends Vue {
     loading = false;
     selectedNode: any = null;
     payloadExecutions: object = {};
+    workflowInstances: WorkflowInstance[] = [];
     treeConfig = { nodeWidth: 100, nodeHeight: 70, levelHeight: 200 };
 
-    mounted() {
-        this.getPayloadExecutionsForTree();
-
-        //if (this.selectedExecutionId) {
-        this.selectedNode.id = this.selectedExecutionId;
-        console.log(this.selectedExecutionId);
-        console.log("in mounted");
-        //}
-    }
-
-    async getPayloadExecutionsForTree(): Promise<void> {
-        this.loading = true;
-
-        const workflowInstances = await getPayloadExecutions(this.payloadId);
-        this.payloadExecutions = mapToExecutionTree(workflowInstances);
+    async mounted() {
+        await this.getPayloadExecutionsForTree();
 
         if (this.selectedExecutionId) {
-            workflowInstances.map((workflowInstance: WorkflowInstance, index) => {
-                workflowInstances[index].tasks.map((task: TaskExecution) => {
+            this.workflowInstances.map((workflowInstance: WorkflowInstance, index) => {
+                this.workflowInstances[index].tasks.map((task: TaskExecution) => {
                     if (task.execution_id === this.selectedExecutionId) {
                         this.selectedNode = task;
                         this.selectedNode.id = task.execution_id;
@@ -137,12 +125,18 @@ export default class ExecutionTree extends Vue {
                 });
             });
         }
+    }
+
+    async getPayloadExecutionsForTree(): Promise<void> {
+        this.loading = true;
+
+        this.workflowInstances = await getPayloadExecutions(this.payloadId);
+        this.payloadExecutions = mapToExecutionTree(this.workflowInstances);
 
         this.loading = false;
     }
 
     setSelectedNode(node: any): void {
-        console.log(node);
         if (node.id === "root-node" || node.id === "workflow-instance") {
             return;
         }
