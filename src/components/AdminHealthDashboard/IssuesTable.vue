@@ -101,7 +101,12 @@
                             <v-btn
                                 elevation="0"
                                 small
-                                class="my-1 mr-1 secondary-button"
+                                class="my-1 mr-1"
+                                :class="
+                                    item.failure_reason === 'Rejected'
+                                        ? 'primary-button'
+                                        : 'secondary-button'
+                                "
                                 @click.stop="
                                     viewIssueDetails(item.execution_id, item.workflow_instance_id)
                                 "
@@ -110,8 +115,8 @@
                             >
                                 {{
                                     item.failure_reason === "Rejected"
-                                        ? "View Rejection"
-                                        : "View Logs"
+                                        ? "View rejection"
+                                        : "View logs"
                                 }}
                             </v-btn>
                             <v-btn
