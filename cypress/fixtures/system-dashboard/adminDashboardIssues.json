@@ -1,26 +1,26 @@
 [
     {
         "task_id": 1,
-        "payload_id": "041293d0-ab97-4ea1-b967-42ec62f26111",
+        "payload_id": "111293d0-ab97-4ea1-b967-42ec62f26111",
         "status": "Error",
         "model_name": "Test model 1",
         "patient_name": "Test patient",
         "patient_id": "1",
         "execution_time": "20220516T151114",
         "workflow_instance_id":"345435",
-        "execution_id": "4543531",
-        "failure_reason": "Rejected"
+        "execution_id": "222293d0-ab97-4ea1-b967-42ec62f26222",
+        "failure_reason": "rejected"
     },
     {
         "task_id": 2,
-        "payload_id": "041293d0-ab97-4ea1-b967-42ec62f26222",
+        "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
         "status": "Error",
         "model_name": "Test model 2",
         "patient_name": "Frederico McSullivan",
         "patient_id": "10",
         "execution_time": "20210417T151112",
         "workflow_instance_id":"345435",
-        "execution_id": "4543532",
+        "execution_id": "444293d0-ab97-4ea1-b967-42ec62f26444",
         "failure_reason": "Error"
     },
     {

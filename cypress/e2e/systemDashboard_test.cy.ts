@@ -18,6 +18,7 @@ import { TaskData } from "../data/system-dashboard/issues";
 import { ModelSummaryData } from "../data/system-dashboard/models";
 import { ModelDetailsData } from "../data/system-dashboard/graph";
 import { ExecStatistics } from "../data/system-dashboard/statistics";
+import { PayloadTreeData } from "data/payloads-dashboard/payloadTree";
 import AdminSystemDashboardPage from "../pages/systemDashboard";
 import { AbstractPage } from "pages/abstractPage";
 
@@ -76,11 +77,11 @@ describe(`Admin System - Issues table section`, () => {
     it(`I cannot click the 'Dismiss selected' button if no issues have been selected`, () => {
         adminSystemPage.AssertDismissButtonUnclickable();
     });
-    it.only(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
-        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_1);
+    it(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
+        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_1, PayloadTreeData.REDIRECT, 2);
     });
     it(`On selecting 'View logs', I am taken to that task in Payloads table`, () => {
-        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_2);
+        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_2, PayloadTreeData.REDIRECT, 1);
     });
 });
 

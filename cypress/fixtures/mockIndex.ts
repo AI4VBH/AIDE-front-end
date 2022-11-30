@@ -31,6 +31,7 @@ export default class ApiMocks {
     public static ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS = require("./payload-dashboard/payloadExecutions.json");
     public static PAYLOAD_SEARCH = require("./payload-dashboard/payloadSearch.json");
     public static PAYLOAD_METADATA = require("./payload-dashboard/payloadMetadata.json");
+    public static PAYLOAD_TASK_REDIRECT = require("./payload-dashboard/payloadTaskRedirect.json");
     //User Management
     public static USER_MANAGEMENT_GET_USERS = require("./user-management/userManagement.json");
     public static USER_MANAGEMENT_ROLES = require("./user-management/userManagementRoles.json");

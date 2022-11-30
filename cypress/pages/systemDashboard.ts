@@ -22,7 +22,7 @@ import { ExecStatistics } from "data/system-dashboard/statistics";
 import { ModelDetailsData } from "../data/system-dashboard/graph";
 import moment from "moment";
 import { NhsDateTimeFormat } from "../../src/utils/date-utilities";
-import { IPagedResponse, IPayload } from "../../src/models/Admin/IPayload";
+import { IPagedResponse, IPayload, WorkflowInstance } from "../../src/models/Admin/IPayload";
 
 export default class AdminSystemDashboardPage {
     //OVERVIEW
@@ -83,7 +83,7 @@ export default class AdminSystemDashboardPage {
         });
     }
 
-    public assertTakenToCorrectTask(task: IIssue) {
+    public assertTakenToCorrectTask(task: IIssue, node: WorkflowInstance, array: number) {
         this.getTask(task.task_id).within(() => {
             cy.intercept(
                 `/payloads?pageNumber=1&pageSize=10&patientId=&patientName=`,
@@ -91,10 +91,14 @@ export default class AdminSystemDashboardPage {
             ).as(`payloadTable`);
             cy.intercept(
                 `/payloads/${task.payload_id}/executions`,
-                ApiMocks.ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS,
+                ApiMocks.PAYLOAD_TASK_REDIRECT,
             ).as(`executions`);
+            cy.intercept(
+                `executions/${node.tasks[array].workflow_instance_id}/tasks/${task.execution_id}/artifacts`,
+                ApiMocks.PAYLOAD_TASK_REDIRECT,
+            ).as(`node`);
             cy.dataCy("view-logs-button").click();
-            cy.wait([`@payloadTable`]);
+            cy.wait([`@payloadTable`, `@executions`, `@node`]);
             cy.url().should(
                 "eq",
                 `http://localhost:8080/admin-payload-dashboard?payload_id=${task.payload_id}&execution_id=${task.execution_id}`,
