@@ -60,8 +60,8 @@
                                 text-color="red darken-3"
                                 data-cy="status"
                             >
-                                <strong v-if="item.failure_reason === 'Rejected'">
-                                    {{ item.failure_reason }}
+                                <strong v-if="item.failure_reason === 'rejected'">
+                                    Rejected
                                 </strong>
                                 <strong v-else>{{ item.status }}</strong>
                             </v-chip>
@@ -87,18 +87,16 @@
                                 small
                                 class="my-1 mr-1"
                                 :class="
-                                    item.failure_reason === 'Rejected'
+                                    item.failure_reason === 'rejected'
                                         ? 'primary-button'
                                         : 'secondary-button'
                                 "
-                                @click.stop="
-                                    viewIssueDetails(item.execution_id, item.workflow_instance_id)
-                                "
+                                @click.stop="viewIssueDetails(item.payload_id, item.execution_id)"
                                 data-cy="view-logs-button"
                                 width="110px"
                             >
                                 {{
-                                    item.failure_reason === "Rejected"
+                                    item.failure_reason === "rejected"
                                         ? "View rejection"
                                         : "View logs"
                                 }}

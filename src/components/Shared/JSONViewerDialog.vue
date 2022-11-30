@@ -7,7 +7,7 @@
                     <v-progress-linear indeterminate color="blue" class=""></v-progress-linear>
                 </div>
                 <div v-show="!loading" class="modal-content">
-                    <v-toolbar color="#61366e" dark>{{ modalType }} Viewer</v-toolbar>
+                    <v-toolbar color="#61366e" class="pl-5" dark>{{ modalType }} Viewer</v-toolbar>
                     <v-card-text style="height: 60vh; overflow-y: scroll !important" data-cy="logs">
                         <JSONViewer
                             mode="text"
