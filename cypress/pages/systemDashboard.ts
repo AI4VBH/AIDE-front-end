@@ -22,6 +22,7 @@ import { ExecStatistics } from "data/system-dashboard/statistics";
 import { ModelDetailsData } from "../data/system-dashboard/graph";
 import moment from "moment";
 import { NhsDateTimeFormat } from "../../src/utils/date-utilities";
+import { IPagedResponse, IPayload } from "../../src/models/Admin/IPayload";
 
 export default class AdminSystemDashboardPage {
     //OVERVIEW
@@ -88,15 +89,31 @@ export default class AdminSystemDashboardPage {
                 `/payloads?pageNumber=1&pageSize=10&patientId=&patientName=`,
                 ApiMocks.ADMIN_DASHBOARD_PAYLOAD_TABLE,
             ).as(`payloadTable`);
+            cy.intercept(
+                `/payloads/${task.payload_id}/executions`,
+                ApiMocks.ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS,
+            ).as(`executions`);
             cy.dataCy("view-logs-button").click();
             cy.wait([`@payloadTable`]);
             cy.url().should(
                 "eq",
-                "http://localhost:8080/admin-payload-dashboard?payload_id=4543531&execution_id=345435",
+                `http://localhost:8080/admin-payload-dashboard?payload_id=${task.payload_id}&execution_id=${task.execution_id}`,
             );
             Cypress.on(`uncaught:exception`, () => {
                 return false;
             });
+        });
+    }
+
+    public expandAndViewTree(payload: IPagedResponse<IPayload>): void {
+        const payload_id = payload.data[0].payload_id;
+        cy.intercept(
+            `/payloads/${payload_id}/executions`,
+            ApiMocks.ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS,
+        ).as(`executions`);
+        cy.get("tbody > :nth-child(1) > :nth-child(5) > .v-icon").click({ force: true });
+        Cypress.on(`uncaught:exception`, () => {
+            return false;
         });
     }
 

@@ -38,6 +38,7 @@ export class TaskData implements IIssue {
         this.patient_id = task.patient_id;
         this.execution_time = task.execution_time;
         this.failure_reason = task.failure_reason;
+        this.execution_id = task.execution_id;
     }
 
     public static TASK_DATA_1: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[0]);
