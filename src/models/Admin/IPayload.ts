@@ -15,7 +15,7 @@
  */
 
 export interface IPayload {
-    payload_id: number;
+    payload_id: string;
     patient_name: string;
     patient_id: string;
     payload_received: string;
