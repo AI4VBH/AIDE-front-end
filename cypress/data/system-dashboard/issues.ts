@@ -21,6 +21,7 @@ export class TaskData implements IIssue {
     task_id: string;
     payload_id: string;
     status: string;
+    workflow_name: string;
     model_name: string;
     patient_name: string;
     patient_id: string;
@@ -32,6 +33,7 @@ export class TaskData implements IIssue {
         this.task_id = task.task_id;
         this.payload_id = task.payload_id;
         this.status = task.status;
+        this.workflow_name = task.workflow_name;
         this.model_name = task.model_name;
         this.patient_name = task.patient_name;
         this.patient_id = task.patient_id;

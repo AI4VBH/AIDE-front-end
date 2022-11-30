@@ -165,6 +165,7 @@ export default class IssuesTable extends Vue {
     dialogDelete = false;
     headers = [
         { text: "Payload ID", value: "payload_id" },
+        { text: "Workflow Name", value: "workflow_name" },
         { text: "Task ID", value: "task_id" },
         { text: "Status", value: "status" },
         { text: "Patient", value: "patient_name" },

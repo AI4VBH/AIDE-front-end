@@ -3,6 +3,7 @@
         "task_id": 1,
         "payload_id": "041293d0-ab97-4ea1-b967-42ec62f26111",
         "status": "Error",
+        "workflow_name": "Test model",
         "model_name": "Test model",
         "patient_name": "Test patient",
         "patient_id": "1",
