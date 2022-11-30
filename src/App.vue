@@ -138,12 +138,9 @@ h1 {
     color: #000;
 }
 
-h2 {
+h2,
+h3 {
     font-family: "Open Sans", sans-serif !important;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    color: #000;
 }
 
 .required::after {

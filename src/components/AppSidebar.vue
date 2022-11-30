@@ -41,6 +41,14 @@ import Component from "vue-class-component";
 import { EventBus } from "@/event-bus";
 import { routes } from "@/router";
 
+const accessibility = {
+    title: "Accessibility Statement",
+    icon: "mdi-human",
+    datacy: "accessibility-button",
+    route: "Accessibility",
+    roles: [],
+};
+
 @Component
 export default class AppSidebar extends Vue {
     // Declared as component data
@@ -119,9 +127,12 @@ export default class AppSidebar extends Vue {
                 return this.roles.some((r) => item.roles.includes(r));
             });
         }
+
         if (this.roles.length == 0) {
             this.items = [this.getDefaultRoute()];
         }
+
+        this.items.push(accessibility);
 
         EventBus.$on("toggleSidebar", (drawer: boolean) => {
             this.drawer = drawer;

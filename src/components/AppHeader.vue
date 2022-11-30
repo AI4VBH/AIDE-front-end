@@ -127,6 +127,10 @@ export default class AppHeader extends Vue {
             case "AdminExportConfiguration":
                 this.pageTitle = "Export Destination Configuration";
                 break;
+
+            case "Accessibility":
+                this.pageTitle = "Accessibility Statement";
+                break;
         }
     }
 
