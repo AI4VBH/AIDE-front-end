@@ -138,7 +138,7 @@ export default class PayloadsTable extends Vue {
         page: 1,
         itemsPerPage: 10,
     } as DataOptions;
-    selectedPayloadID = 0;
+    selectedPayloadID = "";
     selectedExecutionID = "";
     expanded: unknown[] = [];
 
@@ -155,7 +155,7 @@ export default class PayloadsTable extends Vue {
     }
 
     mounted() {
-        this.selectedPayloadID = parseInt(this.$route.query.payload_id as string);
+        this.selectedPayloadID = this.$route.query.payload_id as string;
         this.selectedExecutionID = this.$route.query.execution_id as string;
     }
 
