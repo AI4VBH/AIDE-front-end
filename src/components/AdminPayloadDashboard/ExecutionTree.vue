@@ -4,7 +4,7 @@
             <div style="width: 75%">
                 <vue-tree
                     ref="tree"
-                    style="width: 100%; height: 380px"
+                    style="width: 100%; height: 400px"
                     :dataset="payloadExecutions"
                     :config="treeConfig"
                     direction="horizontal"
@@ -27,7 +27,7 @@
                                         : `node-${node.name}`
                                 "
                             >
-                                <span class="tree-node-title mt-5">
+                                <span class="tree-node-title mt-3">
                                     <span
                                         :data-cy="`node-name-${node.workflow_name}`"
                                         v-if="node.id === 'workflow-instance'"
@@ -109,7 +109,7 @@ export default class ExecutionTree extends Vue {
     selectedNode: any = null;
     payloadExecutions: object = {};
     workflowInstances: WorkflowInstance[] = [];
-    treeConfig = { nodeWidth: 100, nodeHeight: 70, levelHeight: 200 };
+    treeConfig = { nodeWidth: 115, nodeHeight: 70, levelHeight: 200 };
 
     async mounted() {
         await this.getPayloadExecutionsForTree();
