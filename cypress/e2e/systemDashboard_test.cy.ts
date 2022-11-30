@@ -56,9 +56,6 @@ describe(`Admin System - Issues table section`, () => {
         adminSystemPage.unselectAllIssues();
         adminSystemPage.assertCheckboxesUnselected();
     });
-    it(`I can view a task's execution logs`, () => {
-        adminSystemPage.assertLogsDisplayed(TaskData.TASK_DATA_1);
-    });
     it(`I am able to remove individual issues by clicking the dismiss button on each task`, () => {
         adminSystemPage.assertTaskCanBeDismissed(TaskData.TASK_DATA_1);
         abstractPage.assertToast(`You have successfully dismissed 1 task.`);
@@ -76,9 +73,14 @@ describe(`Admin System - Issues table section`, () => {
         adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
         abstractPage.assertToast(`Something unexpected went wrong with your dismissal request!`);
     });
-
     it(`I cannot click the 'Dismiss selected' button if no issues have been selected`, () => {
         adminSystemPage.AssertDismissButtonUnclickable();
+    });
+    it.only(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
+        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_1);
+    });
+    it(`On selecting 'View logs', I am taken to that task in Payloads table`, () => {
+        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_2);
     });
 });
 

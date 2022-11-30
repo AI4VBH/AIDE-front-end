@@ -64,10 +64,39 @@ export default class AdminSystemDashboardPage {
         this.getTask(task.task_id).within(() => {
             const dateTime = this.formatTaskDate(task.execution_time, false);
             cy.dataCy(AdminSystemDashboardPage.TASK_ID).should(`contain`, task.task_id);
-            cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, task.status);
             cy.dataCy(AdminSystemDashboardPage.PATIENT_NAME).should(`contain`, task.patient_name);
             cy.dataCy(AdminSystemDashboardPage.PATIENT_ID).should(`contain`, task.patient_id);
             cy.dataCy(AdminSystemDashboardPage.EXECUTION_DATE_TIME).should(`contain`, dateTime);
+            switch (task.failure_reason) {
+                case "Rejected":
+                    cy.dataCy(AdminSystemDashboardPage.STATUS).should(
+                        `contain`,
+                        task.failure_reason,
+                    );
+                    cy.dataCy("view-logs-button").should(`contain`, "View rejection");
+                    break;
+                default:
+                    cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, task.status);
+                    cy.dataCy("view-logs-button").should(`contain`, "View logs");
+            }
+        });
+    }
+
+    public assertTakenToCorrectTask(task: IIssue) {
+        this.getTask(task.task_id).within(() => {
+            cy.intercept(
+                `/payloads?pageNumber=1&pageSize=10&patientId=&patientName=`,
+                ApiMocks.ADMIN_DASHBOARD_PAYLOAD_TABLE,
+            ).as(`payloadTable`);
+            cy.dataCy("view-logs-button").click();
+            cy.wait([`@payloadTable`]);
+            cy.url().should(
+                "eq",
+                "http://localhost:8080/admin-payload-dashboard?payload_id=4543531&execution_id=345435",
+            );
+            Cypress.on(`uncaught:exception`, () => {
+                return false;
+            });
         });
     }
 
