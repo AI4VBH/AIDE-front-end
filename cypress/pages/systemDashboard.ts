@@ -69,11 +69,8 @@ export default class AdminSystemDashboardPage {
             cy.dataCy(AdminSystemDashboardPage.PATIENT_ID).should(`contain`, task.patient_id);
             cy.dataCy(AdminSystemDashboardPage.EXECUTION_DATE_TIME).should(`contain`, dateTime);
             switch (task.failure_reason) {
-                case "Rejected":
-                    cy.dataCy(AdminSystemDashboardPage.STATUS).should(
-                        `contain`,
-                        task.failure_reason,
-                    );
+                case "rejected":
+                    cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, "Rejected");
                     cy.dataCy("view-logs-button").should(`contain`, "View rejection");
                     break;
                 default:
@@ -147,9 +144,12 @@ export default class AdminSystemDashboardPage {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
-        cy.intercept(`/workflowinstances/345435/executions/4543531/acknowledge`, {
-            statusCode: 200,
-        }).as(`AcknowledgedIssues`);
+        cy.intercept(
+            `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
+            {
+                statusCode: 200,
+            },
+        ).as(`AcknowledgedIssues`);
         cy.intercept(`/issues/failed`, {
             body: ApiMocks.ADMIN_DASHBOARD_ISSUES_DISMISS,
         }).as(`FailedIssues`);
@@ -168,9 +168,12 @@ export default class AdminSystemDashboardPage {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
-        cy.intercept(`/workflowinstances/345435/executions/4543531/acknowledge`, {
-            statusCode: 400,
-        }).as(`FailedDismiss`);
+        cy.intercept(
+            `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
+            {
+                statusCode: 400,
+            },
+        ).as(`FailedDismiss`);
         cy.dataCy(AdminSystemDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
         cy.wait(`@FailedDismiss`);
         Cypress.on(`uncaught:exception`, () => {
