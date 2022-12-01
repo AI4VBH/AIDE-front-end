@@ -219,10 +219,17 @@ export default class Destinations extends AbstractPage {
         this.assertValidationText("No spaces or special characters allowed");
     }
 
-    public sameNameValidation(field) {
-        this.clickDataCy(field);
-        cy.dataCy(field).type("SameName");
-        this.assertValidationText("No spaces or special characters allowed");
+    public assertPortIsValid() {
+        this.clickDataCy("destination-port");
+        cy.dataCy("destination-port").type("0");
+        this.containsText(".v-messages__message", "Invalid port. Must be between 1 and 65535");
+        cy.dataCy("destination-port").clear();
+        cy.dataCy("destination-port").type("65536");
+        this.containsText(".v-messages__message", "Invalid port. Must be between 1 and 65535");
+    }
+
+    public assertRequiredText() {
+        cy.get(".v-messages__message").should("contain.text", "Required");
     }
 
     public addressValidation(field) {
