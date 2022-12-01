@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,18 +19,6 @@ export interface IPayload {
     patient_name: string;
     patient_id: string;
     payload_received: string;
-}
-
-export interface IPagedResponse<T> {
-    pageNumber: number;
-    pageSize: number;
-    firstPage: string;
-    lastPage: string;
-    totalPages: number;
-    totalRecords: number;
-    nextPage: string;
-    previousPage: string;
-    data: T[];
 }
 
 export interface WorkflowInstance {

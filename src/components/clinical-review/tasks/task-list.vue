@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -57,18 +57,22 @@
             data-cy="worklist-search"
         />
 
-        <v-list dense nav class="task-list">
-            <v-list-item-group mandatory v-model="currentTask">
-                <task-item
-                    v-for="task in tasks"
-                    :key="task.clinical_review_message.execution_id"
-                    :execution_id="task.clinical_review_message.execution_id"
-                    :application="task.clinical_review_message.application_metadata"
-                    :patient="task.clinical_review_message.patient_metadata"
-                    :received="task.received"
-                />
-            </v-list-item-group>
-        </v-list>
+        <div class="task-list">
+            <div class="task-list-scroll">
+                <v-list dense nav>
+                    <v-list-item-group mandatory v-model="currentTask" role="group">
+                        <task-item
+                            v-for="task in tasks"
+                            :key="task.clinical_review_message.execution_id"
+                            :execution_id="task.clinical_review_message.execution_id"
+                            :application="task.clinical_review_message.application_metadata"
+                            :patient="task.clinical_review_message.patient_metadata"
+                            :received="task.received"
+                        />
+                    </v-list-item-group>
+                </v-list>
+            </div>
+        </div>
 
         <v-pagination
             class="mt-1"
@@ -88,24 +92,34 @@ import { defineComponent } from "vue";
 import { debounce } from "underscore";
 import TaskItem from "./task-item.vue";
 import { getClinicalReviewTasks } from "@/api/ClinicalReview/ClinicalReviewService";
-import { ClinicalReviewTask } from "@/models/ClinicalReview/ClinicalReviewTask";
+import { ClinicalReviewRecord } from "@/models/ClinicalReview/ClinicalReviewTask";
+
+interface IClinicalReviewTaskListData {
+    search: string;
+    loading: boolean;
+    currentTask: string;
+    currentPage: number;
+    totalPages: number;
+    searchParameter: string;
+    tasks: ClinicalReviewRecord[];
+}
 
 export default defineComponent({
     components: {
         TaskItem,
     },
-    data() {
+    data(): IClinicalReviewTaskListData {
         return {
             search: "",
-            loading: false,
+            loading: true,
             currentTask: "",
             currentPage: 1,
             totalPages: 1,
             searchParameter: "patientId",
-            tasks: [] as ClinicalReviewTask[],
+            tasks: [],
         };
     },
-    emits: ["task-selected", "tasks-count-updated"],
+    emits: ["task-selected", "tasks-count-updated", "tasks-loading-changed"],
     watch: {
         search() {
             this.throttledFetchTasks();
@@ -123,6 +137,9 @@ export default defineComponent({
                 this.currentTask,
                 this.tasks.find((t) => t.clinical_review_message.execution_id === this.currentTask),
             );
+        },
+        loading() {
+            this.$emit("tasks-loading-changed", this.loading);
         },
     },
     methods: {
@@ -165,6 +182,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+::v-deep .v-input {
+    flex: initial;
+}
+
 .task-list-container {
     display: flex;
     flex-direction: column;
@@ -178,6 +199,17 @@ export default defineComponent({
 }
 
 .task-list {
-    height: 100%;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+
+    .task-list-scroll {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+    }
 }
 </style>

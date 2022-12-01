@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
         <div class="ml-6 mr-5" data-cy="logo">
             <router-link :to="{ name: getDefaultDestinationForUser() }">
                 <v-img class="mx-auto" src="@/assets/NHSlogo.svg" height="33px" width="83px" />
+                <span class="d-sr-only">Home</span>
             </router-link>
         </div>
 
@@ -27,6 +28,7 @@
         <div class="mx-3" data-cy="logo">
             <router-link to="/">
                 <v-img class="mx-auto" src="@/assets/AIClogo.svg" height="64px" width="65px" />
+                <span class="d-sr-only">Home</span>
             </router-link>
         </div>
 
@@ -102,17 +104,10 @@ export default class AppHeader extends Vue {
                 break;
 
             case "ClinicalReview":
-                this.pageTitle = "Model outputs for clinical review";
-                break;
-
-            case "ClinicalReviewViewer":
-                this.pageTitle = "Model outputs for clinical review";
+                this.pageTitle = "Application outputs for clinical review";
                 break;
 
             case "ApplicationRepositoryList":
-                this.pageTitle = "Application Repository";
-                break;
-
             case "ApplicationRepositoryDetail":
                 this.pageTitle = "Application Repository";
                 break;
@@ -131,6 +126,10 @@ export default class AppHeader extends Vue {
 
             case "AdminExportConfiguration":
                 this.pageTitle = "Export Destination Configuration";
+                break;
+
+            case "Accessibility":
+                this.pageTitle = "Accessibility Statement";
                 break;
         }
     }

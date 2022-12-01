@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -44,5 +44,31 @@ describe("<patient-header />", () => {
 
         cy.dataCy("accept-task").should("be.enabled");
         cy.dataCy("reject-task").should("be.enabled");
+    });
+
+    it("disables action buttons when study date is not present", () => {
+        const patientMetadata: PatientMetadata = {
+            patient_name: "Joe Bloggs",
+            patient_age: "20",
+            patient_dob: "2002-01-01",
+            patient_id: "some-patient-id",
+            patient_sex: "M",
+        };
+
+        const propsData = {
+            patientMetadata,
+            studyDate: "",
+        };
+
+        cy.mount(PatientHeader, { propsData });
+
+        cy.dataCy("patient-name").should("contain.text", patientMetadata.patient_name);
+        cy.dataCy("patient-age").should("contain.text", patientMetadata.patient_age);
+        cy.dataCy("patient-dob").should("contain.text", formatDate(patientMetadata.patient_dob));
+        cy.dataCy("patient-id").should("contain.text", patientMetadata.patient_id);
+        cy.dataCy("patient-sex").should("contain.text", patientMetadata.patient_sex);
+
+        cy.dataCy("accept-task").should("not.be.enabled");
+        cy.dataCy("reject-task").should("not.be.enabled");
     });
 });

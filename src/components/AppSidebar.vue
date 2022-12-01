@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -40,6 +40,14 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { EventBus } from "@/event-bus";
 import { routes } from "@/router";
+
+const accessibility = {
+    title: "Accessibility Statement",
+    icon: "mdi-human",
+    datacy: "accessibility-button",
+    route: "Accessibility",
+    roles: [],
+};
 
 @Component
 export default class AppSidebar extends Vue {
@@ -119,9 +127,12 @@ export default class AppSidebar extends Vue {
                 return this.roles.some((r) => item.roles.includes(r));
             });
         }
+
         if (this.roles.length == 0) {
             this.items = [this.getDefaultRoute()];
         }
+
+        this.items.push(accessibility);
 
         EventBus.$on("toggleSidebar", (drawer: boolean) => {
             this.drawer = drawer;

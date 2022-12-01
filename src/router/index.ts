@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import Vue from "vue";
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from "vue-router";
+import AccessibilityStatement from "@/views/AccessibilityStatement.vue";
 import AdminSystemDashboard from "@/views/AdminSystemDashboard.vue";
 import AdminDicomConfiguration from "@/views/AdminDicomConfiguration.vue";
 import AdminPayloadDashboard from "@/views/AdminPayloadDashboard.vue";
@@ -37,6 +38,11 @@ function sleep(ms: number) {
 }
 
 export const routes: Array<RouteConfig> = [
+    {
+        path: "/accessibility",
+        name: "Accessibility",
+        component: AccessibilityStatement,
+    },
     {
         path: "/admin-system-dashboard",
         name: "AdminSystemDashboard",

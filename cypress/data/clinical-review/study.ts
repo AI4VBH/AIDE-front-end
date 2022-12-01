@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,20 +16,20 @@
 
 import {
     ClinicalReviewSeries,
-    ClinicalReviewTaskDetail,
+    ClinicalReviewStudyDetails,
 } from "../../../src/models/ClinicalReview/ClinicalReviewTask";
 import ApiMocks from "../../fixtures/mockIndex";
 
-export class StudyData implements ClinicalReviewTaskDetail {
+export class StudyData implements ClinicalReviewStudyDetails {
     study_date?: string;
     study: ClinicalReviewSeries[];
 
-    constructor(studyData: ClinicalReviewTaskDetail) {
+    constructor(studyData: ClinicalReviewStudyDetails) {
         this.study_date = studyData.study_date;
         this.study = studyData.study;
     }
 
     public static STUDY_DATA_2: StudyData = new StudyData(
-        <ClinicalReviewTaskDetail>ApiMocks.CLINICAL_REVIEW_EXECUTION_2,
+        <ClinicalReviewStudyDetails>ApiMocks.CLINICAL_REVIEW_EXECUTION_2,
     );
 }

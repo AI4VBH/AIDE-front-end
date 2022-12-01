@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,10 +24,11 @@
             @task-rejected="rejectTask"
         />
         <v-row class="clinical-review">
-            <v-col class="task-list">
+            <v-col class="task-list" v-show="!tasksLoading && taskCount > 0">
                 <clinical-review-task-list
                     @task-selected="taskSelected"
                     @tasks-count-updated="taskCountUpdated"
+                    @tasks-loading-changed="tasksLoadingChanged"
                 >
                     <template v-slot="{ throttledFetchTasks }">
                         <v-dialog :value="actionModal" persistent max-width="500px">
@@ -52,6 +53,16 @@
                     :task-execution-id="currentTaskExecutionId"
                     @study-selected="studySelected"
                 />
+
+                <div
+                    v-if="!currentTaskExecutionId && !tasksLoading && taskCount === 0"
+                    class="no-tasks-left"
+                >
+                    <v-icon x-large color="success">mdi-checkbox-marked-circle-outline</v-icon>
+                    <p class="mt-2" data-cy="no-tasks-message">
+                        There are no application outputs left to review
+                    </p>
+                </div>
             </v-col>
         </v-row>
     </v-container>
@@ -66,8 +77,8 @@ import { updateClinicalReview } from "../api/ClinicalReview/ClinicalReviewServic
 import PatientHeader from "@/components/clinical-review/patient-header.vue";
 import AcceptRejectDialog from "@/components/clinical-review/accept-reject-dialog.vue";
 import {
-    ClinicalReviewTask,
-    ClinicalReviewTaskDetail,
+    ClinicalReviewRecord,
+    ClinicalReviewStudyDetails,
     ClinicalReviewTaskDetails,
 } from "@/models/ClinicalReview/ClinicalReviewTask";
 
@@ -75,6 +86,7 @@ type ClinicalReviewData = {
     currentTaskExecutionId?: string;
     currentTaskClinicalReviewMessage?: ClinicalReviewTaskDetails;
     taskCount: number;
+    tasksLoading: boolean;
     actionModal: boolean;
     reject: boolean;
     studyDate?: string;
@@ -96,20 +108,32 @@ export default defineComponent({
             currentTaskClinicalReviewMessage: undefined,
             studyDate: "",
             taskCount: 0,
+            tasksLoading: true,
             actionModal: false,
             reject: false,
         };
     },
+    mounted() {
+        const html = document.querySelector("html");
+        html!.style.overflow = "hidden";
+    },
+    beforeDestroy() {
+        const html = document.querySelector("html");
+        html!.style.overflow = "";
+    },
     methods: {
-        taskSelected(execution_id: string, task: ClinicalReviewTask) {
+        taskSelected(execution_id: string, task: ClinicalReviewRecord) {
             this.currentTaskExecutionId = execution_id;
             this.currentTaskClinicalReviewMessage = task.clinical_review_message;
         },
         taskCountUpdated(count: number) {
             this.taskCount = count;
         },
-        studySelected(study: ClinicalReviewTaskDetail) {
+        studySelected(study: ClinicalReviewStudyDetails) {
             this.studyDate = study.study_date;
+        },
+        tasksLoadingChanged(loading: boolean) {
+            this.tasksLoading = loading;
         },
         acceptTask() {
             this.actionModal = true;
@@ -120,50 +144,26 @@ export default defineComponent({
             this.reject = true;
         },
         async performAction(
-            data: { reason: string | undefined; description: string },
+            data: { reason: string | undefined; description: string; acceptance: boolean },
             fetchTasks: () => void,
         ) {
-            let executionId = "";
-            if (typeof this.currentTaskExecutionId === "string") {
-                executionId = this.currentTaskExecutionId;
+            if (!this.currentTaskExecutionId) {
+                return;
             }
 
-            const accepted = data.reason === "";
-            if (accepted) {
-                const responseOk = await updateClinicalReview(
-                    executionId,
-                    true,
-                    "",
-                    data.description,
+            const responseOk = await updateClinicalReview(
+                this.currentTaskExecutionId,
+                data.acceptance,
+                data.description,
+                data.acceptance ? undefined : data.reason,
+            );
+
+            if (responseOk) {
+                Vue.$toast.success(
+                    `Clinical Review has been ${!data.acceptance ? "rejected" : "accepted"}`,
                 );
-
-                if (responseOk) {
-                    Vue.$toast.success("Clinical Review has been accepted");
-                    this.actionModal = false;
-                    fetchTasks();
-                } else {
-                    Vue.$toast.warning("Something unexpected went wrong. Please try again.");
-                }
-            } else {
-                let reason = "";
-                if (typeof data.reason === "string") {
-                    reason = data.reason;
-                }
-
-                const responseOk = await updateClinicalReview(
-                    executionId,
-                    false,
-                    reason,
-                    data.description,
-                );
-
-                if (responseOk) {
-                    Vue.$toast.error("Clinical Review has been rejected");
-                    this.actionModal = false;
-                    fetchTasks();
-                } else {
-                    Vue.$toast.warning("Something unexpected went wrong. Please try again.");
-                }
+                this.actionModal = false;
+                fetchTasks();
             }
         },
     },
@@ -191,7 +191,7 @@ export default defineComponent({
 }
 
 .patient-header {
-    background-color: #fbfbfb;
+    background-color: #fff;
     height: 80px;
 }
 
@@ -209,5 +209,13 @@ export default defineComponent({
         flex: initial;
         display: flex;
     }
+}
+
+.no-tasks-left {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 </style>

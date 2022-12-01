@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -124,6 +124,11 @@ export default defineComponent({
     },
     methods: {
         async getTaskDetails(taskExecutionId: string) {
+            this.study = [];
+            this.imageSlices = [];
+            this.currentSeries = undefined;
+            this.$emit("study-selected", { study_date: "" });
+
             const study = await getStudy(taskExecutionId);
 
             this.study = study.study;

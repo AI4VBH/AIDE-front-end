@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@
     <v-card>
         <v-card-title class="text-h5" data-cy="accept-reject-modal-title">
             {{ reject ? "Reject" : "Accept" }}
-            {{ applicationName }} Result
+            {{ applicationName }} result
         </v-card-title>
         <v-divider />
         <div class="px-6 pt-3">
-            <v-alert dense type="info" data-cy="action-signing"
+            <v-alert dense type="info" color="blue darken-3" data-cy="action-signing"
                 >This action will be signed by you</v-alert
             >
 
@@ -37,11 +37,13 @@
                         hidden
                         validate-on-blur
                         return-object
+                        eager
                         data-cy="reject-reason"
                         label="Reason for rejection"
                         v-model="reason"
                         :items="rejectReasons"
                         :rules="rejectValidation"
+                        :menu-props="{ contentClass: 'reject-reason-options' }"
                     ></v-select>
                 </div>
                 <div>
@@ -50,7 +52,7 @@
                         :class="reason === 'Other' ? 'required' : ''"
                         >Description</span
                     >
-                    <v-text-field
+                    <v-textarea
                         outlined
                         dense
                         :validate-on-blur="false"
@@ -58,7 +60,7 @@
                         label="Description"
                         v-model="description"
                         :rules="reason === 'Other' ? rejectValidation : undefined"
-                    ></v-text-field>
+                    ></v-textarea>
                 </div>
 
                 <v-checkbox data-cy="action-accept-permission" :rules="acceptValidation">
@@ -70,7 +72,7 @@
                 >
             </v-form>
         </div>
-        <v-divider />
+        <v-divider class="mt-4" />
         <v-card-actions class="px-4 justify-end">
             <v-btn text class="secondary-button" data-cy="action-cancel" @click="cancel">
                 Cancel
@@ -144,7 +146,11 @@ export default defineComponent({
             this.$emit("cancel");
         },
         performAction() {
-            this.$emit("perform-action", { reason: this.reason, description: this.description });
+            this.$emit("perform-action", {
+                reason: this.reason,
+                description: this.description,
+                acceptance: !this.reject,
+            });
         },
     },
     setup() {
@@ -160,5 +166,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 .v-input--selection-controls.v-input--checkbox {
     margin-top: 0;
+}
+
+.v-input--checkbox.error--text ::v-deep .v-messages {
+    margin-left: 32px;
+}
+
+::v-deep .v-alert.info {
+    .v-alert__content {
+        font-weight: 500;
+    }
 }
 </style>

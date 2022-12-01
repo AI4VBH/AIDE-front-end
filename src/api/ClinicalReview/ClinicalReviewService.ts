@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
  */
 
 import {
-    ClinicalReviewTaskDetail,
+    ClinicalReviewRecord,
+    ClinicalReviewStudyDetails,
     PagedClinicalReviewList,
 } from "@/models/ClinicalReview/ClinicalReviewTask";
+import { getDefaultPagedResponse } from "@/models/common/IPagedResponse";
 import {
     createAxiosInstance,
     ErrorMessageMap,
@@ -27,6 +29,7 @@ import {
 
 const clinicalReviewErrorMessages: ErrorMessageMap = {
     get: "Something unexpected went wrong retrieving clinical review tasks",
+    put: "Something unexpected went wrong saving your review",
 };
 
 const http = createAxiosInstance(clinicalReviewErrorMessages);
@@ -39,8 +42,8 @@ interface CRTaskQueryParams {
     applicationName?: string;
 }
 
-export async function getStudy(taskExecutionId: string): Promise<ClinicalReviewTaskDetail> {
-    const response = await http.get<ClinicalReviewTaskDetail>(
+export async function getStudy(taskExecutionId: string): Promise<ClinicalReviewStudyDetails> {
+    const response = await http.get<ClinicalReviewStudyDetails>(
         `/clinical-review/${taskExecutionId}`,
     );
 
@@ -67,22 +70,15 @@ export async function getClinicalReviewTasks(
     });
 
     const response = await http.get<PagedClinicalReviewList>(`/clinical-review?${params}`);
-
-    return provideDefaultResult(response, {
-        pageNumber: 0,
-        pageSize: 0,
-        totalPages: 0,
-        totalRecords: 0,
-        data: [],
-        succeeded: false,
-    });
+    const defaultResponse = getDefaultPagedResponse<ClinicalReviewRecord>();
+    return provideDefaultResult(response, defaultResponse);
 }
 
 export async function updateClinicalReview(
     execution_uid: string,
     acceptance: boolean,
-    reason: string,
     message: string,
+    reason?: string,
 ) {
     const response = await http.put(`/clinical-review/${execution_uid}`, {
         acceptance: acceptance,

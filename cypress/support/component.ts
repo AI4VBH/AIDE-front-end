@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -37,7 +37,10 @@ declare global {
 }
 
 Cypress.Commands.add("mount", (component, options) => {
-    return mount(component, { vuetify, ...options });
+    return mount(component, {
+        vuetify,
+        ...options,
+    });
 });
 
 Cypress.Commands.add("dataCy", Commands.dataCy);

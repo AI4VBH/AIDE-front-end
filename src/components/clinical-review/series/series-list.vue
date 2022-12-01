@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
         data-cy="series-list"
     >
         <v-list>
-            <v-list-item-group v-model="activeSeries" mandatory>
+            <v-list-item-group v-model="activeSeries" mandatory role="group">
                 <series-item
                     v-for="item of study"
                     :key="item.series_uid"

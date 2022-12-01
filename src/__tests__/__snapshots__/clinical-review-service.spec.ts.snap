@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getStudy getStudy returns expected OK result 1`] = `
+Object {
+  "study": Array [
+    Object {
+      "files": Array [
+        "FILE0001.dcm",
+      ],
+      "modality": "CT",
+      "series_uid": "e4350707-2981-4ec2-94a0-caf2a7ce63b9",
+    },
+  ],
+  "study_date": "2022-11-11T11:11:11",
+}
+`;
+
+exports[`getStudy updateClinicalReview returns expected OK result 1`] = `
+Object {
+  "acceptance": true,
+  "message": "All ok",
+}
+`;
+
+exports[`getStudy updateClinicalReview returns expected OK result 2`] = `
+Object {
+  "acceptance": false,
+  "message": "Other",
+  "reason": "Invalid",
+}
+`;

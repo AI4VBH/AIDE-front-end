@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,12 +25,14 @@
         :value="displayMetadata"
         :stateless="true"
         data-cy="metadata-list"
+        role="none"
     >
-        <v-list>
+        <v-list role="none">
             <v-list-item-group
                 data-cy="metadata-list-pinned"
                 v-show="pinned.length"
                 style="margin-bottom: 12px"
+                role="group"
             >
                 <v-subheader>PINNED</v-subheader>
                 <metadata-item
@@ -42,7 +44,7 @@
                     @pin-item="unpinItem"
                 />
             </v-list-item-group>
-            <v-list-item-group data-cy="metadata-list-not-pinned">
+            <v-list-item-group data-cy="metadata-list-not-pinned" role="group">
                 <v-subheader v-show="pinned.length">METADATA</v-subheader>
                 <metadata-item
                     v-for="item of metadata"
@@ -102,6 +104,13 @@ export default defineComponent({
             this.pinnedItemNames = this.pinnedItemNames.filter((n) => n !== name);
         },
         async getDicomFile(index: number) {
+            if (!this.imageSlices.length) {
+                this.allMetadata = [];
+                this.pinned = [];
+                this.metadata = [];
+                return;
+            }
+
             const buffer = await getDicomFile(this.imageSlices[index]);
             this.allMetadata = parseMetadata(new Uint8Array(buffer));
             this.filterMetadata();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -60,16 +60,17 @@ export default class ApiMocks {
     public static WORKFLOW_EXAMPLE = require("./workflows/workflowExample.json");
     public static WORKFLOW_EMPTY = require("./workflows/workflowEmpty.json");
     public static WORKFLOW_ERRORS = require("./workflows/workflowsErrors.json");
-    //Clinical Review NEW
-    public static CLINICAL_REVIEW_TASKS = require("./clinical-review-new/clinicalReviewTasks.json");
-    public static CLINICAL_REVIEW_SEARCH_PATIENT_ID = require("./clinical-review-new/searchPatientId.json");
-    public static CLINICAL_REVIEW_SEARCH_PATIENT_NAME = require("./clinical-review-new/searchPatientName.json");
-    public static CLINICAL_REVIEW_SEARCH_APPLICATION_NAME = require("./clinical-review-new/searchApplicationName.json");
-    public static CLINICAL_REVIEW_PAGINATION_PAGE_2 = require("./clinical-review-new/paginationPage2.json");
-    public static CLINICAL_REVIEW_PAGINATION_PAGE_9 = require("./clinical-review-new/paginationPage9.json");
-    public static CLINICAL_REVIEW_PAGINATION_PAGE_10 = require("./clinical-review-new/paginationPage10.json");
-    public static CLINICAL_REVIEW_EXECUTION_1 = require("./clinical-review-new/executionIdRequest1.json");
-    public static CLINICAL_REVIEW_EXECUTION_2 = require("./clinical-review-new/executionIdRequest2.json");
+    //Clinical Review
+    public static CLINICAL_REVIEW_TASKS = require("./clinical-review/allTasks.json");
+    public static CLINICAL_REVIEW_SEARCH_PATIENT_ID = require("./clinical-review/searchPatientId.json");
+    public static CLINICAL_REVIEW_SEARCH_PATIENT_NAME = require("./clinical-review/searchPatientName.json");
+    public static CLINICAL_REVIEW_SEARCH_APPLICATION_NAME = require("./clinical-review/searchApplicationName.json");
+    public static CLINICAL_REVIEW_PAGINATION_PAGE_2 = require("./clinical-review/paginationPage2.json");
+    public static CLINICAL_REVIEW_PAGINATION_PAGE_9 = require("./clinical-review/paginationPage9.json");
+    public static CLINICAL_REVIEW_PAGINATION_PAGE_10 = require("./clinical-review/paginationPage10.json");
+    public static CLINICAL_REVIEW_EXECUTION_1 = require("./clinical-review/executionIdRequest1.json");
+    public static CLINICAL_REVIEW_EXECUTION_2 = require("./clinical-review/executionIdRequest2.json");
+    public static CLINICAL_REVIEW_NO_TASKS = require("./clinical-review/noTasks.json");
     //App Store
     public static APP_STORE_ALL_PERMUTATIONS = require("./app-store/appStoreAllPermutations.json");
     public static APP_STORE_SPECIALITY_DROP_DOWN = require("./app-store/appStoreSpecialityDropDown.json");

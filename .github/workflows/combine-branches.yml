@@ -1,4 +1,4 @@
-# Copyright 2022 Crown Copyright
+# Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ jobs:
               core.setFailed('Failed to create combined branch - maybe a branch by that name already exists?');
               return;
             }
-            
+
             let combinedPRs = [];
             let mergeFailedPRs = [];
             for(const { branch, prString } of branchesAndPRStrings) {
@@ -147,7 +147,7 @@ jobs:
                 mergeFailedPRs.push(prString);
               }
             }
-            
+
             console.log('Creating combined PR');
             const combinedPRsString = combinedPRs.join('\n');
             let body = '✅ This PR was created by the Combine PRs action by combining the following PRs:\n' + combinedPRsString;

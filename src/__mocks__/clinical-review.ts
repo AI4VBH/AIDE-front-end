@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Crown Copyright
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,70 +20,100 @@ import ctSlice2 from "!url-loader!./fixtures/CT000010.dcm";
 import docSlice from "!url-loader!./fixtures/DO000000.dcm";
 import { PagedClinicalReviewList } from "@/models/ClinicalReview/ClinicalReviewTask";
 
+const tasks = [
+    {
+        execution_id: "678",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "677",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "bobwf",
+            patient_metadata: {
+                patient_name: "Joe Batt",
+                patient_id: "1299-123-232-3422",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+                patient_age: "23",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                application_mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-12T11:11:00",
+    },
+    {
+        execution_id: "678",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "678",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "bobwf",
+            patient_metadata: {
+                patient_name: "Alexis Bazin",
+                patient_id: "1299-123-232-3424",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+                patient_age: "23",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "Application 1",
+                application_version: "1.1",
+                application_mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-12T11:11:00",
+    },
+    {
+        execution_id: "679",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "679",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "bobwf",
+            patient_metadata: {
+                patient_name: "Will E Rror",
+                patient_id: "1299-123-232-3555",
+                patient_sex: "M",
+                patient_dob: "2000-01-10T00:00:00",
+                patient_age: "23",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "Application 1",
+                application_version: "1.1",
+                application_mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-12T11:11:00",
+    },
+];
+
 const clinicalReviewTasks: PagedClinicalReviewList = {
     pageNumber: 1,
     pageSize: 10,
-    totalPages: 10,
-    totalRecords: 1,
-    data: [
-        {
-            _id: "678",
-            clinical_review_message: {
-                task_id: "",
-                reviewed_task_id: "cde",
-                execution_id: "677",
-                reviewed_execution_id: "abc",
-                correlation_id: "123",
-                workflow_name: "bobwf",
-                patient_metadata: {
-                    patient_name: "Joe Batt",
-                    patient_id: "1299-123-232-3422",
-                    patient_sex: "M",
-                    patient_dob: "2000-10-10T00:00:00",
-                    patient_age: "23",
-                },
-                files: [],
-                reviewer_roles: ["admin", "clinician"],
-                application_metadata: {
-                    application_name: "stroke model",
-                    application_version: "1.1",
-                    application_mode: "CU",
-                },
-            },
-            reviewed: false,
-            received: new Date(),
-        },
-        {
-            _id: "678",
-            clinical_review_message: {
-                task_id: "",
-                reviewed_task_id: "cde",
-                execution_id: "678",
-                reviewed_execution_id: "abc",
-                correlation_id: "123",
-                workflow_name: "bobwf",
-                patient_metadata: {
-                    patient_name: "Alexis Bazin",
-                    patient_id: "1299-123-232-3424",
-                    patient_sex: "M",
-                    patient_dob: "2000-10-10T00:00:00",
-                    patient_age: "23",
-                },
-                files: [],
-                reviewer_roles: ["admin", "clinician"],
-                application_metadata: {
-                    application_name: "Application 1",
-                    application_version: "1.1",
-                    application_mode: "CU",
-                },
-            },
-            reviewed: false,
-            received: new Date(),
-        },
-    ],
-    succeeded: true,
-    errors: null,
-    message: null,
+    totalPages: 1,
+    totalRecords: tasks.length,
+    data: tasks,
+    firstPage: "",
+    lastPage: "",
+    nextPage: "",
+    previousPage: "",
 };
 
 export const clinicalReviewHandlers = [
@@ -120,6 +150,10 @@ export const clinicalReviewHandlers = [
     }),
     rest.get(`${window.FRONTEND_API_HOST}/clinical-review/:taskExecutionId`, (req, res, ctx) => {
         const executionId = req.params.taskExecutionId as string;
+
+        if (executionId === "679") {
+            return res(ctx.status(400));
+        }
 
         const study = {
             study_date: "2021-11-11T10:00:00",

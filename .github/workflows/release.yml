@@ -1,4 +1,4 @@
-# Copyright 2022 Crown Copyright
+# Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ name: 'release'
 on:
   # Triggers the workflow on just release branches (these should be deployed to SIT and higher environments)
   push:
-    branches: 
+    branches:
       - 'release/**'
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
       - name: Login to Amazon ECR Private
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-      
+
       - name: Set branch name
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
 
@@ -61,23 +61,23 @@ jobs:
           push: true
           pull: true
           tags: ${{ secrets.AWS_ECR_REGISTRY }}/aide/front-end:${{ env.BRANCH_NAME }} , ${{ secrets.AWS_ECR_REGISTRY }}/aide/front-end:latest
-      
+
       - name: Create artifacts folder and copy helm charts
         run: |
           mkdir -p "$GITHUB_WORKSPACE/artifacts/aide-frontend/helm"
           cp -a $GITHUB_WORKSPACE/helm/. $GITHUB_WORKSPACE/artifacts/aide-frontend/helm/
           echo BASE_PATH="$GITHUB_WORKSPACE/artifacts/aide-frontend" >> $GITHUB_ENV
           echo OUT_FOLDER="$GITHUB_WORKSPACE/artifacts/" >> $GITHUB_ENV
-      
+
       - name: Install Octopus CLI
         uses: OctopusDeploy/install-octopus-cli-action@v1.2.0
         with:
           version: latest
-      
+
       - name: Package AIDE FrontEnd
         run: |
           octo pack --id="AIDE.FrontEnd" --format="Zip" --version="${{ env.BRANCH_NAME }}" --basePath="${{ env.BASE_PATH }}" --outFolder="${{ env.OUT_FOLDER }}" --logLevel=debug
-      
+
       - name: Push Package to Octopus Deploy
         uses: OctopusDeploy/push-package-action@v2.1.0
         env:

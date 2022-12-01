@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -138,12 +138,9 @@ h1 {
     color: #000;
 }
 
-h2 {
+h2,
+h3 {
     font-family: "Open Sans", sans-serif !important;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    color: #000;
 }
 
 .required::after {

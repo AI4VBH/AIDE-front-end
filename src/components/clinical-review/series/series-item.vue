@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,7 +15,13 @@
   -->
 
 <template>
-    <v-list-item :value="series.series_uid" class="mb-2" data-cy="series-item" @click="selectItem">
+    <v-list-item
+        :value="series.series_uid"
+        class="mb-2"
+        data-cy="series-item"
+        @click="selectItem"
+        role="listitem"
+    >
         <v-list-item-content>
             <v-list-item-title data-cy="series-title" style="margin-bottom: 5px">
                 {{ series.modality }} ({{ series.files.length }})

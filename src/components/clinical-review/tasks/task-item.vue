@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
   -->
 
 <template>
-    <v-list-item :data-cy="patient.patient_id" :value="execution_id">
+    <v-list-item :data-cy="patient.patient_id" :value="execution_id" role="listitem">
         <v-list-item-content>
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-title data-cy="patient-name" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-title data-cy="patient-name" v-on="on">
                         {{ patient.patient_name }}
                     </v-list-item-title>
                 </template>
@@ -29,8 +29,8 @@
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-subtitle data-cy="patient-id" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-subtitle data-cy="patient-id" v-on="on">
                         <strong>Patient ID:</strong>
                         {{ patient.patient_id }}
                     </v-list-item-subtitle>
@@ -41,8 +41,8 @@
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-subtitle data-cy="patient-age" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-subtitle data-cy="patient-age" v-on="on">
                         <strong>Age:</strong>
                         {{ patient.patient_age }}
                     </v-list-item-subtitle>
@@ -53,8 +53,8 @@
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-subtitle data-cy="patient-sex" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-subtitle data-cy="patient-sex" v-on="on">
                         <strong>Sex:</strong>
                         {{ patient.patient_sex }}
                     </v-list-item-subtitle>
@@ -65,8 +65,8 @@
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-subtitle data-cy="application" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-subtitle data-cy="application" v-on="on">
                         <strong>Application:</strong>
                         {{ application.application_name }} - {{ application.application_version }}
                     </v-list-item-subtitle>
@@ -77,8 +77,8 @@
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-subtitle data-cy="mode" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-subtitle data-cy="mode" v-on="on">
                         <strong>Mode:</strong>
                         {{ application.application_mode }}
                     </v-list-item-subtitle>
@@ -89,8 +89,8 @@
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-subtitle data-cy="received" v-bind="attrs" v-on="on">
+                <template v-slot:activator="{ on }">
+                    <v-list-item-subtitle data-cy="received" v-on="on">
                         <strong>Received:</strong>
                         {{ received | formatDateTime }}
                     </v-list-item-subtitle>
@@ -120,3 +120,10 @@ export default defineComponent({
     },
 });
 </script>
+
+<style lang="scss" scoped>
+.v-list-item__subtitle,
+.v-list-item__title {
+    color: #000 !important;
+}
+</style>

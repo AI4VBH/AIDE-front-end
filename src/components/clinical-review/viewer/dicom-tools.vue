@@ -1,5 +1,5 @@
 <!--
-  Copyright 2022 Crown Copyright
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn v-bind="attrs" v-on="on">
                                 <v-icon>{{ tool.icon }}</v-icon>
+                                <span class="d-sr-only">{{ tool.title }}</span>
                             </v-btn>
                         </template>
                         <span>{{ tool.title }}</span>
