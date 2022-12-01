@@ -265,12 +265,8 @@ export default defineComponent({
         },
         async loadImages() {
             if (!this.imageIds.length) {
-                await this.renderer?.disableElement(viewportId);
-                this.loading = false;
                 return;
             }
-
-            this.enableViewport();
 
             this.loading = true;
             await this.viewport?.setStack(this.imageIds, 0);
