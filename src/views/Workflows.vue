@@ -75,7 +75,9 @@
                                     class="mr-2 secondary-button"
                                     aria-label="edit workflow"
                                     data-cy="workflow-edit"
-                                    @click.stop="() => navigateToWorkflowEditor(item.workflow_id)"
+                                    @click.stop="
+                                        () => navigateToWorkflowEditor(item.workflow_id, item.name)
+                                    "
                                 >
                                     Edit
                                 </v-btn>
@@ -190,11 +192,14 @@ export default class Workflows extends Vue {
         });
     }
 
-    navigateToWorkflowEditor(workflow_id: string) {
+    navigateToWorkflowEditor(workflow_id: string, original_workflow_name: string) {
         this.$router.push({
             name: "WorkflowEditor",
             params: {
-                workflow_id: workflow_id,
+                workflow_id,
+            },
+            query: {
+                original_workflow_name,
             },
         });
     }

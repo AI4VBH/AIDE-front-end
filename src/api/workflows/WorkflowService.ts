@@ -53,12 +53,15 @@ export async function getWorkflow(workflowId: string): Promise<MonaiWorkflow> {
 export async function updateWorkflow(
     workflowId: string,
     workflow: unknown,
+    original_workflow_name: string,
 ): Promise<AxiosResponse | AxiosError> {
-    return httpWorkflows.put(`/workflows/${workflowId}`, workflow).catch((error) => {
-        if (error) {
-            return error;
-        }
-    });
+    return httpWorkflows
+        .put(`/workflows/${workflowId}`, { original_workflow_name, workflow })
+        .catch((error) => {
+            if (error) {
+                return error;
+            }
+        });
 }
 
 export async function createWorkflow(workflow: unknown): Promise<AxiosResponse | AxiosError> {
