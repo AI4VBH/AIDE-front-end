@@ -28,9 +28,9 @@
                 able to:
             </p>
             <ul>
-                <li>zoom in up to 300% without the text spilling off the screen</li>
-                <li>navigate most of the website using just a keyboard</li>
-                <li>navigate most of the website using speech recognition software</li>
+                <li>Zoom in up to 300% without the text spilling off the screen</li>
+                <li>Navigate most of the website using just a keyboard</li>
+                <li>Navigate most of the website using speech recognition software</li>
                 <li>
                     listen to most of the website using a screen reader (including the most recent
                     versions of JAWS, NVDA and VoiceOver)
@@ -223,8 +223,6 @@
             <p>
                 However, the accessibility regulations say that we don't need to make all elements
                 on a website accessible, if doing so would impose a disproportionate burden on us.
-            </p>
-            <p>
                 Under assessment we feel that the Clinical Review DICOM viewer falls under this
                 section with regards to the technology it is built in and the additional effort it
                 would take to extract that functionality to make it accessible.
