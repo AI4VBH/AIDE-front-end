@@ -50,19 +50,9 @@ describe("Destinations", () => {
                 dicomConfigurationPage.noSpacesOrSpecialCharactersValidation(field);
             });
         });
-        it(`When I enter an incorrect IP or hostname into the modal, validation should be shown`, () => {
+        it(`Validation should be displayed to the user to indicate the port can't be less than 1 or more than 65535`, () => {
             dicomConfigurationPage.clickDataCy("add-dicom-configuration-button");
-            dicomConfigurationPage.addressValidation("destination-ip-address");
-        });
-        it.skip(`I can only enter numbers into the port field`, () => {
-            dicomConfigurationPage.clickDataCy("add-dicom-configuration-button");
-            dicomConfigurationPage.portValidation("destination-port");
-        });
-        it(`When I enter an export destination name that already exists, validation should be shown`, () => {
-            dicomConfigurationPage.clickDataCy("add-dicom-configuration-button");
-            dicomConfigurationPage.enterAddDestinationDetails(newDestinationData);
-            dicomConfigurationPage.return409();
-            dicomConfigurationPage.assertSameNameValidation();
+            dicomConfigurationPage.assertPortIsValid();
         });
         it("'Save' button is inactive until all fields are populated", () => {
             dicomConfigurationPage.clickDataCy("add-dicom-configuration-button");
@@ -137,7 +127,7 @@ describe("Destinations", () => {
         });
     });
 
-    describe(" API errors", () => {
+    describe("API errors", () => {
         const initError = "Something unexpected went wrong retrieving DICOM configurations";
         const deleteError = "Something unexpected went wrong deleting the DICOM configuration";
         const editError = "Something unexpected went wrong updating the DICOM configuration";

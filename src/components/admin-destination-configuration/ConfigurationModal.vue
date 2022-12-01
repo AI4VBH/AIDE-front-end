@@ -179,9 +179,11 @@ export default class ConfigurationModal extends Vue {
     ];
     portRules: InputValidationRules = [
         ...this.requiredTextRules,
-        (value: number) => value > 0 || "Invalid port",
+        (value: string) =>
+            /^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/.test(
+                value,
+            ) || "Invalid port. Must be between 1 and 65535",
     ];
-
     alphanumericCharactersRules: InputValidationRules = [
         ...this.requiredTextRules,
         (value: string) =>
