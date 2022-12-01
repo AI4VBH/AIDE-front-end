@@ -28,6 +28,7 @@ export class TaskData implements IIssue {
     execution_time: string;
     execution_id: string;
     workflow_instance_id: string;
+    failure_reason?: string;
 
     constructor(task: IIssue) {
         this.task_id = task.task_id;
@@ -38,6 +39,8 @@ export class TaskData implements IIssue {
         this.patient_name = task.patient_name;
         this.patient_id = task.patient_id;
         this.execution_time = task.execution_time;
+        this.failure_reason = task.failure_reason;
+        this.execution_id = task.execution_id;
     }
 
     public static TASK_DATA_1: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[0]);

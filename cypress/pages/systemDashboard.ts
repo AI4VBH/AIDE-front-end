@@ -22,6 +22,7 @@ import { ExecStatistics } from "data/system-dashboard/statistics";
 import { ModelDetailsData } from "../data/system-dashboard/graph";
 import moment from "moment";
 import { NhsDateTimeFormat } from "../../src/utils/date-utilities";
+import { IPagedResponse, IPayload, WorkflowInstance } from "../../src/models/Admin/IPayload";
 
 export default class AdminSystemDashboardPage {
     //OVERVIEW
@@ -64,10 +65,56 @@ export default class AdminSystemDashboardPage {
         this.getTask(task.task_id).within(() => {
             const dateTime = this.formatTaskDate(task.execution_time, false);
             cy.dataCy(AdminSystemDashboardPage.TASK_ID).should(`contain`, task.task_id);
-            cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, task.status);
             cy.dataCy(AdminSystemDashboardPage.PATIENT_NAME).should(`contain`, task.patient_name);
             cy.dataCy(AdminSystemDashboardPage.PATIENT_ID).should(`contain`, task.patient_id);
             cy.dataCy(AdminSystemDashboardPage.EXECUTION_DATE_TIME).should(`contain`, dateTime);
+            switch (task.failure_reason) {
+                case "rejected":
+                    cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, "Rejected");
+                    cy.dataCy("view-logs-button").should(`contain`, "View rejection");
+                    break;
+                default:
+                    cy.dataCy(AdminSystemDashboardPage.STATUS).should(`contain`, task.status);
+                    cy.dataCy("view-logs-button").should(`contain`, "View logs");
+            }
+        });
+    }
+
+    public assertTakenToCorrectTask(task: IIssue, node: WorkflowInstance, array: number) {
+        this.getTask(task.task_id).within(() => {
+            cy.intercept(
+                `/payloads?pageNumber=1&pageSize=10&patientId=&patientName=`,
+                ApiMocks.ADMIN_DASHBOARD_PAYLOAD_TABLE,
+            ).as(`payloadTable`);
+            cy.intercept(
+                `/payloads/${task.payload_id}/executions`,
+                ApiMocks.PAYLOAD_TASK_REDIRECT,
+            ).as(`executions`);
+            cy.intercept(
+                `executions/${node.tasks[array].workflow_instance_id}/tasks/${task.execution_id}/artifacts`,
+                ApiMocks.PAYLOAD_TASK_REDIRECT,
+            ).as(`node`);
+            cy.dataCy("view-logs-button").click();
+            cy.wait([`@payloadTable`, `@executions`, `@node`]);
+            cy.url().should(
+                "eq",
+                `http://localhost:8080/admin-payload-dashboard?payload_id=${task.payload_id}&execution_id=${task.execution_id}`,
+            );
+            Cypress.on(`uncaught:exception`, () => {
+                return false;
+            });
+        });
+    }
+
+    public expandAndViewTree(payload: IPagedResponse<IPayload>): void {
+        const payload_id = payload.data[0].payload_id;
+        cy.intercept(
+            `/payloads/${payload_id}/executions`,
+            ApiMocks.ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS,
+        ).as(`executions`);
+        cy.get("tbody > :nth-child(1) > :nth-child(5) > .v-icon").click({ force: true });
+        Cypress.on(`uncaught:exception`, () => {
+            return false;
         });
     }
 
@@ -97,9 +144,12 @@ export default class AdminSystemDashboardPage {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
-        cy.intercept(`/workflowinstances/345435/executions/4543531/acknowledge`, {
-            statusCode: 200,
-        }).as(`AcknowledgedIssues`);
+        cy.intercept(
+            `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
+            {
+                statusCode: 200,
+            },
+        ).as(`AcknowledgedIssues`);
         cy.intercept(`/issues/failed`, {
             body: ApiMocks.ADMIN_DASHBOARD_ISSUES_DISMISS,
         }).as(`FailedIssues`);
@@ -118,9 +168,12 @@ export default class AdminSystemDashboardPage {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
-        cy.intercept(`/workflowinstances/345435/executions/4543531/acknowledge`, {
-            statusCode: 400,
-        }).as(`FailedDismiss`);
+        cy.intercept(
+            `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
+            {
+                statusCode: 400,
+            },
+        ).as(`FailedDismiss`);
         cy.dataCy(AdminSystemDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
         cy.wait(`@FailedDismiss`);
         Cypress.on(`uncaught:exception`, () => {
