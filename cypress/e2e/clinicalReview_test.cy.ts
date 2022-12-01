@@ -1,8 +1,24 @@
+/*
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 import ClinicalReviewPage from "../pages/clinicalReview";
 
 const reviewPage = new ClinicalReviewPage();
 
-describe.skip("Clinical review page", () => {
+describe("Clinical review page", () => {
     beforeEach(() => {
         reviewPage.initPage();
     });
@@ -11,74 +27,34 @@ describe.skip("Clinical review page", () => {
         reviewPage.assertViewAndFilterTasks();
     });
 
-    it("Can use pagination to view clinical review tasks", () => {
+    it("Can use pagination to view clinical review worklist tasks", () => {
         reviewPage.assertPaginationandViewTasks();
     });
 
-    it.skip("Can accept worklist item", () => {
-        reviewPage.assertAcceptWorklistItem();
+    it("Can view series selector and DICOMs", () => {
+        reviewPage.viewDicomsAndSeriesSelector();
     });
 
-    it.skip("Can reject worklist item", () => {
-        reviewPage.assertRejectWorklistItem();
+    it("Can view and pin Metadata", () => {
+        reviewPage.viewMetadataAndPin();
     });
 
-    it.skip("Can view the dicom series selector'", () => {
-        reviewPage.assertDicomSeriesSelector();
+    it("Can view patient details in top panel", () => {
+        reviewPage.assertPatientDetails();
     });
 
-    it.skip("Can change dicom series selected", () => {
-        reviewPage.waitForInitialViewerLoad();
-        cy.dataCy(ClinicalReviewPage.SERIES)
-            .eq(1)
-            .click()
-            .within(() => {
-                cy.dataCy(ClinicalReviewPage.MODALITY_LENGTH).then((el) => {
-                    expect(el[0].textContent).to.satisfy(function (string) {
-                        return string === "MR(22)" || string === "MR(100)";
-                    });
-                });
-                cy.dataCy(ClinicalReviewPage.SERIES_DESCRIPTION).should("have.text", "T1/3D/FFE/C");
-            });
+    it("Can accept and reject a task", () => {
+        reviewPage.assertAcceptRejectTask();
     });
-
-    it.skip("Dicom Metadata can be viewed", () => {
-        reviewPage.assertDicomMetadataView();
-    });
-
-    it.skip("Dicom Metadata can be pinned", () => {
-        reviewPage.assertDicomMetadataPinned();
-    });
-
-    it.skip("Dicom viewport displays correctly", () => {
-        reviewPage.assertDicomViewportDisplay();
-    });
-
-    it.skip("Can scroll through dicom images", () => {
-        reviewPage.assertDicomImagesScrolling();
-    });
-
-    it.skip("Can use the viewer measure tool", () => {
-        reviewPage.assertViewerMeasureTool();
-    });
-
-    it.skip("Should paginate executions for review", () => {
-        reviewPage.assertExecutionsPagination();
-    });
-
-    it.skip("Page refresh occurs without errors", () => {
-        reviewPage.assertPageRefresh();
+    [400, 404, 500].forEach((error_code) => {
+        it(`Toast displayed on both accepting or rejecting a task if ${error_code} status is returned`, () => {
+            reviewPage.assertToastIfErrorOnReview(error_code);
+        });
     });
 });
 
-describe.skip("Scenarios without standard data setup", () => {
-    beforeEach(() => {
-        Cypress.on("uncaught:exception", () => {
-            //TODO: Remove this once uncaught exceptions have been removed
-            return false;
-        });
-    });
-    it.skip("Displays no tasks when there are no executions brought back from the API", () => {
-        reviewPage.assertNoTasks();
+describe("Clinical review page - No tasks", () => {
+    it("When there are no tasks to review, a message informing me of this is displayed", () => {
+        reviewPage.assertNoTasksMessage();
     });
 });

@@ -1,0 +1,131 @@
+step "add-docker-image-pull-secret" {
+    name = "Add Docker Image Pull Secret"
+    properties = {
+        Octopus.Action.TargetRoles = "kubernetes"
+    }
+
+    action {
+        action_type = "Octopus.KubernetesRunScript"
+        properties = {
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                export AWS_ACCESS_KEY_ID=$(get_octopusvariable "AWS_ACCESS_KEY_ID")
+                export AWS_SECRET_ACCESS_KEY=$(get_octopusvariable "AWS_SECRET_ACCESS_KEY")
+                export AWS_DEFAULT_REGION=$(get_octopusvariable "AWS_REGION")
+                
+                kubectl create namespace aide --dry-run=client -o yaml | kubectl apply -f -
+                
+                kubectl create secret docker-registry $(get_octopusvariable "imagePullSecretName") \
+                  --docker-server=$(get_octopusvariable "AWS_ACCOUNT").dkr.ecr.$(get_octopusvariable "AWS_REGION").amazonaws.com \
+                  --docker-username=AWS \
+                  --docker-password=$(aws ecr get-login-password) \
+                  --namespace=aide \
+                  --dry-run=client -o yaml | kubectl apply -f -
+            EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool_variable = "WorkerPoolName"
+    }
+}
+
+step "add-certificate-secret" {
+    name = "Add Ingress Certificate Secret"
+    properties = {
+        Octopus.Action.TargetRoles = "kubernetes"
+    }
+
+    action {
+        action_type = "Octopus.KubernetesRunScript"
+        properties = {
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                kubectl create namespace $(get_octopusvariable "namespace") --dry-run=client -o yaml | kubectl apply -f -
+                
+                cat <<EOF >> certificate.pem
+                $(get_octopusvariable "IngressCertificate.CertificatePem")
+                $(get_octopusvariable "IngressCertificate.ChainPem")
+                EOF
+                
+                cat <<EOF >> key.pem
+                $(get_octopusvariable "IngressCertificate.PrivateKeyPem")
+                EOF
+                
+                kubectl create secret tls $(get_octopusvariable "CertificateSecretName") --cert certificate.pem --key key.pem -n $(get_octopusvariable "namespace") --dry-run=client -o yaml | kubectl apply -f -
+                
+                rm -f certificate.pem
+                rm -f key.pem
+            EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool_variable = "WorkerPoolName"
+    }
+}
+
+step "deploy-the-aide-frontend" {
+    name = "Deploy the AIDE Frontend"
+    properties = {
+        Octopus.Action.TargetRoles = "kubernetes"
+    }
+
+    action {
+        action_type = "Octopus.HelmChartUpgrade"
+        properties = {
+            Octopus.Action.Helm.ClientVersion = "V3"
+            Octopus.Action.Helm.Namespace = "aide"
+            Octopus.Action.Helm.ReleaseName = "aide-frontend"
+            Octopus.Action.Helm.ResetValues = "True"
+            Octopus.Action.Helm.YamlValues = <<-EOT
+                image:
+                  tag: #{Octopus.Action.Package.PackageVersion}
+                imagePullSecrets:
+                  - name: #{imagePullSecretName}
+                enviromentVariables:
+                  KEYCLOAK_URL: #{RealmUrl}:8443/
+                  KEYCLOAK_URL_BACKEND: #{keycloakUrlBackend}
+                  FRONTEND_API_HOST: #{RealmUrl}/api/
+                  WADO_URI_ROOT: #{WadoUriRoot}
+                  QIDO_ROOT: #{QidoRoot}
+                  WADO_ROOT: #{WadoRoot}
+                  CLINICAL_REVIEW_URL: #{ClinicalReviewUrl}
+                  ORTHANC_API_URL: #{OrthancApiUrl}
+                
+                enviromentVariablesFromSecrets:
+                  secrets:
+                    - name: RABBITMQ_USERNAME
+                      secretName: rabbit-user-secret
+                      secretKey: username
+                    - name: RABBITMQ_PASSWORD
+                      secretName: rabbit-user-secret
+                      secretKey: password
+                    - name: ELASTIC_USERNAME
+                      secretName: elastic-secret-master
+                      secretKey: username
+                    - name: ELASTIC_PASSWORD
+                      secretName: elastic-secret-master
+                      secretKey: password
+                
+                ingress:
+                  host: #{Hostname}
+                  tlsSecretName: #{CertificateSecretName}
+                
+                storage:
+                  globalDataDirectory: #{GlobalStoragePath}
+                  dataDirectory: #{GlobalStoragePath}data/
+                  dataStorageCapacityRequest: 10Gi
+            EOT
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "octopus-server-built-in"
+            Octopus.Action.Package.PackageId = "AIDE.FrontEnd"
+        }
+        worker_pool_variable = "WorkerPoolName"
+
+        packages {
+            acquisition_location = "Server"
+            feed = "octopus-server-built-in"
+            package_id = "AIDE.FrontEnd"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}

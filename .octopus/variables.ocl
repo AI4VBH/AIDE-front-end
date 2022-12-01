@@ -1,0 +1,31 @@
+variable "imagePullSecretName" {
+    value "regcred" {}
+}
+
+variable "namespace" {
+    value "aide" {}
+}
+
+variable "ClinicalReviewUrl" {
+    value "http://clinical-review-port-5000.aide.svc.cluster.local:5000" {}
+}
+
+variable "OrthancApiUrl" {
+    value "https://sit-aide.answerdigital.io:8045" {}
+}
+
+variable "WadoRoot" {
+    value "https://sit-aide.answerdigital.io:8045/dicom-web" {}
+}
+
+variable "QidoRoot" {
+    value "https://sit-aide.answerdigital.io:8045/dicom-web" {}
+}
+
+variable "WadoUriRoot" {
+    value "https://sit-aide.answerdigital.io:8045/dicom-web" {}
+}
+
+variable "CertificateSecretName" {
+    value "ingress-tls-secret" {}
+}

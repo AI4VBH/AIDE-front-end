@@ -1,14 +1,31 @@
+/*
+ * Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 import {
     PagedClinicalReviewList,
-    ClinicalReviewTask,
+    ClinicalReviewRecord,
 } from "../../../src/models/ClinicalReview/ClinicalReviewTask";
 import ApiMocks from "../../fixtures/mockIndex";
+
 export class ClinicalReviewTaskData implements PagedClinicalReviewList {
     pageNumber: number;
     pageSize: number;
     totalPages: number;
     totalRecords: number;
-    data: ClinicalReviewTask[];
+    data: ClinicalReviewRecord[];
     succeeded: boolean;
     errors: any;
     message: any;
@@ -18,9 +35,12 @@ export class ClinicalReviewTaskData implements PagedClinicalReviewList {
         this.pageSize = taskData.pageSize;
         this.totalPages = taskData.totalPages;
         this.data = taskData.data;
-        this.errors = taskData.errors;
-        this.message = taskData.message;
     }
+
+    firstPage: string;
+    lastPage: string;
+    nextPage: string;
+    previousPage: string;
 
     public static LIST_OF_ALL_TASKS: ClinicalReviewTaskData = new ClinicalReviewTaskData(
         <PagedClinicalReviewList>ApiMocks.CLINICAL_REVIEW_TASKS,
@@ -34,7 +54,13 @@ export class ClinicalReviewTaskData implements PagedClinicalReviewList {
     public static SEARCH_APPLICATION_NAME: ClinicalReviewTaskData = new ClinicalReviewTaskData(
         <PagedClinicalReviewList>ApiMocks.CLINICAL_REVIEW_SEARCH_APPLICATION_NAME,
     );
-    public static PAGINATION: ClinicalReviewTaskData = new ClinicalReviewTaskData(
-        <PagedClinicalReviewList>ApiMocks.CLINICAL_REVIEW_PAGINATION,
+    public static PAGINATION_PAGE_2: ClinicalReviewTaskData = new ClinicalReviewTaskData(
+        <PagedClinicalReviewList>ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_2,
+    );
+    public static PAGINATION_PAGE_9: ClinicalReviewTaskData = new ClinicalReviewTaskData(
+        <PagedClinicalReviewList>ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_9,
+    );
+    public static PAGINATION_PAGE_10: ClinicalReviewTaskData = new ClinicalReviewTaskData(
+        <PagedClinicalReviewList>ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_10,
     );
 }

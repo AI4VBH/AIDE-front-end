@@ -1,1 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
 <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" id="svg2" xml:space="preserve" sodipodi:docname="NHS logo for A4 10mm - RGB Blue_1.eps" viewBox="48 72.94 93.86 37.8"><defs id="defs6"/><sodipodi:namedview id="namedview4" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0"/><g id="g8" inkscape:groupmode="layer" inkscape:label="ink_ext_XXXXXX" transform="matrix(1.3333333,0,0,-1.3333333,0,188.97333)"><g id="g10" transform="scale(0.1)"><path d="M 1063.94,586.77 V 870.234 H 360 V 586.77 Z M 643.023,842.883 594.43,614.719 h -76.258 l -47.949,157.875 h -0.649 l -31.89,-157.875 h -57.832 l 48.984,228.164 h 76.516 l 47,-158.223 H 553 l 32.191,158.223 z m 218.118,0 -47.649,-228.164 h -61.41 l 20.371,97.722 h -72.637 l -20.367,-97.722 h -61.414 l 47.649,228.164 h 61.41 l -18.039,-87.289 h 72.593 l 18.082,87.289 z m 176.429,-6.227 -14.81,-45.426 c -11.82,5.54 -27.92,10.434 -50.576,10.434 -24.293,0 -44.02,-3.562 -44.02,-21.898 0,-32.332 89.036,-20.266 89.036,-89.563 0,-63.074 -58.825,-79.437 -112.04,-79.437 -23.648,0 -50.926,5.586 -70.945,11.808 l 14.453,46.418 c 12.129,-7.859 36.469,-13.097 56.492,-13.097 19.078,0 48.942,3.605 48.942,27.132 0,36.629 -89.036,22.891 -89.036,87.25 0,58.868 51.922,76.512 102.196,76.512 28.269,0 54.858,-2.961 70.308,-10.133" style="fill:#005eb8;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path12"/></g></g></svg>

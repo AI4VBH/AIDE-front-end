@@ -1,8 +1,25 @@
+<!--
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+  -->
+
 <template>
     <v-app-bar app color="#fff" clipped-left class="elevation-1">
         <div class="ml-6 mr-5" data-cy="logo">
             <router-link :to="{ name: getDefaultDestinationForUser() }">
                 <v-img class="mx-auto" src="@/assets/NHSlogo.svg" height="33px" width="83px" />
+                <span class="d-sr-only">Home</span>
             </router-link>
         </div>
 
@@ -11,6 +28,7 @@
         <div class="mx-3" data-cy="logo">
             <router-link to="/">
                 <v-img class="mx-auto" src="@/assets/AIClogo.svg" height="64px" width="65px" />
+                <span class="d-sr-only">Home</span>
             </router-link>
         </div>
 
@@ -77,8 +95,8 @@ export default class AppHeader extends Vue {
 
     updatePageTitle(): void {
         switch (this.$route.name) {
-            case "AdminHealthDashboard":
-                this.pageTitle = "Admin Health Dashboard";
+            case "AdminSystemDashboard":
+                this.pageTitle = "Admin System Dashboard";
                 break;
 
             case "AdminPayloadDashboard":
@@ -86,17 +104,10 @@ export default class AppHeader extends Vue {
                 break;
 
             case "ClinicalReview":
-                this.pageTitle = "Model outputs for clinical review";
-                break;
-
-            case "ClinicalReviewViewer":
-                this.pageTitle = "Model outputs for clinical review";
+                this.pageTitle = "Application outputs for clinical review";
                 break;
 
             case "ApplicationRepositoryList":
-                this.pageTitle = "Application Repository";
-                break;
-
             case "ApplicationRepositoryDetail":
                 this.pageTitle = "Application Repository";
                 break;
@@ -115,6 +126,10 @@ export default class AppHeader extends Vue {
 
             case "AdminExportConfiguration":
                 this.pageTitle = "Export Destination Configuration";
+                break;
+
+            case "Accessibility":
+                this.pageTitle = "Accessibility Statement";
                 break;
         }
     }

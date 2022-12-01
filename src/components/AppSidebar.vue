@@ -1,3 +1,19 @@
+<!--
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+  -->
+
 <template>
     <v-navigation-drawer v-model="drawer" app permanent expand-on-hover clipped mini-variant>
         <v-list dense nav>
@@ -25,6 +41,14 @@ import Component from "vue-class-component";
 import { EventBus } from "@/event-bus";
 import { routes } from "@/router";
 
+const accessibility = {
+    title: "Accessibility Statement",
+    icon: "mdi-human",
+    datacy: "accessibility-button",
+    route: "Accessibility",
+    roles: [],
+};
+
 @Component
 export default class AppSidebar extends Vue {
     // Declared as component data
@@ -48,10 +72,10 @@ export default class AppSidebar extends Vue {
 
     items = [
         {
-            title: "Health Dashboard",
+            title: "System Dashboard",
             icon: "mdi-cog",
             datacy: "admin-button",
-            ...this.getRouteData("AdminHealthDashboard"),
+            ...this.getRouteData("AdminSystemDashboard"),
         },
         {
             title: "Payload Dashboard",
@@ -103,9 +127,12 @@ export default class AppSidebar extends Vue {
                 return this.roles.some((r) => item.roles.includes(r));
             });
         }
+
         if (this.roles.length == 0) {
             this.items = [this.getDefaultRoute()];
         }
+
+        this.items.push(accessibility);
 
         EventBus.$on("toggleSidebar", (drawer: boolean) => {
             this.drawer = drawer;

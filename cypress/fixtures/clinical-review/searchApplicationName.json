@@ -1,0 +1,41 @@
+{
+    "pageNumber": 1,
+    "pageSize": 10,
+    "totalPages": 10,
+    "totalRecords": 1,
+    "succeeded": true,
+    "errors": null,
+    "message": null,
+    "data": [
+        {
+            "id": "678",
+            "clinical_review_message": {
+                "task_id": "",
+                "reviewed_task_id": "cde",
+                "execution_id": "678",
+                "reviewed_execution_id": "abc",
+                "correlation_id": "123",
+                "workflow_name": "bobwf",
+                "patient_metadata": {
+                    "patient_name": "Peter-Bazin",
+                    "patient_id": "8821-123-232-0909",
+                    "patient_sex": "M",
+                    "patient_Dob": "12-09-2003",
+                    "patient_age": "23"
+                },
+                "files": [],
+                "reviewer_roles": [
+                    "admin",
+                    "clinician"
+                ],
+                "application_metadata": {
+                    "application_name": "App-Name",
+                    "application_version": "1.1",
+                    "application_mode": "QA"
+                }
+            },
+            "reviewed": false,
+            "received": "2020-12-17T03:24:00"
+        }
+    ]
+}

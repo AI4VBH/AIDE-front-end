@@ -1,0 +1,83 @@
+---
+- - :permit
+  - MIT
+  - :who: Joss Sparkes (RemakingEden)
+    :why: Green list
+    :versions: []
+    :when: 2022-11-11 09:27:46.774796944 Z
+- - :permit
+  - Apache 2.0
+  - :who: Joss Sparkes (RemakingEden)
+    :why: Green list
+    :versions: []
+    :when: 2022-11-11 09:28:55.270991841 Z
+- - :approve
+  - keycloak-js
+  - :who: Jack Schofield (JackSchofield23)
+    :why: Apache 2.0 (https://github.com/keycloak/keycloak/blob/main/LICENSE.txt)
+    :versions:
+    - 19.0.3
+    :when: 2022-11-18 08:51:39.999308652 Z
+- - :approve
+  - scroll-to-bottomjs
+  - :who: Jack Schofield (JackSchofield23)
+    :why: MIT
+    :versions:
+    - 1.1.0
+    :when: 2022-11-18 08:51:39.999308652 Z
+- - :approve
+  - better-npm-audit
+  - :who: Jack Schofield (JackSchofield23)
+    :why: MIT (https://github.com/jeemok/better-npm-audit/blob/master/LICENSE)
+    :versions:
+    - 3.7.3
+    :when: 2022-11-18 08:51:39.999308652 Z
+- - :approve
+  - '@ssthouse/vue-tree-chart'
+  - :who: Jack Schofield (JackSchofield23)
+    :why: none
+    :versions:
+    - 0.6.8
+    :when: 2022-11-24 08:51:39.999308652 Z
+- - :approve
+  - '@typescript-eslint/parser'
+  - :who: Jack Schofield (JackSchofield23)
+    :why: BSD-2-Clause (https://github.com/typescript-eslint/typescript-eslint/blob/main/LICENSE)
+    :versions:
+    - 5.41.0
+    :when: 2022-11-24 08:51:39.999308652 Z
+- - :approve
+  - axe-core
+  - :who: Jack Schofield (JackSchofield23)
+    :why: MPL-2.0 (https://github.com/dequelabs/axe-core/blob/develop/LICENSE)
+    :versions:
+    - 4.5.0
+    :when: 2022-11-24 08:51:39.999308652 Z
+- - :approve
+  - axe-core
+  - :who: Jack Schofield (JackSchofield23)
+    :why: MPL-2.0 (https://github.com/dequelabs/axe-core/blob/develop/LICENSE)
+    :versions:
+    - 4.5.0
+    :when: 2022-11-24 08:51:39.999308652 Z
+- - :approve
+  - chai-as-promised
+  - :who: Jack Schofield (JackSchofield23)
+    :why: WTFPL (https://github.com/domenic/chai-as-promised/blob/master/LICENSE.txt)
+    :versions:
+    - 7.1.1
+    :when: 2022-11-24 08:51:39.999308652 Z
+- - :approve
+  - sinon-chai
+  - :who: Jack Schofield (JackSchofield23)
+    :why: WTFPL (https://github.com/domenic/sinon-chai/blob/master/LICENSE.txt)
+    :versions:
+    - 3.7.0
+    :when: 2022-11-24 08:51:39.999308652 Z
+- - :approve
+  - vanilla-jsoneditor
+  - :who: Jack Schofield (JackSchofield23)
+    :why: ISC (https://github.com/josdejong/svelte-jsoneditor/blob/main/LICENSE.md)
+    :versions:
+    - 0.9.1
+    :when: 2022-11-24 08:51:39.999308652 Z

@@ -1,3 +1,17 @@
+# Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 name: 'develop'
 
 # Controls when the workflow will run
@@ -36,7 +50,7 @@ jobs:
       - name: Login to Amazon ECR Private
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-      
+
       - name: Set branch name
         run: echo "BRANCH_NAME=$(echo $(date +%Y.%m.%d))-develop.$(echo $(date +%-H%M))" >> $GITHUB_ENV
 
@@ -46,23 +60,23 @@ jobs:
           push: true
           pull: true
           tags: ${{ secrets.AWS_ECR_REGISTRY }}/aide/front-end:${{ env.BRANCH_NAME }}
-      
+
       - name: Create artifacts folder and copy helm charts
         run: |
           mkdir -p "$GITHUB_WORKSPACE/artifacts/aide-frontend/helm"
           cp -a $GITHUB_WORKSPACE/helm/. $GITHUB_WORKSPACE/artifacts/aide-frontend/helm/
           echo BASE_PATH="$GITHUB_WORKSPACE/artifacts/aide-frontend" >> $GITHUB_ENV
           echo OUT_FOLDER="$GITHUB_WORKSPACE/artifacts/" >> $GITHUB_ENV
-      
+
       - name: Install Octopus CLI
         uses: OctopusDeploy/install-octopus-cli-action@v1.2.0
         with:
           version: latest
-      
+
       - name: Package AIDE FrontEnd
         run: |
           octo pack --id="AIDE.FrontEnd" --format="Zip" --version="${{ env.BRANCH_NAME }}" --basePath="${{ env.BASE_PATH }}" --outFolder="${{ env.OUT_FOLDER }}" --logLevel=debug
-      
+
       - name: Push Package to Octopus Deploy
         uses: OctopusDeploy/push-package-action@v2.1.0
         env:

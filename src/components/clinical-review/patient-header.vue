@@ -1,3 +1,19 @@
+<!--
+  Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+  -->
+
 <template>
     <v-row class="patient-header">
         <v-col data-cy="patient-name">
@@ -25,8 +41,10 @@
             {{ studyDate | formatDateTime }}
         </v-col>
         <v-col data-cy="task-actions" class="task-actions">
-            <v-btn data-cy="accept-task" color="primary" @click="acceptTask">Accept</v-btn>
-            <v-btn data-cy="reject-task" @click="rejectTask">Reject</v-btn>
+            <v-btn data-cy="accept-task" color="primary" :disabled="!studyDate" @click="acceptTask">
+                Accept
+            </v-btn>
+            <v-btn data-cy="reject-task" :disabled="!studyDate" @click="rejectTask">Reject</v-btn>
         </v-col>
     </v-row>
 </template>
@@ -59,7 +77,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .patient-header {
+    color: #000;
+
     > div {
+        background-color: #fff;
         border-right: 1px solid rgba(0, 0, 0, 0.12);
 
         &:last-of-type {
@@ -86,7 +107,6 @@ export default defineComponent({
 }
 
 .header-label {
-    color: #424242;
     font-weight: bold;
     display: block;
 }

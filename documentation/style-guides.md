@@ -1,3 +1,19 @@
+<!--
+  ~ Copyright 2022 Guy’s and St Thomas’ NHS Foundation Trust
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
 # Table of Contents
 - [Style guides](#style-guides)
     - [Colour palette](#colour-palette)
@@ -21,7 +37,7 @@ The application uses [Material Design Icons](https://materialdesignicons.com/) l
 
 - Buttons - [Vuetify `v-btn` component](https://vuetifyjs.com/en/components/buttons/)
 &nbsp;
-    - **Primary button:** 
+    - **Primary button:**
     Background colour: `#61366E`
     Text colour: `#FFFFFF`
     &nbsp;
@@ -41,17 +57,17 @@ The application uses [Material Design Icons](https://materialdesignicons.com/) l
 &nbsp;
     - **Confirmation modals**
     &nbsp;
-    ![image](./static/confirmation-modal.png)  
+    ![image](./static/confirmation-modal.png)
     &nbsp;
     - **Form modals** - combines `v-dialog` and [Vuetify form `v-form`](https://vuetifyjs.com/en/components/forms/) UI components.
     &nbsp;
-    ![image](./static/form-modal.png)  
+    ![image](./static/form-modal.png)
 ---
 - Toast notifications (used to inform the user if API requests are successful) implemented using `vue-toast-notification` package (https://www.npmjs.com/package/vue-toast-notification).
 &nbsp;
     - **Successful toast notification:**
     &nbsp;
-    ![image](./static/success-toast.png)  
+    ![image](./static/success-toast.png)
     &nbsp;
     - **Error toast notification:**
     &nbsp;
