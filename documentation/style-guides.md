@@ -41,34 +41,34 @@ The application uses [Material Design Icons](https://materialdesignicons.com/) l
     Background colour: `#61366E`
     Text colour: `#FFFFFF`
     &nbsp;
-    ![image](./static/primary-button.png)
+    ![image](./static/primary-button.PNG)
     &nbsp;
     - **Secondary button:**
     Background colour: `#F7F3F9`
     Text colour: `#61366E`
     &nbsp;
-    ![image](./static/secondary-button.png)
+    ![image](./static/secondary-button.PNG)
 ---
 - Tables - [Vuetify `v-data-table` component](https://vuetifyjs.com/en/components/data-tables/). Tables use inbuilt pagination and searching/filtering/checkbox components (if applicable).
 &nbsp;
-    ![image](./static/table-issues.png)
+    ![image](./static/table-issues.PNG)
 ---
 - Modals - [Vuetify `v-dialog` component](https://vuetifyjs.com/en/components/dialogs/)
 &nbsp;
     - **Confirmation modals**
     &nbsp;
-    ![image](./static/confirmation-modal.png)
+    ![image](./static/confirmation-modal.PNG)
     &nbsp;
     - **Form modals** - combines `v-dialog` and [Vuetify form `v-form`](https://vuetifyjs.com/en/components/forms/) UI components.
     &nbsp;
-    ![image](./static/form-modal.png)
+    ![image](./static/form-modal.PNG)
 ---
 - Toast notifications (used to inform the user if API requests are successful) implemented using `vue-toast-notification` package (https://www.npmjs.com/package/vue-toast-notification).
 &nbsp;
     - **Successful toast notification:**
     &nbsp;
-    ![image](./static/success-toast.png)
+    ![image](./static/success-toast.PNG)
     &nbsp;
     - **Error toast notification:**
     &nbsp;
-    ![image](./static/error-toast.png)
+    ![image](./static/error-toast.PNG)
