@@ -19,7 +19,7 @@
                 "patient_metadata": {
                     "patient_name": "Joe Batt",
                     "patient_id": "000-000-000-001",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "10-10-2000",
                     "patient_age": "23"
                 },
@@ -29,9 +29,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "stroke model",
-                    "application_version": "1.1",
-                    "application_mode": "QA"
+                    "name": "stroke model",
+                    "version": "1.1",
+                    "mode": "QA"
                 }
             },
             "reviewed": false,
@@ -49,7 +49,7 @@
                 "patient_metadata": {
                     "patient_name": "Alexis Bazin",
                     "patient_id": "000-000-000-002",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "10-12-2000",
                     "patient_age": "72"
                 },
@@ -59,9 +59,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "stroke",
-                    "application_version": "1.1",
-                    "application_mode": "Clinical"
+                    "name": "stroke",
+                    "version": "1.1",
+                    "mode": "Clinical"
                 }
             },
             "reviewed": false,
@@ -79,7 +79,7 @@
                 "patient_metadata": {
                     "patient_name": "John Smith",
                     "patient_id": "000-000-000-003",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "03-11-2022",
                     "patient_age": "09"
                 },
@@ -89,9 +89,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "Cancer model",
-                    "application_version": "13.8",
-                    "application_mode": "Research"
+                    "name": "Cancer model",
+                    "version": "13.8",
+                    "mode": "Research"
                 }
             },
             "reviewed": false,
@@ -109,7 +109,7 @@
                 "patient_metadata": {
                     "patient_name": "Susan Smith",
                     "patient_id": "000-000-000-004",
-                    "patient_sex": "F",
+                    "patient_gender": "F",
                     "patient_Dob": "02-09-2022",
                     "patient_age": "99"
                 },
@@ -119,9 +119,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "Pain model",
-                    "application_version": "0.9",
-                    "application_mode": "QA"
+                    "name": "Pain model",
+                    "version": "0.9",
+                    "mode": "QA"
                 }
             },
             "reviewed": false,
@@ -139,7 +139,7 @@
                 "patient_metadata": {
                     "patient_name": "Susan Jeffries",
                     "patient_id": "000-000-000-005",
-                    "patient_sex": "F",
+                    "patient_gender": "F",
                     "patient_Dob": "12-12-2010",
                     "patient_age": "99"
                 },
@@ -149,9 +149,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "Pain model",
-                    "application_version": "10",
-                    "application_mode": "Clinician"
+                    "name": "Pain model",
+                    "version": "10",
+                    "mode": "Clinician"
                 }
             },
             "reviewed": false,
@@ -169,7 +169,7 @@
                 "patient_metadata": {
                     "patient_name": "Mark Jeffries",
                     "patient_id": "000-000-000-007",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "12-12-2010",
                     "patient_age": "45"
                 },
@@ -179,9 +179,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "Other model",
-                    "application_version": "10.00",
-                    "application_mode": "Research"
+                    "name": "Other model",
+                    "version": "10.00",
+                    "mode": "Research"
                 }
             },
             "reviewed": false,
@@ -199,7 +199,7 @@
                 "patient_metadata": {
                     "patient_name": "Mark Migleson",
                     "patient_id": "000-000-000-008",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "12-12-2010",
                     "patient_age": "45"
                 },
@@ -209,9 +209,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "Other model",
-                    "application_version": "10.00",
-                    "application_mode": "Research"
+                    "name": "Other model",
+                    "version": "10.00",
+                    "mode": "Research"
                 }
             },
             "reviewed": false,
