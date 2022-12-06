@@ -115,7 +115,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { getPayloads } from "@/api/Admin/payloads/PayloadService";
+import { getPayloadById, getPayloads } from "@/api/Admin/payloads/PayloadService";
 import { IPayload } from "@/models/Admin/IPayload";
 import ExecutionTree from "@/components/AdminPayloadDashboard/ExecutionTree.vue";
 import { formatDateAndTimeOfArray } from "@/utils/date-utilities";
@@ -190,12 +190,20 @@ export default class PayloadsTable extends Vue {
         formatDateAndTimeOfArray(this.paginatedPayloads.data, "payload_received");
 
         if (this.selectedPayloadID) {
-            this.paginatedPayloads.data.map((payload: IPayload) => {
-                if (payload.payload_id === this.selectedPayloadID) {
-                    return (this.expanded = [payload]);
+            let selectedPayload = this.paginatedPayloads.data.find(
+                (p) => p.payload_id === this.selectedPayloadID,
+            );
+
+            if (!selectedPayload) {
+                const payload = await getPayloadById(this.selectedPayloadID);
+
+                if (payload) {
+                    this.paginatedPayloads.data.push(payload);
+                    selectedPayload = payload;
                 }
-                return;
-            });
+            }
+
+            this.expanded = [selectedPayload];
         }
     }
 }
