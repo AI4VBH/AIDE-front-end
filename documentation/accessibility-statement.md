@@ -42,6 +42,8 @@ For example:
 
 We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements, please contact us.
 
+Email us at [ai4vbh@kcl.ac.uk](mailto:ai4vbh@kcl.ac.uk)
+
 
 ## Enforcement procedure
 

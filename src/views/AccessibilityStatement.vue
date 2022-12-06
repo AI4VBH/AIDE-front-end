@@ -65,7 +65,7 @@
                 problems not listed on this page or think we're not meeting accessibility
                 requirements, please contact us.
             </p>
-            <p>CONTACT-DETAILS-TO-BE-ADDED</p>
+            <p>Email us at: <a href="mailto:ai4vbh@kcl.ac.uk">ai4vbh@kcl.ac.uk</a></p>
         </section>
 
         <section>
