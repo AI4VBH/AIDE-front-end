@@ -410,13 +410,13 @@ export default class ClinicalReviewPage extends AbstractPage {
     public searchApplicationName() {
         cy.intercept(
             "GET",
-            `/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=${searchApplicationNameTaskData.application_metadata.application_name}`,
+            `/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=${searchApplicationNameTaskData.application_metadata.name}`,
             ApiMocks.CLINICAL_REVIEW_SEARCH_APPLICATION_NAME,
         ).as("application-name");
         cy.dataCy("application-name-radiobtn").click({ force: true }).should("not.have.text");
         cy.dataCy("worklist-search")
             .clear({ force: true })
-            .type(searchApplicationNameTaskData.application_metadata.application_name);
+            .type(searchApplicationNameTaskData.application_metadata.name);
         cy.wait("@application-name");
         this.assertTaskDetails(ClinicalReviewTaskData.SEARCH_APPLICATION_NAME, 0);
     }
