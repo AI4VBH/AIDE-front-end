@@ -52,7 +52,7 @@ export interface PatientMetadata {
     patient_id: string;
     patient_dob: string;
     patient_age: string;
-    patient_sex: string;
+    patient_gender: string;
 }
 
 export interface File {
@@ -70,9 +70,9 @@ export interface Credentials {
 }
 
 export interface ApplicationMetadata {
-    application_name: string;
-    application_version: string;
-    application_mode: string;
+    name: string;
+    version: string;
+    mode: string;
 }
 
 // Series / Study

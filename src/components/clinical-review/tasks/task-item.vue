@@ -56,11 +56,11 @@
                 <template v-slot:activator="{ on }">
                     <v-list-item-subtitle data-cy="patient-sex" v-on="on">
                         <strong>Sex:</strong>
-                        {{ patient.patient_sex }}
+                        {{ patient.patient_gender }}
                     </v-list-item-subtitle>
                 </template>
                 <span>
-                    {{ patient.patient_sex }}
+                    {{ patient.patient_gender }}
                 </span>
             </v-tooltip>
 
@@ -68,23 +68,21 @@
                 <template v-slot:activator="{ on }">
                     <v-list-item-subtitle data-cy="application" v-on="on">
                         <strong>Application:</strong>
-                        {{ application.application_name }} - {{ application.application_version }}
+                        {{ application.name }} - {{ application.version }}
                     </v-list-item-subtitle>
                 </template>
-                <span>
-                    {{ application.application_name }} - {{ application.application_version }}
-                </span>
+                <span> {{ application.name }} - {{ application.version }} </span>
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
                 <template v-slot:activator="{ on }">
                     <v-list-item-subtitle data-cy="mode" v-on="on">
                         <strong>Mode:</strong>
-                        {{ application.application_mode }}
+                        {{ application.mode }}
                     </v-list-item-subtitle>
                 </template>
                 <span>
-                    {{ application.application_mode }}
+                    {{ application.mode }}
                 </span>
             </v-tooltip>
 

@@ -19,7 +19,7 @@
                 "patient_metadata": {
                     "patient_name": "John-Bazin",
                     "patient_id": "5837-123-232-3927",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "10-10-2021",
                     "patient_age": "45"
                 },
@@ -29,9 +29,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "App-Name",
-                    "application_version": "1.1",
-                    "application_mode": "CU"
+                    "name": "App-Name",
+                    "version": "1.1",
+                    "mode": "CU"
                 }
             },
             "reviewed": false,
