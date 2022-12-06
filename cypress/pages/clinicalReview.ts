@@ -212,7 +212,7 @@ export default class ClinicalReviewPage extends AbstractPage {
         );
         cy.dataCy("patient-sex").should(
             "contain",
-            task.clinical_review_message.patient_metadata.patient_sex,
+            task.clinical_review_message.patient_metadata.patient_gender,
         );
         cy.dataCy("study-date").should("contain", dateTime);
     }
@@ -364,19 +364,13 @@ export default class ClinicalReviewPage extends AbstractPage {
             )
             .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_id)
             .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_age)
-            .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_sex)
             .and(
                 "contain",
-                task.data[index].clinical_review_message.application_metadata.application_name,
+                task.data[index].clinical_review_message.patient_metadata.patient_gender,
             )
-            .and(
-                "contain",
-                task.data[index].clinical_review_message.application_metadata.application_version,
-            )
-            .and(
-                "contain",
-                task.data[index].clinical_review_message.application_metadata.application_mode,
-            )
+            .and("contain", task.data[index].clinical_review_message.application_metadata.name)
+            .and("contain", task.data[index].clinical_review_message.application_metadata.version)
+            .and("contain", task.data[index].clinical_review_message.application_metadata.mode)
             .and("contain", taskdate);
     }
 
@@ -416,13 +410,13 @@ export default class ClinicalReviewPage extends AbstractPage {
     public searchApplicationName() {
         cy.intercept(
             "GET",
-            `/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=${searchApplicationNameTaskData.application_metadata.application_name}`,
+            `/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=${searchApplicationNameTaskData.application_metadata.name}`,
             ApiMocks.CLINICAL_REVIEW_SEARCH_APPLICATION_NAME,
         ).as("application-name");
         cy.dataCy("application-name-radiobtn").click({ force: true }).should("not.have.text");
         cy.dataCy("worklist-search")
             .clear({ force: true })
-            .type(searchApplicationNameTaskData.application_metadata.application_name);
+            .type(searchApplicationNameTaskData.application_metadata.name);
         cy.wait("@application-name");
         this.assertTaskDetails(ClinicalReviewTaskData.SEARCH_APPLICATION_NAME, 0);
     }

@@ -19,7 +19,7 @@
                 "patient_metadata": {
                     "patient_name": "Peter-Bazin",
                     "patient_id": "8821-123-232-0909",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "12-09-2003",
                     "patient_age": "23"
                 },
@@ -29,9 +29,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "App-Name",
-                    "application_version": "1.1",
-                    "application_mode": "QA"
+                    "name": "App-Name",
+                    "version": "1.1",
+                    "mode": "QA"
                 }
             },
             "reviewed": false,

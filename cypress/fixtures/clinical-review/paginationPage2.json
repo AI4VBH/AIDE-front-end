@@ -19,7 +19,7 @@
                 "patient_metadata": {
                     "patient_name": "Trevor-Menangi-Page2",
                     "patient_id": "8855-123-232-7709",
-                    "patient_sex": "M",
+                    "patient_gender": "M",
                     "patient_Dob": "12-12-2017",
                     "patient_age": "45"
                 },
@@ -29,9 +29,9 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "application_name": "Pagination",
-                    "application_version": "11",
-                    "application_mode": "Research"
+                    "name": "Pagination",
+                    "version": "11",
+                    "mode": "Research"
                 }
             },
             "reviewed": false,

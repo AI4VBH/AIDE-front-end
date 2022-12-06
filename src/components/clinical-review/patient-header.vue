@@ -34,7 +34,7 @@
         </v-col>
         <v-col data-cy="patient-sex" class="narrow-column">
             <span class="header-label">Sex</span>
-            {{ patientMetadata.patient_sex }}
+            {{ patientMetadata.patient_gender }}
         </v-col>
         <v-col data-cy="study-date">
             <span class="header-label">Study Date</span>
