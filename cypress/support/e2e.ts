@@ -16,6 +16,7 @@
 
 import "cypress-axe";
 import "cypress-get-table";
+import "cypress-mochawesome-reporter/register";
 import { Commands } from "./commands";
 
 Cypress.Commands.add("dataCy", Commands.dataCy);
