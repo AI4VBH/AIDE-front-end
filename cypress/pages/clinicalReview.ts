@@ -201,10 +201,6 @@ export default class ClinicalReviewPage extends AbstractPage {
             "contain",
             task.clinical_review_message.patient_metadata.patient_name,
         );
-        cy.dataCy("patient-age").should(
-            "contain",
-            task.clinical_review_message.patient_metadata.patient_age,
-        );
         cy.dataCy("patient-dob").should("contain", date);
         cy.dataCy("patient-id").should(
             "contain",
@@ -363,7 +359,6 @@ export default class ClinicalReviewPage extends AbstractPage {
                 task.data[index].clinical_review_message.patient_metadata.patient_name,
             )
             .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_id)
-            .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_age)
             .and(
                 "contain",
                 task.data[index].clinical_review_message.patient_metadata.patient_gender,
