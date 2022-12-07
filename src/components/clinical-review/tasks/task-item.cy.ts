@@ -35,8 +35,8 @@ const task = {
         files: [],
         reviewer_roles: ["admin", "clinician"],
         application_metadata: {
-            name: "stroke model",
-            version: "1.1",
+            application_name: "stroke model",
+            application_version: "1.1",
             mode: "CU",
         },
     },
@@ -74,8 +74,8 @@ describe("<task-item />", () => {
         );
         cy.get("[data-cy=application]").should(
             "contain.text",
-            task.clinical_review_message.application_metadata.name,
-            task.clinical_review_message.application_metadata.version,
+            task.clinical_review_message.application_metadata.application_name,
+            task.clinical_review_message.application_metadata.application_version,
         );
         cy.get("[data-cy=mode]").should(
             "contain.text",
