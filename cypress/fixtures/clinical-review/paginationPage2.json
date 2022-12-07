@@ -28,8 +28,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "Pagination",
-                    "version": "11",
+                    "application_name": "Pagination",
+                    "application_version": "11",
                     "mode": "Research"
                 }
             },

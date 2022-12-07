@@ -69,8 +69,8 @@ export interface Credentials {
 }
 
 export interface ApplicationMetadata {
-    name: string;
-    version: string;
+    application_name: string;
+    application_version: string;
     mode: string;
 }
 

@@ -28,8 +28,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "App-Name",
-                    "version": "1.1",
+                    "application_name": "App-Name",
+                    "application_version": "1.1",
                     "mode": "QA"
                 }
             },
