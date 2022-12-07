@@ -39,8 +39,8 @@ const tasks = [
             files: [],
             reviewer_roles: ["admin", "clinician"],
             application_metadata: {
-                name: "stroke model",
-                version: "1.1",
+                application_name: "stroke model",
+                application_version: "1.1",
                 mode: "CU",
             },
         },
@@ -65,8 +65,8 @@ const tasks = [
             files: [],
             reviewer_roles: ["admin", "clinician"],
             application_metadata: {
-                name: "Application 1",
-                version: "1.1",
+                application_name: "Application 1",
+                application_version: "1.1",
                 mode: "CU",
             },
         },
@@ -91,8 +91,8 @@ const tasks = [
             files: [],
             reviewer_roles: ["admin", "clinician"],
             application_metadata: {
-                name: "Application 1",
-                version: "1.1",
+                application_name: "Application 1",
+                application_version: "1.1",
                 mode: "CU",
             },
         },

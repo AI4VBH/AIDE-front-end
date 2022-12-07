@@ -68,10 +68,12 @@
                 <template v-slot:activator="{ on }">
                     <v-list-item-subtitle data-cy="application" v-on="on">
                         <strong>Application:</strong>
-                        {{ application.name }} - {{ application.version }}
+                        {{ application.application_name }} - {{ application.application_version }}
                     </v-list-item-subtitle>
                 </template>
-                <span> {{ application.name }} - {{ application.version }} </span>
+                <span>
+                    {{ application.application_name }} - {{ application.application_version }}
+                </span>
             </v-tooltip>
 
             <v-tooltip bottom open-delay="3000">
