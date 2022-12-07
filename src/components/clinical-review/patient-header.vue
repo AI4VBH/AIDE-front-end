@@ -20,10 +20,6 @@
             <span class="header-label">Patient</span>
             {{ patientMetadata.patient_name }}
         </v-col>
-        <v-col data-cy="patient-age" class="narrow-column">
-            <span class="header-label">Age</span>
-            {{ patientMetadata.patient_age }}
-        </v-col>
         <v-col data-cy="patient-dob">
             <span class="header-label">DoB</span>
             {{ patientMetadata.patient_dob | formatDate }}

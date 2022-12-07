@@ -42,13 +42,13 @@
 
             <v-tooltip bottom open-delay="3000">
                 <template v-slot:activator="{ on }">
-                    <v-list-item-subtitle data-cy="patient-age" v-on="on">
-                        <strong>Age:</strong>
-                        {{ patient.patient_age }}
+                    <v-list-item-subtitle data-cy="patient-dob" v-on="on">
+                        <strong>DoB:</strong>
+                        {{ patient.patient_dob }}
                     </v-list-item-subtitle>
                 </template>
                 <span>
-                    {{ patient.patient_age }}
+                    {{ patient.patient_dob }}
                 </span>
             </v-tooltip>
 

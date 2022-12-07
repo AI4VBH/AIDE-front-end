@@ -31,7 +31,6 @@ const task = {
             patient_id: "1299-123-232-3422",
             patient_gender: "M",
             patient_dob: "10-10-2000",
-            patient_age: "23",
         },
         files: [],
         reviewer_roles: ["admin", "clinician"],
@@ -65,9 +64,9 @@ describe("<task-item />", () => {
             "contain.text",
             task.clinical_review_message.patient_metadata.patient_id,
         );
-        cy.get("[data-cy=patient-age]").should(
+        cy.get("[data-cy=patient-dob]").should(
             "contain.text",
-            task.clinical_review_message.patient_metadata.patient_age,
+            task.clinical_review_message.patient_metadata.patient_dob,
         );
         cy.get("[data-cy=patient-sex]").should(
             "contain.text",
