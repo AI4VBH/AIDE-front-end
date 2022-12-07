@@ -58,6 +58,12 @@ export async function getPayloads(query: QueryParams): Promise<IPagedResponse<IP
     return provideDefaultResult(response, defaultData);
 }
 
+export async function getPayloadById(payloadId: string): Promise<IPayload | undefined> {
+    const response = await http.get<IPayload>(`/payloads/${payloadId}`);
+
+    return provideDefaultResult(response, undefined);
+}
+
 export async function getPayloadExecutions(payload_id: string): Promise<WorkflowInstance[]> {
     const response = await http.get(`/payloads/${payload_id}/executions`);
 
