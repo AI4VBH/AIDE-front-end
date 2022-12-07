@@ -34,6 +34,7 @@ cypress/videos
 cypress/screenshots
 cypress-visual-report
 cypress-visual-screenshots
+cypress/reports
 
 # Eslint
 eslint.json

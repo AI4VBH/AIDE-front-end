@@ -41,6 +41,11 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: e2e-report
+          path: cypress/reports
+
   component-tests:
     runs-on: ubuntu-latest
     steps:
