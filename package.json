@@ -83,6 +83,7 @@
     "cypress": "10.7.0",
     "cypress-axe": "^1.0.0",
     "cypress-get-table": "^1.0.1",
+    "cypress-mochawesome-reporter": "^3.2.3",
     "eslint": "^8.23.0",
     "eslint-plugin-prettier": "^4.0",
     "eslint-plugin-vue": "^9.0",
