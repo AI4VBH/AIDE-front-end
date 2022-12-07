@@ -28,8 +28,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "stroke model",
-                    "version": "1.1",
+                    "application_name": "stroke model",
+                    "application_version": "1.1",
                     "mode": "QA"
                 }
             },
@@ -57,8 +57,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "stroke",
-                    "version": "1.1",
+                    "application_name": "stroke",
+                    "application_version": "1.1",
                     "mode": "Clinical"
                 }
             },
@@ -86,8 +86,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "Cancer model",
-                    "version": "13.8",
+                    "application_name": "Cancer model",
+                    "application_version": "13.8",
                     "mode": "Research"
                 }
             },
@@ -115,8 +115,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "Pain model",
-                    "version": "0.9",
+                    "application_name": "Pain model",
+                    "application_version": "0.9",
                     "mode": "QA"
                 }
             },
@@ -144,8 +144,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "Pain model",
-                    "version": "10",
+                    "application_name": "Pain model",
+                    "application_version": "10",
                     "mode": "Clinician"
                 }
             },
@@ -173,8 +173,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "Other model",
-                    "version": "10.00",
+                    "application_name": "Other model",
+                    "application_version": "10.00",
                     "mode": "Research"
                 }
             },
@@ -202,8 +202,8 @@
                     "clinician"
                 ],
                 "application_metadata": {
-                    "name": "Other model",
-                    "version": "10.00",
+                    "application_name": "Other model",
+                    "application_version": "10.00",
                     "mode": "Research"
                 }
             },
