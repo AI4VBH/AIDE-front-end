@@ -15,7 +15,7 @@
   -->
 
 <template>
-    <div class="container">
+    <div class="container ma-0">
         <v-row v-if="!loading">
             <div style="width: 75%">
                 <vue-tree

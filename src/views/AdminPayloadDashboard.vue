@@ -15,7 +15,7 @@
   -->
 
 <template>
-    <v-container>
+    <v-container fluid>
         <PayloadsTable />
     </v-container>
 </template>

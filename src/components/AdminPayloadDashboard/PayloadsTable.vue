@@ -15,14 +15,14 @@
   -->
 
 <template>
-    <v-container class="mt-3 mb-7">
+    <v-container fluid class="mt-3 mb-7 px-7">
         <v-row class="mb-5">
             <v-col class="col-sm-8 col-xl-9">
                 <h2 class="mx-auto section-title">Payloads/Inputs</h2>
             </v-col>
         </v-row>
-        <v-row>
-            <v-layout v-show="!loading" child-flex>
+        <v-row v-if="!loading">
+            <v-layout child-flex column>
                 <v-card>
                     <v-card-title>
                         <v-spacer />
@@ -105,7 +105,9 @@
                     </v-data-table>
                 </v-card>
             </v-layout>
-            <v-col v-if="loading" cols="12">
+        </v-row>
+        <v-row v-else>
+            <v-col cols="12">
                 <v-skeleton-loader class="mx-auto" type="table"></v-skeleton-loader>
             </v-col>
         </v-row>
