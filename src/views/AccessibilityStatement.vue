@@ -28,7 +28,7 @@
                 able to:
             </p>
             <ul>
-                <li>Zoom in up to 300% without the text spilling off the screen</li>
+                <li>Zoom in up to 200% without the text spilling off the screen</li>
                 <li>Navigate most of the website using just a keyboard</li>
                 <li>Navigate most of the website using speech recognition software</li>
                 <li>
@@ -124,11 +124,14 @@
                     </tr>
                     <tr>
                         <td>Admin page - System Statistics</td>
-                        <td>Unable to access the checkboxes by tabbing to them</td>
+                        <td>
+                            Unable to access the checkboxes using a screen reader or by tabbing to
+                            them
+                        </td>
                         <td>Keyboard accessibility - WAVE</td>
                         <td>
                             Individuals using only a keyboard will be unable to select or un-select
-                            any checkbox
+                            any checkbox or hear a description of what they are
                         </td>
                     </tr>
                     <tr>
@@ -177,6 +180,15 @@
                     </tr>
                     <tr>
                         <td>All pages</td>
+                        <td>Unable to access any dropdown using only the keyboard</td>
+                        <td>Keyboard accessibility</td>
+                        <td>
+                            Serious - Ensure keyboard-only users can access site without using a
+                            mouse
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>All pages</td>
                         <td>Colour contrast - Placeholder text for input fields</td>
                         <td>Insufficient color contrast - Axe</td>
                         <td>Serious</td>
@@ -203,7 +215,7 @@
                             Vuetify library which errors if we change
                         </td>
                         <td>Aria-input-field-name</td>
-                        <td>Serious</td>
+                        <td>Unable to tab out of the editor back onto main page</td>
                     </tr>
                     <tr>
                         <td>Payload page - Payload table</td>

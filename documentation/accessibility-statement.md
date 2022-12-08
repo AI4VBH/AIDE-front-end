@@ -20,7 +20,7 @@ This accessibility statement applies to the AI Centre for Value Based Healthcare
 
 This website is run by the AI Centre for Value Based Healthcare. We want as many people as possible to be able to use this website. For example, that means you are able to:
 
-- Zoom in up to 300% without the text spilling off the screen
+- Zoom in up to 200% without the text spilling off the screen
 - Navigate most of the website using just a keyboard
 - Navigate most of the website using speech recognition software
 - Listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
@@ -65,15 +65,16 @@ Despite our best efforts to ensure accessibility of AIDE, there may be some limi
 | Page | Issues | Type | Impact |
 |------|--------|------|--------|
 | Admin page - System Statistics | No column header above the first column in the 'Issues' table containing the checkboxes | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for |
-| Admin page - System Statistics | Unable to access the checkboxes by tabbing to them | Keyboard accessibility - WAVE | Individuals using only a keyboard will be unable to select or un-select any checkbox |
+| Admin page - System Statistics | Unable to access the checkboxes using a screen reader by tabbing to them | Keyboard accessibility - WAVE | Individuals using only a keyboard will be unable to select or un-select any checkbox or hear a description of what they are |
 | Payload page - Payload table | No text on the far left column which contains the drop-down/expansion symbols | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for |
 | Payload page - Payload table | "A button is empty or has no text" - Error next to all three drop-down/expansion symbols | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for |
 | All pages with pagination | Pagination has a nested interactive element | Nested-interactive - AXE | Ensures interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies |
 | All pages with a modal | Unable to add an aria-label on the whole modal component because vuetify does not allow it | Aria-dialog-name - Axe | Serious - Ensures every ARIA dialog and alertdialog node has an accessible name |
+| All pages | Unable to access any dropdown using only the keyboard | Keyboard accessibility | Serious - Ensure keyboard-only users can access site without using a mouse |
 | All pages | Colour contrast - Placeholder text for input fields | Insufficient color contrast - Axe | Serious |
 | All pages with pagination | Colour contrast on rows per page dropdown | Insufficient color contrast - Axe | Serious |
 | Workflow editor page | Element contains only non-text characters - the error is shown for the little expansion arrows within the text editor | Insufficient color contrast - Axe | Serious |
-| Workflow editor page | Aria-label error for the Editor - unable to change as it is an inbuilt vuetify library which errors if we change | Aria-input-field-name | Serious |
+| Workflow editor page | Aria-label error for the Editor - unable to change as it is an inbuilt vuetify library which errors if we change | Aria-input-field-name | Unable to tab out of the editor back onto main page |
 | Payload page - Payload table | Unable to access the radio buttons by tabbing to them | Keyboard accessibility - WAVE | Individuals using only a keyboard will be unable to select radio buttons |
 
 
