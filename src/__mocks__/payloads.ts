@@ -29,31 +29,31 @@ const payloads: IPagedResponse<IPayload> = {
     previousPage: "0",
     data: [
         {
-            payload_id: "041293d0-ab97-4ea1-b967-42ec62f26111",
+            payload_id: "111293d0-ab97-4ea1-b967-42ec62f26111",
             patient_name: "Alex Bazin",
             patient_id: "123 123 1234",
             payload_received: "20220516T141114",
         },
         {
-            payload_id: "",
+            payload_id: "222293d0-ab97-4ea1-b967-42ec62f26222",
             patient_name: "Louiza Van-Der-Varintaford",
             patient_id: "223 223 3234",
             payload_received: "20220526T050215",
         },
         {
-            payload_id: "",
+            payload_id: "333293d0-ab97-4ea1-b967-42ec62f26333",
             patient_name: "Joe Batt",
             patient_id: "423 323 2235",
             payload_received: "20220526T060316",
         },
         {
-            payload_id: "",
+            payload_id: "444293d0-ab97-4ea1-b967-42ec62f26444",
             patient_name: "Richard McRichardson",
             patient_id: "623 723 8234",
             payload_received: "20220526T070417",
         },
         {
-            payload_id: "",
+            payload_id: "555293d0-ab97-4ea1-b967-42ec62f26555",
             patient_name: "Migle Van-Migleson",
             patient_id: "023 723 6234",
             payload_received: "20220526T080518",
@@ -147,7 +147,13 @@ export const payloadsHandlers = [
         return res(ctx.json(payloads));
     }),
     rest.get(`${window.FRONTEND_API_HOST}/payloads/:payloadId/executions`, (req, res, ctx) => {
-        return res(ctx.json(payloadExecutions));
+        const payloadId = req.params.payloadId;
+        const workflowNotTriggeredPayloadId = "111293d0-ab97-4ea1-b967-42ec62f26111";
+        if (payloadId == workflowNotTriggeredPayloadId) {
+            return res(ctx.json([]));
+        } else {
+            return res(ctx.json(payloadExecutions));
+        }
     }),
     rest.get(`${window.FRONTEND_API_HOST}/executions/:executionId/metadata`, (req, res, ctx) => {
         return res(ctx.json(payloadExecutionMetadata));
