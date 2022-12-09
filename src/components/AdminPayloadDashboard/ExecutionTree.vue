@@ -56,6 +56,11 @@
                                 <span v-if="node.id === 'workflow-instance'" class="tree-node-text">
                                     Workflow
                                 </span>
+                                <span
+                                    v-else-if="node.id === 'no-workflow-instance'"
+                                    class="tree-node-text"
+                                >
+                                </span>
                                 <span v-else-if="node.id !== 'root-node'" class="tree-node-text">
                                     Task
                                 </span>

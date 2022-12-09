@@ -17,7 +17,7 @@
 import { TaskExecution, WorkflowInstance } from "@/models/Admin/IPayload";
 
 export interface ExecutionTreeFirstNode {
-    id: "workflow-instance";
+    id: string;
     name: string;
     workflow_name: string;
     workflow_instance_id: string;
@@ -72,6 +72,21 @@ export function mapToExecutionTree(instances: WorkflowInstance[]): ExecutionTree
         id: "root-node",
         name: "Payload Received",
         status: "Succeeded",
-        children: instances.map((i) => mapToExecutionTreeFirstNode(i)),
+        children:
+            instances.length > 0
+                ? instances.map((i) => mapToExecutionTreeFirstNode(i))
+                : [mapToEmptyWorkflow()],
+    };
+}
+
+export function mapToEmptyWorkflow(): ExecutionTreeFirstNode {
+    return {
+        id: "no-workflow-instance",
+        name: "No Workflow Triggered",
+        status: "Succeeded",
+        workflow_name: "",
+        workflow_instance_id: "",
+        start_date: "",
+        children: [],
     };
 }
