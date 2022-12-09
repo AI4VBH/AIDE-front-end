@@ -111,8 +111,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Admin page - System Statistics</td>
+                    <!-- <tr>
+                        <td>System dashboard - Issues table</td>
                         <td>
                             No column header above the first column in the 'Issues' table containing
                             the checkboxes
@@ -121,50 +121,52 @@
                         <td>
                             Unable to use a screen reader to describe what this column is used for
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
-                        <td>Admin page - System Statistics</td>
-                        <td>
-                            Unable to access the checkboxes using a screen reader or by tabbing to
-                            them
-                        </td>
-                        <td>Keyboard accessibility - WAVE</td>
+                        <td>System dashboard - Issues table</td>
+                        <td>Unable to access the checkboxes using a screen reader or a keyboard</td>
+                        <td>Keyboard accessibility / Screen reader</td>
                         <td>
                             Individuals using only a keyboard will be unable to select or un-select
-                            any checkbox or hear a description of what they are
+                            any checkbox or hear a screen reader describe them
                         </td>
                     </tr>
                     <tr>
-                        <td>Payload page - Payload table</td>
+                        <td>Payload dashboard - Payload table</td>
                         <td>
-                            No text on the far left column which contains the drop-down/expansion
-                            symbols
+                            No column header for the expansion icons column on the right side of the
+                            table
                         </td>
-                        <td>Explicit labelling - WAVE</td>
+                        <td>Explicit labelling / Screen reader</td>
+                        <td>The screen reader can not describe that column</td>
+                    </tr>
+                    <tr>
+                        <td>Payload dashboard - Payload table</td>
                         <td>
-                            Unable to use a screen reader to describe what this column is used for
+                            The expansion icons can be selected to open the payloads via the
+                            keyboard, however this cannot be done when using the keyboard whilst
+                            using a screen reader
+                        </td>
+                        <td>Explicit labelling / Screen reader</td>
+                        <td>Unable to use a screen reader and keyboard to open the payloads</td>
+                    </tr>
+                    <tr>
+                        <td>Workflows - Workflow editor</td>
+                        <td>Two colour contrast issues on the page</td>
+                        <td>Insufficient colour contrast</td>
+                        <td>
+                            Insufficient colour contrast reduces the ability of vision impaired
+                            users to read the site
                         </td>
                     </tr>
                     <tr>
-                        <td>Payload page - Payload table</td>
+                        <td>Workflows - Workflow editor</td>
                         <td>
-                            &quot;A button is empty or has no text&quot; - Error next to all three
-                            drop-down/expansion symbols
+                            Due to this being a JSON editor, the 'tab' button is used to edit rather
+                            than for navigation
                         </td>
-                        <td>Explicit labelling - WAVE</td>
-                        <td>
-                            Unable to use a screen reader to describe what this column is used for
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>All pages with pagination</td>
-                        <td>Pagination has a nested interactive element</td>
-                        <td>Nested-interactive - AXE</td>
-                        <td>
-                            Ensures interactive controls are not nested as they are not always
-                            announced by screen readers or can cause focus problems for assistive
-                            technologies
-                        </td>
+                        <td>Keyboard accessibility</td>
+                        <td>Keyboard-only users would not be able to exit the JSON editor</td>
                     </tr>
                     <tr>
                         <td>All pages with a modal</td>
@@ -172,57 +174,19 @@
                             Unable to add an aria-label on the whole modal component because Vuetify
                             does not allow it
                         </td>
-                        <td>Aria-dialog-name - Axe</td>
-                        <td>
-                            Serious - Ensures every ARIA dialog and alertdialog node has an
-                            accessible name
-                        </td>
+                        <td>Aria-dialog-name</td>
+                        <td>Screen-readers may not describe the modal upon opening</td>
                     </tr>
                     <tr>
-                        <td>All pages</td>
-                        <td>Unable to access any dropdown using only the keyboard</td>
+                        <td>All pages with a dropdown</td>
+                        <td>
+                            Unable to access any dropdown using only the keyboard because Vuetify
+                            will not allow it
+                        </td>
                         <td>Keyboard accessibility</td>
                         <td>
-                            Serious - Ensure keyboard-only users can access site without using a
-                            mouse
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>All pages</td>
-                        <td>Colour contrast - Placeholder text for input fields</td>
-                        <td>Insufficient color contrast - Axe</td>
-                        <td>Serious</td>
-                    </tr>
-                    <tr>
-                        <td>All pages with pagination</td>
-                        <td>Colour contrast on rows per page dropdown</td>
-                        <td>Insufficient color contrast - Axe</td>
-                        <td>Serious</td>
-                    </tr>
-                    <tr>
-                        <td>Workflow editor page</td>
-                        <td>
-                            Element contains only non-text characters - the error is shown for the
-                            little expansion arrows within the text editor
-                        </td>
-                        <td>Insufficient color contrast - Axe</td>
-                        <td>Serious</td>
-                    </tr>
-                    <tr>
-                        <td>Workflow editor page</td>
-                        <td>
-                            Aria-label error for the Editor - unable to change as it is an inbuilt
-                            Vuetify library which errors if we change
-                        </td>
-                        <td>Aria-input-field-name</td>
-                        <td>Unable to tab out of the editor back onto main page</td>
-                    </tr>
-                    <tr>
-                        <td>Payload page - Payload table</td>
-                        <td>Unable to access the radio buttons by tabbing to them</td>
-                        <td>Keyboard accessibility - WAVE</td>
-                        <td>
-                            Individuals using only a keyboard will be unable to select radio buttons
+                            Keyboard-only users will not be able to select elements in drop-downs
+                            across the site
                         </td>
                     </tr>
                 </tbody>

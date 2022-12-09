@@ -64,18 +64,14 @@ Despite our best efforts to ensure accessibility of AIDE, there may be some limi
 
 | Page | Issues | Type | Impact |
 |------|--------|------|--------|
-| Admin page - System Statistics | No column header above the first column in the 'Issues' table containing the checkboxes | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for |
-| Admin page - System Statistics | Unable to access the checkboxes using a screen reader by tabbing to them | Keyboard accessibility - WAVE | Individuals using only a keyboard will be unable to select or un-select any checkbox or hear a description of what they are |
-| Payload page - Payload table | No text on the far left column which contains the drop-down/expansion symbols | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for |
-| Payload page - Payload table | "A button is empty or has no text" - Error next to all three drop-down/expansion symbols | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for |
-| All pages with pagination | Pagination has a nested interactive element | Nested-interactive - AXE | Ensures interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies |
-| All pages with a modal | Unable to add an aria-label on the whole modal component because vuetify does not allow it | Aria-dialog-name - Axe | Serious - Ensures every ARIA dialog and alertdialog node has an accessible name |
-| All pages | Unable to access any dropdown using only the keyboard | Keyboard accessibility | Serious - Ensure keyboard-only users can access site without using a mouse |
-| All pages | Colour contrast - Placeholder text for input fields | Insufficient color contrast - Axe | Serious |
-| All pages with pagination | Colour contrast on rows per page dropdown | Insufficient color contrast - Axe | Serious |
-| Workflow editor page | Element contains only non-text characters - the error is shown for the little expansion arrows within the text editor | Insufficient color contrast - Axe | Serious |
-| Workflow editor page | Aria-label error for the Editor - unable to change as it is an inbuilt vuetify library which errors if we change | Aria-input-field-name | Unable to tab out of the editor back onto main page |
-| Payload page - Payload table | Unable to access the radio buttons by tabbing to them | Keyboard accessibility - WAVE | Individuals using only a keyboard will be unable to select radio buttons |
+<!-- | System dashboard - Issues table | No column header above the first column in the 'Issues' table containing the checkboxes | Explicit labelling - WAVE | Unable to use a screen reader to describe what this column is used for | -->
+| System dashboard - Issues table | Unable to access the checkboxes using a screen reader or a keyboard | Keyboard accessibility / Screen reader | Individuals using only a keyboard will be unable to select or un-select any checkbox or hear a screen reader describe them |
+| Payload dashboard - Payload table | No column header for the expansion icons column on the right side of the table | Explicit labelling / Screen reader | The screen reader can not describe that column |
+| Payload dashboard - Payload table | The expansion icons can be selected to open the payloads via the keyboard, however this cannot be done when using the keyboard whilst using a screen reader | Explicit labelling / Screen reader | Unable to use a screen reader and keyboard to open the payloads |
+| Workflows - Workflow editor | Two colour contrast issues on the page | Insufficient colour contrast | Insufficient colour contrast reduces the ability of vision impaired users to read the site |
+| Workflows - Workflow editor | Due to this being a JSON editor, the 'tab' button is used to edit rather than for navigation | Keyboard accessibility | Keyboard only users would not be able to exit the JSON editor |
+| All pages with a modal | Unable to add an aria-label on the whole modal component because vuetify does not allow it | Aria-dialog-name | Screen-readers may not describe the modal upon opening |
+| All pages with a dropdown | Unable to access any dropdown using only the keyboard because vuetify will not allow it | Keyboard accessibility | keyboard-only users will not be able to access or select elements in drop-downs across the site |
 
 
 ##  Disproportionate burden
