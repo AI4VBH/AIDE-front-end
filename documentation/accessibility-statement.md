@@ -71,7 +71,7 @@ Despite our best efforts to ensure accessibility of AIDE, there may be some limi
 | Workflows - Workflow editor | Two colour contrast issues on the page | Insufficient colour contrast | Insufficient colour contrast reduces the ability of vision impaired users to read the site |
 | Workflows - Workflow editor | Due to this being a JSON editor, the 'tab' button is used to edit rather than for navigation | Keyboard accessibility | Keyboard only users would not be able to exit the JSON editor |
 | All pages with a modal | Unable to add an aria-label on the whole modal component because vuetify does not allow it | Aria-dialog-name | Screen-readers may not describe the modal upon opening |
-| All pages with a dropdown | Unable to access any dropdown using only the keyboard because vuetify will not allow it | Keyboard accessibility | keyboard-only users will not be able to access or select elements in drop-downs across the site |
+| All pages with a dropdown | Unable to access any dropdown using only the keyboard because vuetify will not allow it | Keyboard accessibility | Keyboard-only users will not be able to access or select elements in drop-downs across the site |
 
 
 ##  Disproportionate burden
