@@ -82,7 +82,7 @@ export function mapToExecutionTree(instances: WorkflowInstance[]): ExecutionTree
 export function mapToEmptyWorkflow(): ExecutionTreeFirstNode {
     return {
         id: "no-workflow-instance",
-        name: "No Workflow Triggered",
+        name: "No workflows were triggered based on received payload AET",
         status: "Succeeded",
         workflow_name: "",
         workflow_instance_id: "",
