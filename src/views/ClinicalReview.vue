@@ -24,10 +24,11 @@
             @task-rejected="rejectTask"
         />
         <v-row class="clinical-review">
-            <v-col class="task-list" v-show="!tasksLoading && taskCount > 0">
+            <v-col class="task-list" v-show="!tasksLoading && (taskCount > 0 || searchText !== '')">
                 <clinical-review-task-list
                     @task-selected="taskSelected"
                     @tasks-count-updated="taskCountUpdated"
+                    @search-text-updated="searchTextUpdated"
                     @tasks-loading-changed="tasksLoadingChanged"
                 >
                     <template v-slot="{ throttledFetchTasks }">
@@ -55,7 +56,12 @@
                 />
 
                 <div
-                    v-if="!currentTaskExecutionId && !tasksLoading && taskCount === 0"
+                    v-if="
+                        !currentTaskExecutionId &&
+                        !tasksLoading &&
+                        taskCount === 0 &&
+                        searchText === ''
+                    "
                     class="no-tasks-left"
                 >
                     <v-icon x-large color="success">mdi-checkbox-marked-circle-outline</v-icon>
@@ -86,6 +92,7 @@ type ClinicalReviewData = {
     currentTaskExecutionId?: string;
     currentTaskClinicalReviewMessage?: ClinicalReviewTaskDetails;
     taskCount: number;
+    searchText: string;
     tasksLoading: boolean;
     actionModal: boolean;
     reject: boolean;
@@ -108,6 +115,7 @@ export default defineComponent({
             currentTaskClinicalReviewMessage: undefined,
             studyDate: "",
             taskCount: 0,
+            searchText: "",
             tasksLoading: true,
             actionModal: false,
             reject: false,
@@ -128,6 +136,9 @@ export default defineComponent({
         },
         taskCountUpdated(count: number) {
             this.taskCount = count;
+        },
+        searchTextUpdated(searchText: string) {
+            this.searchText = searchText;
         },
         studySelected(study: ClinicalReviewStudyDetails) {
             this.studyDate = study.study_date;
