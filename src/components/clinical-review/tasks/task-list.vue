@@ -186,7 +186,7 @@ export default defineComponent({
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.getTasks();
-        }, 700),
+        }, 500),
     },
     mounted() {
         this.throttledFetchTasks();
