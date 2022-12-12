@@ -113,6 +113,18 @@ const clinicalReviewTasks: PagedClinicalReviewList = {
     previousPage: "",
 };
 
+const emptyClinicalReviewTasks: PagedClinicalReviewList = {
+    pageNumber: 1,
+    pageSize: 10,
+    totalPages: 1,
+    totalRecords: 0,
+    data: [],
+    firstPage: "",
+    lastPage: "",
+    nextPage: "",
+    previousPage: "",
+};
+
 export const clinicalReviewHandlers = [
     rest.get(`${window.FRONTEND_API_HOST}/clinical-review/dicom`, async (req, res, ctx) => {
         const key: string | null = req.url.searchParams.get("key");
@@ -183,7 +195,13 @@ export const clinicalReviewHandlers = [
         return res(ctx.json(study));
     }),
     rest.get(`${window.FRONTEND_API_HOST}/clinical-review`, (_req, res, ctx) => {
-        return res(ctx.json(clinicalReviewTasks));
+        const patientId = _req.url.searchParams.get("patientId");
+        const patientName = _req.url.searchParams.get("patientName");
+        const applicationName = _req.url.searchParams.get("applicationName");
+
+        if (patientId === "" && patientName === "" && applicationName === "")
+            return res(ctx.json(clinicalReviewTasks));
+        else return res(ctx.json(emptyClinicalReviewTasks));
     }),
     rest.put(`${window.FRONTEND_API_HOST}/clinical-review/:clinicalReviewId`, (_req, res, ctx) => {
         return res(ctx.status(201));
