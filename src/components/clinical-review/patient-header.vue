@@ -18,7 +18,7 @@
     <v-row class="patient-header">
         <v-col data-cy="patient-name">
             <span class="header-label">Patient</span>
-            {{ patientMetadata.patient_name }}
+            <span>{{ patientMetadata.patient_name }}</span>
         </v-col>
         <v-col data-cy="patient-dob">
             <span class="header-label">DoB</span>
