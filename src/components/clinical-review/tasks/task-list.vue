@@ -15,7 +15,7 @@
   -->
 
 <template>
-    <v-card :loading="loading" elevation="0" class="task-list-container">
+    <v-card elevation="0" class="task-list-container">
         <div class="text-h6 task-list-title">Work List</div>
 
         <v-radio-group
@@ -57,8 +57,8 @@
             data-cy="worklist-search"
         />
 
-        <div class="task-list">
-            <div v-show="tasks.length == 0" class="empty-task-list">
+        <div v-show="!loading" class="task-list">
+            <div v-show="tasks.length === 0" class="empty-task-list">
                 <div>
                     <v-icon x-large color="red">mdi-close-circle-outline</v-icon>
                 </div>
@@ -83,6 +83,7 @@
         </div>
 
         <v-pagination
+            v-show="!loading"
             class="mt-1"
             :total-visible="5"
             :length="totalPages"
@@ -92,6 +93,9 @@
             data-cy="pagination"
         />
         <slot v-bind="{ throttledFetchTasks }" />
+        <v-col v-if="loading" cols="12">
+            <v-skeleton-loader v-if="loading" class="mx-auto" max-width="300" type="card" />
+        </v-col>
     </v-card>
 </template>
 
@@ -182,7 +186,7 @@ export default defineComponent({
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.getTasks();
-        }, 250),
+        }, 500),
     },
     mounted() {
         this.throttledFetchTasks();

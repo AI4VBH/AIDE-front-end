@@ -18,23 +18,28 @@
     <v-row class="patient-header">
         <v-col data-cy="patient-name">
             <span class="header-label">Patient</span>
-            {{ patientMetadata.patient_name }}
+            <span v-if="!tasksLoading">{{ patientMetadata.patient_name }}</span>
+            <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="patient-dob">
             <span class="header-label">DoB</span>
-            {{ patientMetadata.patient_dob | formatDate }}
+            <span v-if="!tasksLoading">{{ patientMetadata.patient_dob | formatDate }}</span>
+            <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="patient-id">
             <span class="header-label">Patient ID</span>
-            {{ patientMetadata.patient_id }}
+            <span v-if="!tasksLoading">{{ patientMetadata.patient_id }}</span>
+            <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="patient-sex" class="narrow-column">
             <span class="header-label">Sex</span>
-            {{ patientMetadata.patient_gender }}
+            <span v-if="!tasksLoading">{{ patientMetadata.patient_gender }}</span>
+            <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="study-date">
             <span class="header-label">Study Date</span>
-            {{ studyDate | formatDateTime }}
+            <span v-if="!tasksLoading">{{ studyDate | formatDateTime }}</span>
+            <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="task-actions" class="task-actions">
             <v-btn data-cy="accept-task" color="primary" :disabled="!studyDate" @click="acceptTask">
@@ -59,6 +64,7 @@ export default defineComponent({
     props: {
         patientMetadata: { type: Object as PropType<PatientMetadata> },
         studyDate: { type: String },
+        tasksLoading: { type: Boolean },
     },
     methods: {
         acceptTask() {

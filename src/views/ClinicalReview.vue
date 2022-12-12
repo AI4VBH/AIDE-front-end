@@ -20,11 +20,12 @@
             v-if="taskCount > 0 && currentTaskClinicalReviewMessage"
             :patient-metadata="currentTaskClinicalReviewMessage.patient_metadata"
             :study-date="studyDate"
+            :tasks-loading="tasksLoading"
             @task-accepted="acceptTask"
             @task-rejected="rejectTask"
         />
         <v-row class="clinical-review">
-            <v-col class="task-list" v-show="!tasksLoading && (taskCount > 0 || searchText !== '')">
+            <v-col class="task-list" v-show="taskCount > 0 || searchText !== ''">
                 <clinical-review-task-list
                     @task-selected="taskSelected"
                     @tasks-count-updated="taskCountUpdated"
