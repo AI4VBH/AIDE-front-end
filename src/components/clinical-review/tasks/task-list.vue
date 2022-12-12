@@ -58,7 +58,7 @@
         />
 
         <div v-if="!loading" class="task-list">
-            <div v-show="tasks.length == 0" class="empty-task-list">
+            <div v-show="tasks.length === 0" class="empty-task-list">
                 <div>
                     <v-icon x-large color="red">mdi-close-circle-outline</v-icon>
                 </div>
@@ -83,7 +83,7 @@
         </div>
 
         <v-pagination
-            v-if="!loading"
+            v-show="!loading"
             class="mt-1"
             :total-visible="5"
             :length="totalPages"
@@ -123,7 +123,7 @@ export default defineComponent({
     data(): IClinicalReviewTaskListData {
         return {
             search: "",
-            loading: true,
+            loading: false,
             currentTask: "",
             currentPage: 1,
             totalPages: 1,
@@ -186,7 +186,7 @@ export default defineComponent({
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.getTasks();
-        }, 500),
+        }, 700),
     },
     mounted() {
         this.throttledFetchTasks();
