@@ -19,6 +19,7 @@
         <v-col data-cy="patient-name">
             <span class="header-label">Patient</span>
             <span>{{ patientMetadata.patient_name }}</span>
+            <!-- <v-skeleton-loader v-if="tasksLoading" class="mx-auto" max-width="300" type="card" /> -->
         </v-col>
         <v-col data-cy="patient-dob">
             <span class="header-label">DoB</span>
@@ -59,6 +60,7 @@ export default defineComponent({
     props: {
         patientMetadata: { type: Object as PropType<PatientMetadata> },
         studyDate: { type: String },
+        tasksLoading: { type: Boolean },
     },
     methods: {
         acceptTask() {

@@ -20,6 +20,7 @@
             v-if="taskCount > 0 && currentTaskClinicalReviewMessage"
             :patient-metadata="currentTaskClinicalReviewMessage.patient_metadata"
             :study-date="studyDate"
+            :tasks-loading="tasksLoading"
             @task-accepted="acceptTask"
             @task-rejected="rejectTask"
         />
