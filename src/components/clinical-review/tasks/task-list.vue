@@ -58,7 +58,15 @@
         />
 
         <div class="task-list">
-            <div class="task-list-scroll">
+            <div v-show="tasks.length == 0" class="empty-task-list">
+                <div>
+                    <v-icon x-large color="red">mdi-close-circle-outline</v-icon>
+                </div>
+                <p class="mt-2" data-cy="no-tasks-message">
+                    Your search returned no application outputs
+                </p>
+            </div>
+            <div v-show="tasks.length > 0" class="task-list-scroll">
                 <v-list dense nav>
                     <v-list-item-group mandatory v-model="currentTask" role="group">
                         <task-item
@@ -119,7 +127,7 @@ export default defineComponent({
             tasks: [],
         };
     },
-    emits: ["task-selected", "tasks-count-updated", "tasks-loading-changed"],
+    emits: ["task-selected", "tasks-count-updated", "tasks-loading-changed", "search-text-updated"],
     watch: {
         search() {
             this.throttledFetchTasks();
@@ -159,6 +167,7 @@ export default defineComponent({
             this.totalPages = totalPages;
 
             this.$emit("tasks-count-updated", this.tasks.length);
+            this.$emit("search-text-updated", this.search);
 
             this.loading = false;
         },
@@ -210,6 +219,15 @@ export default defineComponent({
         right: 0;
         bottom: 0;
         overflow-y: auto;
+    }
+}
+
+.empty-task-list {
+    padding-left: 8px;
+    padding-right: 8px;
+
+    div {
+        text-align: center;
     }
 }
 </style>
