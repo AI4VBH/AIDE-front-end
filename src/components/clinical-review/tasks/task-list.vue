@@ -169,7 +169,10 @@ export default defineComponent({
             this.tasks = data;
             this.currentPage = pageNumber;
             this.totalPages = totalPages;
-            this.currentTask = this.tasks[0].clinical_review_message.execution_id;
+
+            if (this.tasks.length > 0) {
+                this.currentTask = this.tasks[0].clinical_review_message.execution_id;
+            }
 
             this.$emit("tasks-count-updated", this.tasks.length);
             this.$emit("search-text-updated", this.search);
