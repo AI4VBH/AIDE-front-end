@@ -189,6 +189,7 @@ export default class PayloadsTable extends Vue {
             patientId: this.searchParameter === "patientId" ? this.tableSearch : "",
             ...this.tableOptions,
         });
+
         formatDateAndTimeOfArray(this.paginatedPayloads.data, "payload_received");
 
         if (this.selectedPayloadID) {
