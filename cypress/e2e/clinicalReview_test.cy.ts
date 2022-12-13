@@ -31,11 +31,11 @@ describe("Clinical review page", () => {
         reviewPage.assertPaginationandViewTasks();
     });
 
-    it("Can view series selector and DICOMs", () => {
+    it.only("Can view series selector and DICOMs", () => {
         reviewPage.viewDicomsAndSeriesSelector();
     });
 
-    it.only("Can view and pin Metadata", () => {
+    it("Can view and pin Metadata", () => {
         reviewPage.viewMetadataAndPin();
     });
 
