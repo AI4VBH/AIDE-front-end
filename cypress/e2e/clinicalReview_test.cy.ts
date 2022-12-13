@@ -39,11 +39,11 @@ describe("Clinical review page", () => {
         reviewPage.viewMetadataAndPin();
     });
 
-    it("Can view patient details in top panel", () => {
+    it.only("Can view patient details in top panel", () => {
         reviewPage.assertPatientDetails();
     });
 
-    it("Can accept and reject a task", () => {
+    it.only("Can accept and reject a task", () => {
         reviewPage.assertAcceptRejectTask();
     });
     [400, 404, 500].forEach((error_code) => {
