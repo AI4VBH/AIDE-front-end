@@ -23,6 +23,10 @@ describe("Clinical review page", () => {
         reviewPage.initPage();
     });
 
+    it("Can accept and reject a task", () => {
+        reviewPage.assertAcceptRejectTask();
+    });
+
     it("Can view and filter the clinical review worklist tasks", () => {
         reviewPage.assertViewAndFilterTasks();
     });
@@ -31,7 +35,7 @@ describe("Clinical review page", () => {
         reviewPage.assertPaginationandViewTasks();
     });
 
-    it.only("Can view series selector and DICOMs", () => {
+    it("Can view series selector and DICOMs", () => {
         reviewPage.viewDicomsAndSeriesSelector();
     });
 
@@ -39,12 +43,8 @@ describe("Clinical review page", () => {
         reviewPage.viewMetadataAndPin();
     });
 
-    it.only("Can view patient details in top panel", () => {
+    it("Can view patient details in top panel", () => {
         reviewPage.assertPatientDetails();
-    });
-
-    it.only("Can accept and reject a task", () => {
-        reviewPage.assertAcceptRejectTask();
     });
     [400, 404, 500].forEach((error_code) => {
         it(`Toast displayed on both accepting or rejecting a task if ${error_code} status is returned`, () => {
