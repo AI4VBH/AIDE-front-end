@@ -57,7 +57,7 @@
             data-cy="worklist-search"
         />
 
-        <div v-if="!loading" class="task-list">
+        <div v-show="!loading" class="task-list">
             <div v-show="tasks.length === 0" class="empty-task-list">
                 <div>
                     <v-icon x-large color="red">mdi-close-circle-outline</v-icon>
@@ -123,7 +123,7 @@ export default defineComponent({
     data(): IClinicalReviewTaskListData {
         return {
             search: "",
-            loading: false,
+            loading: true,
             currentTask: "",
             currentPage: 1,
             totalPages: 1,
@@ -187,7 +187,7 @@ export default defineComponent({
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.getTasks();
-        }, 700),
+        }, 500),
     },
     mounted() {
         this.throttledFetchTasks();
