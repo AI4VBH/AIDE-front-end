@@ -43,7 +43,7 @@ describe("Clinical review page", () => {
         reviewPage.assertPatientDetails();
     });
 
-    it.only("Can accept and reject a task", () => {
+    it("Can accept and reject a task", () => {
         reviewPage.assertAcceptRejectTask();
     });
     [400, 404, 500].forEach((error_code) => {
