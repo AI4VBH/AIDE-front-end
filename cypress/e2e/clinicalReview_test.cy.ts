@@ -35,7 +35,7 @@ describe("Clinical review page", () => {
         reviewPage.viewDicomsAndSeriesSelector();
     });
 
-    it("Can view and pin Metadata", () => {
+    it.only("Can view and pin Metadata", () => {
         reviewPage.viewMetadataAndPin();
     });
 
