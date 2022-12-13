@@ -88,6 +88,7 @@ step "deploy-the-aide-frontend" {
                   WADO_ROOT: #{WadoRoot}
                   CLINICAL_REVIEW_URL: #{ClinicalReviewUrl}
                   ORTHANC_API_URL: #{OrthancApiUrl}
+                  VUE_APP_GRAFANA_DASHBOARD_URL: https://#{Hostname}:2632
                 
                 enviromentVariablesFromSecrets:
                   secrets:
