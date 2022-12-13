@@ -200,7 +200,7 @@ export default class PayloadsTable extends Vue {
                 const payload = await getPayloadById(this.selectedPayloadID);
 
                 if (payload) {
-                    this.paginatedPayloads.data.push(payload);
+                    this.paginatedPayloads.data.unshift(payload);
                     selectedPayload = payload;
                 }
             }
