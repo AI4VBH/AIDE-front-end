@@ -21,19 +21,32 @@
                 <h2 class="mx-auto section-title">Issues</h2>
             </v-col>
         </v-row>
+        <v-row class="d-flex mb-4 justify-space-between">
+            <v-btn
+                elevation="0"
+                class="my-3 secondary-button"
+                color="white"
+                width="150px"
+                @click="deleteItem(undefined)"
+                :disabled="selectedIssues.length === 0"
+                data-cy="dismiss-selected"
+            >
+                Dismiss selected
+            </v-btn>
+            <v-btn
+                elevation="0"
+                class="my-3 secondary-button"
+                data-cy="view-grafana-dashboard"
+                link="true"
+                :href="grafanaDashboardUrl"
+                width="250px"
+                target="_blank"
+            >
+                View Grafana Dashboard
+            </v-btn>
+        </v-row>
         <v-row v-if="!loading && issues !== undefined">
-            <v-layout child-flex column>
-                <v-btn
-                    elevation="0"
-                    class="my-3 secondary-button"
-                    color="white"
-                    width="150px"
-                    @click="deleteItem(undefined)"
-                    :disabled="selectedIssues.length === 0"
-                    data-cy="dismiss-selected"
-                >
-                    Dismiss selected
-                </v-btn>
+            <v-layout column>
                 <v-card>
                     <v-card-title class="d-none">
                         <v-spacer></v-spacer>
@@ -182,6 +195,7 @@ export default class IssuesTable extends Vue {
         { text: "Time", value: "execution_time" },
         { text: "Actions", value: "actions", width: "250px" },
     ];
+    grafanaDashboardUrl = process.env.VUE_APP_GRAFANA_DASHBOARD_URL;
 
     async created(): Promise<void> {
         this.getExecutionIssues();
