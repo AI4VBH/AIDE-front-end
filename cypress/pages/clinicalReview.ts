@@ -105,8 +105,14 @@ export default class ClinicalReviewPage extends AbstractPage {
         this.clickDataCy("action-cancel");
         this.fillAcceptModal();
         this.assertAccepted(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
+        cy.wait(["@all-tasks"]);
+        cy.dataCy(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1].clinical_review_message.patient_metadata.patient_id)
+            .click({ force: true });
         this.fillRejectModal();
         this.assertRejected(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
+        cy.wait(["@all-tasks"]);
+        cy.dataCy(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1].clinical_review_message.patient_metadata.patient_id)
+            .click({ force: true });
         this.fillAcceptModal();
         this.assertAccepted(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
     }
