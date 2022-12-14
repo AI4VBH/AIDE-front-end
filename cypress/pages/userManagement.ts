@@ -25,7 +25,7 @@ import { RolePostData } from "data/user-management/rolesPost";
 
 const nextPage = ".v-data-footer__icons-after > .v-btn > .v-btn__content > .v-icon";
 const paginationDropdown =
-    ".v-window-item--active > .px-4 > .v-card > .v-data-table > .v-data-footer > .v-data-footer__select > .v-input > .v-input__control > .v-input__slot > .v-select__slot > .v-input__append-inner > .v-input__icon > .v-icon";
+    ".v-window-item--active > div > .px-4 > .v-card > .v-data-table > .v-data-footer > .v-data-footer__select > .v-input > .v-input__control > .v-input__slot > .v-select__slot > .v-input__append-inner > .v-input__icon > .v-icon";
 const dropdown = ".d-flex > .v-input > .v-input__control > .v-input__slot > .v-select__slot";
 const rolesDropdown = ":nth-child(4) > .v-input > .v-input__control > .v-input__slot";
 
