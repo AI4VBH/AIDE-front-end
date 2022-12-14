@@ -17,7 +17,7 @@
 <template>
     <v-tab-item>
         <div v-if="!loading && users !== undefined">
-            <v-card v-show="!loading" class="px-4 py-4">
+            <v-card class="px-4 py-4">
                 <div class="d-flex mb-4 justify-space-between">
                     <div class="text-h5">{{ userCount }}</div>
                     <div class="d-flex align-center">
