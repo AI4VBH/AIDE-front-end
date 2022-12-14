@@ -51,7 +51,7 @@ export interface PatientMetadata {
     patient_name: string;
     patient_id: string;
     patient_dob: string;
-    patient_gender: string;
+    patient_sex: string;
 }
 
 export interface File {

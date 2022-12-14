@@ -33,7 +33,7 @@ const tasks = [
             patient_metadata: {
                 patient_name: "Joe Batt",
                 patient_id: "1299-123-232-3422",
-                patient_gender: "M",
+                patient_sex: "M",
                 patient_dob: "2000-10-10T00:00:00",
             },
             files: [],
@@ -59,7 +59,7 @@ const tasks = [
             patient_metadata: {
                 patient_name: "Alexis Bazin",
                 patient_id: "1299-123-232-3424",
-                patient_gender: "M",
+                patient_sex: "M",
                 patient_dob: "2000-10-10T00:00:00",
             },
             files: [],
@@ -85,7 +85,7 @@ const tasks = [
             patient_metadata: {
                 patient_name: "Will E Rror",
                 patient_id: "1299-123-232-3555",
-                patient_gender: "M",
+                patient_sex: "M",
                 patient_dob: "2000-01-10T00:00:00",
             },
             files: [],
