@@ -81,6 +81,7 @@ describe("<task-item />", () => {
             "contain.text",
             task.clinical_review_message.application_metadata.mode,
         );
+
         cy.get("[data-cy=received]").should("contain.text", formatDateTime(task.received));
     });
 });
