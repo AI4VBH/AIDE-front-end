@@ -29,7 +29,7 @@ const task = {
         patient_metadata: {
             patient_name: "Joe Bloggs",
             patient_id: "1299-123-232-3422",
-            patient_gender: "M",
+            patient_sex: "M",
             patient_dob: "10-10-2000",
         },
         files: [],
@@ -70,7 +70,7 @@ describe("<task-item />", () => {
         );
         cy.get("[data-cy=patient-sex]").should(
             "contain.text",
-            task.clinical_review_message.patient_metadata.patient_gender,
+            task.clinical_review_message.patient_metadata.patient_sex,
         );
         cy.get("[data-cy=application]").should(
             "contain.text",
@@ -81,6 +81,7 @@ describe("<task-item />", () => {
             "contain.text",
             task.clinical_review_message.application_metadata.mode,
         );
+
         cy.get("[data-cy=received]").should("contain.text", formatDateTime(task.received));
     });
 });

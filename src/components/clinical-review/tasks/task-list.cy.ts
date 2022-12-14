@@ -28,7 +28,7 @@ const task = {
         patient_metadata: {
             patient_name: "Joe Bloggs",
             patient_id: "1299-123-232-3422",
-            patient_gender: "M",
+            patient_sex: "M",
             patient_dob: "10-10-2000",
         },
         files: [],

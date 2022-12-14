@@ -19,7 +19,7 @@
                 "patient_metadata": {
                     "patient_name": "Peter-Bazin",
                     "patient_id": "8821-123-232-0909",
-                    "patient_gender": "M",
+                    "patient_sex": "M",
                     "patient_Dob": "12-09-2003"
                 },
                 "files": [],

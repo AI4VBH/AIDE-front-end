@@ -19,7 +19,7 @@
                 "patient_metadata": {
                     "patient_name": "Joe Batt",
                     "patient_id": "000-000-000-001",
-                    "patient_gender": "M",
+                    "patient_sex": "M",
                     "patient_Dob": "10-10-2000"
                 },
                 "files": [],
@@ -48,7 +48,7 @@
                 "patient_metadata": {
                     "patient_name": "Alexis Bazin",
                     "patient_id": "000-000-000-002",
-                    "patient_gender": "M",
+                    "patient_sex": "M",
                     "patient_Dob": "10-12-2000"
                 },
                 "files": [],
@@ -77,7 +77,7 @@
                 "patient_metadata": {
                     "patient_name": "John Smith",
                     "patient_id": "000-000-000-003",
-                    "patient_gender": "M",
+                    "patient_sex": "M",
                     "patient_Dob": "03-11-2022"
                 },
                 "files": [],
@@ -106,7 +106,7 @@
                 "patient_metadata": {
                     "patient_name": "Susan Smith",
                     "patient_id": "000-000-000-004",
-                    "patient_gender": "F",
+                    "patient_sex": "F",
                     "patient_Dob": "02-09-2022"
                 },
                 "files": [],
@@ -135,7 +135,7 @@
                 "patient_metadata": {
                     "patient_name": "Susan Jeffries",
                     "patient_id": "000-000-000-005",
-                    "patient_gender": "F",
+                    "patient_sex": "F",
                     "patient_Dob": "12-12-2010"
                 },
                 "files": [],
@@ -164,7 +164,7 @@
                 "patient_metadata": {
                     "patient_name": "Mark Jeffries",
                     "patient_id": "000-000-000-007",
-                    "patient_gender": "M",
+                    "patient_sex": "M",
                     "patient_Dob": "12-12-2010"
                 },
                 "files": [],
@@ -193,7 +193,7 @@
                 "patient_metadata": {
                     "patient_name": "Mark Migleson",
                     "patient_id": "000-000-000-008",
-                    "patient_gender": "M",
+                    "patient_sex": "M",
                     "patient_Dob": "12-12-2010"
                 },
                 "files": [],
