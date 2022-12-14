@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import { formatDateTime } from "@/utils/date-utilities";
+import { formatDateTime, formatDate } from "@/utils/date-utilities";
 import TaskItem from "./task-item.vue";
 
 const task = {
@@ -66,7 +66,7 @@ describe("<task-item />", () => {
         );
         cy.get("[data-cy=patient-dob]").should(
             "contain.text",
-            task.clinical_review_message.patient_metadata.patient_dob,
+            formatDate(task.clinical_review_message.patient_metadata.patient_dob),
         );
         cy.get("[data-cy=patient-sex]").should(
             "contain.text",
