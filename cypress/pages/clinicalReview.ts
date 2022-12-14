@@ -99,7 +99,24 @@ export default class ClinicalReviewPage extends AbstractPage {
         );
     }
 
-    public assertAcceptRejectTask() {
+    public assertRejectTask() {
+        cy.intercept(
+            "GET",
+            "https://localhost:8000/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
+            ApiMocks.CLINICAL_REVIEW_TASKS,
+        ).as("all-tasks");
+
+        this.selectTaskViewDicom(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
+        this.clickDataCy(
+            ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1].clinical_review_message
+                .patient_metadata.patient_id,
+        );
+        this.fillRejectModal();
+        this.assertRejected(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
+        cy.wait(["@all-tasks"]);
+    }
+
+    public assertAcceptTask() {
         cy.intercept(
             "GET",
             "https://localhost:8000/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
@@ -111,22 +128,7 @@ export default class ClinicalReviewPage extends AbstractPage {
         this.clickDataCy("action-cancel");
         this.fillAcceptModal();
         this.assertAccepted(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
-
         cy.wait(["@all-tasks"]);
-        this.clickDataCy(
-            ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1].clinical_review_message
-                .patient_metadata.patient_id,
-        );
-        this.fillRejectModal();
-        this.assertRejected(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
-
-        cy.wait(["@all-tasks"]);
-        this.clickDataCy(
-            ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1].clinical_review_message
-                .patient_metadata.patient_id,
-        );
-        this.fillAcceptModal();
-        this.assertAccepted(ClinicalReviewTaskData.LIST_OF_ALL_TASKS.data[1]);
     }
 
     public assertToastIfErrorOnReview(status_code: number) {
