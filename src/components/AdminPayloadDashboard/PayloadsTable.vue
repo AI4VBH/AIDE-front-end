@@ -21,7 +21,7 @@
                 <h2 class="mx-auto section-title">Payloads/Inputs</h2>
             </v-col>
         </v-row>
-        <v-row v-if="!loading">
+        <v-row v-if="!loading && paginatedPayloads !== undefined">
             <v-layout child-flex column>
                 <v-card>
                     <v-card-title>

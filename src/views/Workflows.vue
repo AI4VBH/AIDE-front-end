@@ -29,85 +29,102 @@
                     <v-icon small class="ml-1">mdi-plus</v-icon>
                 </v-btn>
             </div>
-
-            <v-card elevation="1">
-                <v-data-table
-                    v-show="!loading"
-                    :headers="workflowHeaders"
-                    :items="workflowPage.data"
-                    :server-items-length="workflowPage.totalRecords"
-                    :options.sync="tableOptions"
-                    :footer-props="{ itemsPerPageOptions: [5, 10] }"
-                >
-                    <template v-slot:item="{ item, index }">
-                        <tr :data-cy="`workflow-table-row-${index}`">
-                            <!-- name -->
-                            <td
-                                class="text-start font-weight-bold"
-                                :data-cy="`workflow-table-row-name-${index}`"
-                            >
-                                {{ item.name }}
-                            </td>
-                            <!-- AeTitle -->
-                            <td class="text-start" :data-cy="`workflow-table-row-aetitle-${index}`">
-                                {{ item.ae_title }}
-                            </td>
-                            <!-- Data Origins -->
-                            <td class="text-start" :data-cy="`workflow-table-row-data-${index}`">
-                                {{ item.data_origins.join(", ") }}
-                            </td>
-                            <!-- version -->
-                            <td class="text-start" :data-cy="`workflow-table-row-version-${index}`">
-                                {{ item.version }}
-                            </td>
-                            <!-- description -->
-                            <td
-                                class="text-start"
-                                :data-cy="`workflow-table-row-description-${index}`"
-                            >
-                                {{ item.description }}
-                            </td>
-                            <!-- actions -->
-                            <td class="text-start" :data-cy="`workflow-table-row-actions-${index}`">
-                                <v-btn
-                                    small
-                                    elevation="0"
-                                    class="mr-2 secondary-button"
-                                    aria-label="edit workflow"
-                                    data-cy="workflow-edit"
-                                    @click.stop="
-                                        () => navigateToWorkflowEditor(item.workflow_id, item.name)
-                                    "
+            <div v-if="!loading && workflowPage !== undefined">
+                <v-card elevation="1">
+                    <v-data-table
+                        :headers="workflowHeaders"
+                        :items="workflowPage.data"
+                        :server-items-length="workflowPage.totalRecords"
+                        :options.sync="tableOptions"
+                        :footer-props="{ itemsPerPageOptions: [5, 10] }"
+                    >
+                        <template v-slot:item="{ item, index }">
+                            <tr :data-cy="`workflow-table-row-${index}`">
+                                <!-- name -->
+                                <td
+                                    class="text-start font-weight-bold"
+                                    :data-cy="`workflow-table-row-name-${index}`"
                                 >
-                                    Edit
-                                </v-btn>
-                                <v-btn
-                                    small
-                                    elevation="0"
-                                    class="outlined-button"
-                                    aria-label="delete workflow"
-                                    data-cy="workflow-delete"
-                                    @click.stop="() => confirmDeletion(item)"
+                                    {{ item.name }}
+                                </td>
+                                <!-- AeTitle -->
+                                <td
+                                    class="text-start"
+                                    :data-cy="`workflow-table-row-aetitle-${index}`"
                                 >
-                                    Delete
-                                    <v-icon small right> mdi-close </v-icon>
-                                </v-btn>
-                            </td>
-                        </tr>
-                    </template>
+                                    {{ item.ae_title }}
+                                </td>
+                                <!-- Data Origins -->
+                                <td
+                                    class="text-start"
+                                    :data-cy="`workflow-table-row-data-${index}`"
+                                >
+                                    {{ item.data_origins.join(", ") }}
+                                </td>
+                                <!-- version -->
+                                <td
+                                    class="text-start"
+                                    :data-cy="`workflow-table-row-version-${index}`"
+                                >
+                                    {{ item.version }}
+                                </td>
+                                <!-- description -->
+                                <td
+                                    class="text-start"
+                                    :data-cy="`workflow-table-row-description-${index}`"
+                                >
+                                    {{ item.description }}
+                                </td>
+                                <!-- actions -->
+                                <td
+                                    class="text-start"
+                                    :data-cy="`workflow-table-row-actions-${index}`"
+                                >
+                                    <v-btn
+                                        small
+                                        elevation="0"
+                                        class="mr-2 secondary-button"
+                                        aria-label="edit workflow"
+                                        data-cy="workflow-edit"
+                                        @click.stop="
+                                            () =>
+                                                navigateToWorkflowEditor(
+                                                    item.workflow_id,
+                                                    item.name,
+                                                )
+                                        "
+                                    >
+                                        Edit
+                                    </v-btn>
+                                    <v-btn
+                                        small
+                                        elevation="0"
+                                        class="outlined-button"
+                                        aria-label="delete workflow"
+                                        data-cy="workflow-delete"
+                                        @click.stop="() => confirmDeletion(item)"
+                                    >
+                                        Delete
+                                        <v-icon small right> mdi-close </v-icon>
+                                    </v-btn>
+                                </td>
+                            </tr>
+                        </template>
 
-                    <template v-slot:no-data>
-                        <span class="grey--text text--darken-2"> No workflows found </span>
-                    </template>
-                    <template v-slot:no-results>
-                        <span class="grey--text text--darken-2"> No workflows found </span>
-                    </template>
-                </v-data-table>
-
+                        <template v-slot:no-data>
+                            <span class="grey--text text--darken-2"> No workflows found </span>
+                        </template>
+                        <template v-slot:no-results>
+                            <span class="grey--text text--darken-2"> No workflows found </span>
+                        </template>
+                    </v-data-table>
+                </v-card>
+            </div>
+            <div v-else>
                 <v-col v-if="loading" cols="12">
                     <v-skeleton-loader class="mx-auto" type="table"></v-skeleton-loader>
                 </v-col>
-            </v-card>
+            </div>
 
             <confirmation-modal
                 :persistent="true"
