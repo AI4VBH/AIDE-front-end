@@ -33,7 +33,7 @@
         </v-col>
         <v-col data-cy="patient-sex" class="narrow-column">
             <span class="header-label">Sex</span>
-            <span v-if="!tasksLoading">{{ patientMetadata.patient_gender }}</span>
+            <span v-if="!tasksLoading">{{ patientMetadata.patient_sex }}</span>
             <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="study-date">

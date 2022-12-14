@@ -226,7 +226,7 @@ export default class ClinicalReviewPage extends AbstractPage {
         );
         cy.dataCy("patient-sex").should(
             "contain",
-            task.clinical_review_message.patient_metadata.patient_gender,
+            task.clinical_review_message.patient_metadata.patient_sex,
         );
         cy.dataCy("study-date").should("contain", dateTime);
     }
@@ -379,7 +379,7 @@ export default class ClinicalReviewPage extends AbstractPage {
             .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_id)
             .and(
                 "contain",
-                task.data[index].clinical_review_message.patient_metadata.patient_gender,
+                task.data[index].clinical_review_message.patient_metadata.patient_sex,
             )
             .and(
                 "contain",

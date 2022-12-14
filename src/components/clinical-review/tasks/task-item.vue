@@ -56,11 +56,11 @@
                 <template v-slot:activator="{ on }">
                     <v-list-item-subtitle data-cy="patient-sex" v-on="on">
                         <strong>Sex:</strong>
-                        {{ patient.patient_gender }}
+                        {{ patient.patient_sex }}
                     </v-list-item-subtitle>
                 </template>
                 <span>
-                    {{ patient.patient_gender }}
+                    {{ patient.patient_sex }}
                 </span>
             </v-tooltip>
 
