@@ -22,7 +22,7 @@ describe("Clinical review page", () => {
     beforeEach(() => {
         reviewPage.initPage();
     });
-    it.skip("Can accept and reject a task", () => {
+    it("Can accept and reject a task", () => {
         reviewPage.assertAcceptRejectTask();
     });
 
