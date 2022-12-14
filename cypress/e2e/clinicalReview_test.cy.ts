@@ -22,6 +22,9 @@ describe("Clinical review page", () => {
     beforeEach(() => {
         reviewPage.initPage();
     });
+    it.skip("Can accept and reject a task", () => {
+        reviewPage.assertAcceptRejectTask();
+    });
 
     it("Can view and filter the clinical review worklist tasks", () => {
         reviewPage.assertViewAndFilterTasks();
@@ -41,10 +44,6 @@ describe("Clinical review page", () => {
 
     it("Can view patient details in top panel", () => {
         reviewPage.assertPatientDetails();
-    });
-
-    it("Can accept and reject a task", () => {
-        reviewPage.assertAcceptRejectTask();
     });
     [400, 404, 500].forEach((error_code) => {
         it(`Toast displayed on both accepting or rejecting a task if ${error_code} status is returned`, () => {
