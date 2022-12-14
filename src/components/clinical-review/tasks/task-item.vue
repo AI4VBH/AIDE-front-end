@@ -44,11 +44,11 @@
                 <template v-slot:activator="{ on }">
                     <v-list-item-subtitle data-cy="patient-dob" v-on="on">
                         <strong>DoB:</strong>
-                        {{ patient.patient_dob }}
+                        {{ patient.patient_dob | formatDate }}
                     </v-list-item-subtitle>
                 </template>
                 <span>
-                    {{ patient.patient_dob }}
+                    {{ patient.patient_dob | formatDate }}
                 </span>
             </v-tooltip>
 
@@ -106,10 +106,11 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { ApplicationMetadata, PatientMetadata } from "@/models/ClinicalReview/ClinicalReviewTask";
-import { formatDateTime } from "@/utils/date-utilities";
+import { formatDateTime, formatDate } from "@/utils/date-utilities";
 
 export default defineComponent({
     filters: {
+        formatDate,
         formatDateTime,
     },
     props: {
