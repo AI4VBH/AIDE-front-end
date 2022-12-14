@@ -59,7 +59,8 @@ export function onRequestErrorInterceptor(
 
         return Promise.reject(error);
     } else if (error.response?.status === 401) {
-        Vue.prototype.$keycloak?.logout({ redirectUri: `${window.location.origin}/#/` });
+        Vue.$toast?.error("Unauthorised.");
+        Vue.prototype.$keycloak?.logout({ redirectUri: `${window.location.origin}` });
 
         return Promise.reject(error);
     } else if (error.response?.status === 409 && conflictToastHidden) {
