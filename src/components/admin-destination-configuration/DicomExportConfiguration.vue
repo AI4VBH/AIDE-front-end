@@ -98,6 +98,13 @@
                             </v-btn>
                         </td>
                     </tr>
+                    <tr v-if="destinations.length === 0">
+                        <td colspan="6" style="text-align: center">
+                            <span class="grey--text text--darken-2">
+                                There are no export destinations to display
+                            </span>
+                        </td>
+                    </tr>
                 </tbody>
             </v-simple-table>
             <v-col v-if="loading" cols="12">
