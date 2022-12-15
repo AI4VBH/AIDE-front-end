@@ -236,19 +236,45 @@ export default class ClinicalReviewPage extends AbstractPage {
     public assertViewAndFilterTasks() {
         this.assertTaskSelected(ClinicalReviewTaskData.LIST_OF_ALL_TASKS, 0);
         this.assertTaskDetails(ClinicalReviewTaskData.LIST_OF_ALL_TASKS, 0);
+        this.searchNoResults();
         this.searchPatientId();
         this.searchPatientName();
         this.searchApplicationName();
     }
 
+    public searchNoResults() {
+        cy.intercept(
+            "GET",
+            `/clinical-review?pageNumber=1&pageSize=10&patientId=bla&patientName=&applicationName=`,
+            ApiMocks.CLINICAL_REVIEW_NO_TASKS,
+        ).as("no-results");
+        cy.intercept(
+            "GET",
+            `/clinical-review?pageNumber=0&pageSize=10&patientId=&patientName=&applicationName=`,
+            ApiMocks.CLINICAL_REVIEW_TASKS,
+        ).as("clear");
+        cy.dataCy("worklist-search").type("bla");
+        cy.wait("@no-results");
+        cy.dataCy("no-tasks-message").should(
+            "contain.text",
+            "Your search returned no application outputs",
+        );
+        cy.dataCy("worklist-search").clear();
+        cy.wait("@clear");
+    }
+
     public assertPaginationandViewTasks() {
         this.changePage(nextPage, 2, ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_2);
+        this.assertTaskSelected(ClinicalReviewTaskData.PAGINATION_PAGE_2, 0);
         this.assertTaskDetails(ClinicalReviewTaskData.PAGINATION_PAGE_2, 0);
         this.changePage(previousPage, 1, ApiMocks.CLINICAL_REVIEW_TASKS);
+        this.assertTaskSelected(ClinicalReviewTaskData.LIST_OF_ALL_TASKS, 0);
         this.assertTaskDetails(ClinicalReviewTaskData.LIST_OF_ALL_TASKS, 0);
         this.changePage(pageTen, 10, ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_10);
+        this.assertTaskSelected(ClinicalReviewTaskData.PAGINATION_PAGE_10, 0);
         this.assertTaskDetails(ClinicalReviewTaskData.PAGINATION_PAGE_10, 0);
         this.changePage(pageNine, 9, ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_9);
+        this.changePage(pageTen, 10, ApiMocks.CLINICAL_REVIEW_PAGINATION_PAGE_9);
         this.assertTaskDetails(ClinicalReviewTaskData.PAGINATION_PAGE_9, 0);
     }
 
@@ -379,10 +405,7 @@ export default class ClinicalReviewPage extends AbstractPage {
                 task.data[index].clinical_review_message.patient_metadata.patient_name,
             )
             .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_id)
-            .and(
-                "contain",
-                task.data[index].clinical_review_message.patient_metadata.patient_sex,
-            )
+            .and("contain", task.data[index].clinical_review_message.patient_metadata.patient_sex)
             .and(
                 "contain",
                 task.data[index].clinical_review_message.application_metadata.application_name,
