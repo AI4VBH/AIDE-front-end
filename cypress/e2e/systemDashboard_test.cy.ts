@@ -131,7 +131,7 @@ describe(`Admin System - API errors`, () => {
         });
         it(`Toast displayed on a task dismissal request when a ${error_code} status is returned`, () => {
             adminSystemPage.initPage();
-            adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
+            adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1, error_code);
             abstractPage.assertToast(dismissalText);
         });
         it.skip(`Toast displayed on a models section GET request when a ${error_code} status is returned`, () => {
