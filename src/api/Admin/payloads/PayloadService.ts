@@ -15,7 +15,7 @@
  */
 
 import { IPayload, WorkflowInstance } from "@/models/Admin/IPayload";
-import { IPagedResponse } from "@/models/common/IPagedResponse";
+import { getDefaultPagedResponse, IPagedResponse } from "@/models/common/IPagedResponse";
 import { createAxiosInstance, ErrorMessageMap, provideDefaultResult } from "@/utils/axios-helpers";
 import { AxiosResponse } from "axios";
 
@@ -42,17 +42,7 @@ export async function getPayloads(query: QueryParams): Promise<IPagedResponse<IP
         patientName: query.patientName ?? "",
     });
 
-    const defaultData = {
-        pageNumber: 0,
-        pageSize: 0,
-        firstPage: "",
-        lastPage: "",
-        totalPages: 0,
-        totalRecords: 0,
-        nextPage: "",
-        previousPage: "",
-        data: [],
-    };
+    const defaultData = getDefaultPagedResponse<IPayload>();
 
     const response = await http.get<IPagedResponse<IPayload>>(`/payloads?${params}`);
     return provideDefaultResult(response, defaultData);

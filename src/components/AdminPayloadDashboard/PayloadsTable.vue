@@ -65,7 +65,7 @@
                         item-key="payload_id"
                         class="elevation-1"
                         data-cy="payload"
-                        @click:row="(item, slot) => slot.expand(!slot.isExpanded)"
+                        @click:row="onClick"
                     >
                         <template v-slot:no-data>
                             <span class="grey--text text--darken-3">No data available</span>
@@ -125,10 +125,12 @@ import { DataOptions } from "vuetify";
 import { Watch } from "vue-property-decorator";
 import { throttle } from "underscore";
 import { IPagedResponse } from "@/models/common/IPagedResponse";
+import goTo from "vuetify/lib/services/goto";
 
 @Component({
     components: {
         ExecutionTree,
+        formatDateAndTimeOfArray,
     },
 })
 export default class PayloadsTable extends Vue {
@@ -143,7 +145,8 @@ export default class PayloadsTable extends Vue {
     } as DataOptions;
     selectedPayloadID = "";
     selectedExecutionID = "";
-    expanded: unknown[] = [];
+    expanded: (IPayload | undefined)[] = [];
+    previousPage = -1;
 
     headers = [
         { text: "Patient Name", value: "patient_name", sortable: false },
@@ -155,6 +158,10 @@ export default class PayloadsTable extends Vue {
 
     onExpand() {
         this.renderKey++;
+    }
+
+    onClick(item: IPayload, slot: any) {
+        slot.expand(!slot.isExpanded);
     }
 
     mounted() {
@@ -169,17 +176,33 @@ export default class PayloadsTable extends Vue {
     @Watch("tableOptions")
     async tableOptionsChanged() {
         this.loading = true;
+        this.clearSelectedPayload();
         this.throttledGetPaginatedPayloads();
+        this.previousPage = this.tableOptions.page;
         this.loading = false;
+    }
+
+    private clearSelectedPayload() {
+        if (this.expanded.length > 0) {
+            // if page changes deselect item.
+            this.expanded = [];
+            this.selectedPayloadID = "";
+            this.selectedExecutionID = "";
+            this.$router.replace({ query: undefined });
+        }
     }
 
     @Watch("searchParameter")
     async tableSearchParameterChanged() {
-        this.throttledGetPaginatedPayloads();
+        if (this.tableSearch != "") {
+            this.clearSelectedPayload();
+            this.throttledGetPaginatedPayloads();
+        }
     }
 
     @Watch("tableSearch")
     async tableSearchChanged() {
+        this.clearSelectedPayload();
         this.throttledGetPaginatedPayloads();
     }
 
@@ -191,7 +214,7 @@ export default class PayloadsTable extends Vue {
         });
         formatDateAndTimeOfArray(this.paginatedPayloads.data, "payload_received");
 
-        if (this.selectedPayloadID) {
+        if (this.tableOptions.page == 1 && this.selectedPayloadID) {
             let selectedPayload = this.paginatedPayloads.data.find(
                 (p) => p.payload_id === this.selectedPayloadID,
             );
@@ -204,8 +227,21 @@ export default class PayloadsTable extends Vue {
                     selectedPayload = payload;
                 }
             }
+            formatDateAndTimeOfArray(this.paginatedPayloads.data, "payload_received");
 
             this.expanded = [selectedPayload];
+            setTimeout(() => {
+                const expandedRow = document.querySelector(
+                    ".v-data-table__expanded__row",
+                ) as HTMLElement;
+                if (!expandedRow) {
+                    return;
+                }
+                goTo(expandedRow, {
+                    easing: "easeInOutCubic",
+                    duration: 300,
+                });
+            }, 100);
         }
     }
 }
