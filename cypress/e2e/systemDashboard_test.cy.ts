@@ -71,7 +71,7 @@ describe(`Admin System - Issues table section`, () => {
         abstractPage.assertToast(`You have successfully dismissed 5 tasks.`);
     });
     it(`I am unable to dismiss a task when there is an error`, () => {
-        adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
+        adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1, 400);
         abstractPage.assertToast(`Something unexpected went wrong with your dismissal request!`);
     });
     it(`I cannot click the 'Dismiss selected' button if no issues have been selected`, () => {
@@ -131,7 +131,7 @@ describe(`Admin System - API errors`, () => {
         });
         it(`Toast displayed on a task dismissal request when a ${error_code} status is returned`, () => {
             adminSystemPage.initPage();
-            adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1);
+            adminSystemPage.assertDismisalOfTaskFailure(TaskData.TASK_DATA_1, error_code);
             abstractPage.assertToast(dismissalText);
         });
         it.skip(`Toast displayed on a models section GET request when a ${error_code} status is returned`, () => {
