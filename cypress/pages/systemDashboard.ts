@@ -164,14 +164,14 @@ export default class AdminSystemDashboardPage {
             .should(`not.exist`);
     }
 
-    public assertDismisalOfTaskFailure(task: IIssue): void {
+    public assertDismisalOfTaskFailure(task: IIssue, statuscode): void {
         cy.get(`tbody > :nth-child(${task.task_id})`).within(() => {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
         cy.intercept(
             `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
             {
-                statusCode: 400,
+                statusCode: statuscode,
             },
         ).as(`FailedDismiss`);
         cy.dataCy(AdminSystemDashboardPage.VALIDATION_OK).click({ multiple: true, force: true });
