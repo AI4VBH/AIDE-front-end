@@ -146,7 +146,6 @@ export default class PayloadsTable extends Vue {
     selectedPayloadID = "";
     selectedExecutionID = "";
     expanded: (IPayload | undefined)[] = [];
-    previousPage = -1;
 
     headers = [
         { text: "Patient Name", value: "patient_name", sortable: false },
@@ -178,7 +177,6 @@ export default class PayloadsTable extends Vue {
         this.loading = true;
         this.clearSelectedPayload();
         this.throttledGetPaginatedPayloads();
-        this.previousPage = this.tableOptions.page;
         this.loading = false;
     }
 
