@@ -18,11 +18,7 @@ import ApiMocks from "../fixtures/mockIndex";
 import { AbstractPage } from "./abstractPage";
 import { ClinicalReviewTaskData } from "../data/clinical-review/listOfTasks";
 import { StudyData } from "data/clinical-review/study";
-import {
-    formatDateAndTimeOfString,
-    formatDate,
-    formatDateTime,
-} from "../../src/utils/date-utilities";
+import { formatDateAndTimeOfString, formatDate } from "../../src/utils/date-utilities";
 import {
     ClinicalReviewRecord,
     PagedClinicalReviewList,
@@ -216,7 +212,7 @@ export default class ClinicalReviewPage extends AbstractPage {
 
     public assertDetails(task: ClinicalReviewRecord, study: ClinicalReviewStudyDetails) {
         const date = formatDate(task.clinical_review_message.patient_metadata.patient_dob);
-        const dateTime = formatDateTime(study.study_date);
+        const dateTime = formatDate(study.study_date);
         cy.dataCy("patient-name").should(
             "contain",
             task.clinical_review_message.patient_metadata.patient_name,

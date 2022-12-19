@@ -38,7 +38,7 @@
         </v-col>
         <v-col data-cy="study-date">
             <span class="header-label">Study Date</span>
-            <span v-if="!tasksLoading">{{ studyDate | formatDateTime }}</span>
+            <span v-if="!tasksLoading">{{ studyDate | formatDate }}</span>
             <v-skeleton-loader v-else class="mx-auto" max-width="300" type="text" />
         </v-col>
         <v-col data-cy="task-actions" class="task-actions">
