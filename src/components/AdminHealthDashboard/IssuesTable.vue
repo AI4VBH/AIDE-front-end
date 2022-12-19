@@ -64,7 +64,7 @@
                         :headers="headers"
                         :items="issues"
                         :search="search"
-                        :items-per-page="5"
+                        :footer-props="{ itemsPerPageOptions: [5, 10] }"
                         v-model="selectedIssues"
                         show-select
                         item-key="execution_id"
@@ -191,7 +191,7 @@ export default class IssuesTable extends Vue {
         { text: "Task ID", value: "task_id" },
         { text: "Status", value: "status" },
         { text: "Patient", value: "patient_name" },
-        { text: "Patient ID", value: "patient_id" },
+        { text: "Patient ID", value: "patient_id", width: "200px" },
         { text: "Time", value: "execution_time" },
         { text: "Actions", value: "actions", width: "250px" },
     ];
