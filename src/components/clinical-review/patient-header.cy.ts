@@ -15,7 +15,7 @@
  */
 
 import { PatientMetadata } from "@/models/ClinicalReview/ClinicalReviewTask";
-import { formatDate, formatDateTime } from "@/utils/date-utilities";
+import { formatDate } from "@/utils/date-utilities";
 import PatientHeader from "./patient-header.vue";
 
 describe("<patient-header />", () => {
@@ -38,7 +38,7 @@ describe("<patient-header />", () => {
         cy.dataCy("patient-dob").should("contain.text", formatDate(patientMetadata.patient_dob));
         cy.dataCy("patient-id").should("contain.text", patientMetadata.patient_id);
         cy.dataCy("patient-sex").should("contain.text", patientMetadata.patient_sex);
-        cy.dataCy("study-date").should("contain.text", formatDateTime(propsData.studyDate));
+        cy.dataCy("study-date").should("contain.text", formatDate(propsData.studyDate));
 
         cy.dataCy("accept-task").should("be.enabled");
         cy.dataCy("reject-task").should("be.enabled");
