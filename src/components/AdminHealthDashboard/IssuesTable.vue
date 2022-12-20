@@ -101,7 +101,7 @@
                             </span>
                         </template>
                         <template v-slot:[`item.patient_id`]="{ item }">
-                            <span data-cy="patient-id">
+                            <span data-cy="patient-id" class="word-break">
                                 {{ item.patient_id }}
                             </span>
                         </template>
@@ -186,12 +186,12 @@ export default class IssuesTable extends Vue {
     issues: IIssue[] = [];
     dialogDelete = false;
     headers = [
-        { text: "Payload ID", value: "payload_id" },
+        { text: "Payload ID", value: "payload_id", width: "200px" },
         { text: "Workflow Name", value: "workflow_name" },
         { text: "Task ID", value: "task_id" },
         { text: "Status", value: "status" },
         { text: "Patient", value: "patient_name" },
-        { text: "Patient ID", value: "patient_id", width: "200px" },
+        { text: "Patient ID", value: "patient_id", width: "150px" },
         { text: "Time", value: "execution_time" },
         { text: "Actions", value: "actions", width: "250px" },
     ];
@@ -281,3 +281,12 @@ export default class IssuesTable extends Vue {
     }
 }
 </script>
+
+<style scoped>
+.word-break {
+    overflow-wrap: break-word;
+    width: 150px;
+    min-width: 150px;
+    display: block;
+}
+</style>
