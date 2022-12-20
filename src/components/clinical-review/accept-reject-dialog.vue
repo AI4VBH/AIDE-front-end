@@ -35,7 +35,6 @@
                         outlined
                         dense
                         hidden
-                        validate-on-blur
                         return-object
                         eager
                         data-cy="reject-reason"
