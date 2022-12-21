@@ -246,7 +246,7 @@ export default class ClinicalReviewPage extends AbstractPage {
         ).as("no-results");
         cy.intercept(
             "GET",
-            `/clinical-review?pageNumber=0&pageSize=10&patientId=&patientName=&applicationName=`,
+            `/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=`,
             ApiMocks.CLINICAL_REVIEW_TASKS,
         ).as("clear");
         cy.dataCy("worklist-search").type("bla");

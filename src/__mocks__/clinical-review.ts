@@ -22,6 +22,266 @@ import { PagedClinicalReviewList } from "@/models/ClinicalReview/ClinicalReviewT
 
 const tasks = [
     {
+        execution_id: "111",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "111",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w1_1",
+            patient_metadata: {
+                patient_name: "Jonathan Doe",
+                patient_id: "1299-123-232-1111",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-01T11:11:00",
+    },
+    {
+        execution_id: "222",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "222",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w2_2",
+            patient_metadata: {
+                patient_name: "Jane Doe",
+                patient_id: "1299-123-232-2222",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-02T11:11:00",
+    },
+    {
+        execution_id: "333",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "333",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w3_3",
+            patient_metadata: {
+                patient_name: "Wednesday Addams",
+                patient_id: "1299-123-232-3333",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-03T11:11:00",
+    },
+    {
+        execution_id: "444",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "444",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w4_4",
+            patient_metadata: {
+                patient_name: "Pugsley Addams",
+                patient_id: "1299-123-232-4444",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-04T11:11:00",
+    },
+    {
+        execution_id: "555",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "555",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w5_5",
+            patient_metadata: {
+                patient_name: "Morticia Addams",
+                patient_id: "1299-123-232-5555",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-05T11:11:00",
+    },
+    {
+        execution_id: "666",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "666",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w6_6",
+            patient_metadata: {
+                patient_name: "Hand",
+                patient_id: "1299-123-232-6666",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-06T11:11:00",
+    },
+    {
+        execution_id: "777",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "777",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w7_7",
+            patient_metadata: {
+                patient_name: "Lurch",
+                patient_id: "1299-123-232-7777",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-07T11:11:00",
+    },
+    {
+        execution_id: "888",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "888",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w8_8",
+            patient_metadata: {
+                patient_name: "Gomez Addams",
+                patient_id: "1299-123-232-8888",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-08T11:11:00",
+    },
+    {
+        execution_id: "999",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "999",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w9_9",
+            patient_metadata: {
+                patient_name: "Uncle Fester Addams",
+                patient_id: "1299-123-232-9999",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-09T11:11:00",
+    },
+    {
+        execution_id: "000",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "000",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "w0_0",
+            patient_metadata: {
+                patient_name: "Cousin Itt Addams",
+                patient_id: "1299-123-232-0000",
+                patient_sex: "M",
+                patient_dob: "2000-10-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "stroke model",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-10T11:11:00",
+    },
+    {
         execution_id: "678",
         clinical_review_message: {
             task_id: "",
@@ -104,21 +364,9 @@ const tasks = [
 const clinicalReviewTasks: PagedClinicalReviewList = {
     pageNumber: 1,
     pageSize: 10,
-    totalPages: 1,
+    totalPages: 2,
     totalRecords: tasks.length,
     data: tasks,
-    firstPage: "",
-    lastPage: "",
-    nextPage: "",
-    previousPage: "",
-};
-
-const emptyClinicalReviewTasks: PagedClinicalReviewList = {
-    pageNumber: 1,
-    pageSize: 10,
-    totalPages: 1,
-    totalRecords: 0,
-    data: [],
     firstPage: "",
     lastPage: "",
     nextPage: "",
@@ -198,10 +446,59 @@ export const clinicalReviewHandlers = [
         const patientId = _req.url.searchParams.get("patientId");
         const patientName = _req.url.searchParams.get("patientName");
         const applicationName = _req.url.searchParams.get("applicationName");
+        const pageNumber = _req.url.searchParams.get("pageNumber");
 
-        if (patientId === "" && patientName === "" && applicationName === "")
-            return res(ctx.json(clinicalReviewTasks));
-        else return res(ctx.json(emptyClinicalReviewTasks));
+        let crTasksData = tasks;
+
+        if (patientId !== "" && patientId !== null) {
+            crTasksData = crTasksData.filter((item) => {
+                if (
+                    item.clinical_review_message.patient_metadata.patient_id
+                        .toLowerCase()
+                        .includes(patientId.toLowerCase())
+                )
+                    return item;
+            });
+            clinicalReviewTasks.data = crTasksData;
+        }
+
+        if (patientName !== "" && patientName !== null) {
+            crTasksData = crTasksData.filter((item) => {
+                if (
+                    item.clinical_review_message.patient_metadata.patient_name
+                        .toLowerCase()
+                        .includes(patientName.toLowerCase())
+                )
+                    return item;
+            });
+            clinicalReviewTasks.data = crTasksData;
+        }
+
+        if (applicationName !== "" && applicationName !== null) {
+            crTasksData = crTasksData.filter((item) => {
+                if (
+                    item.clinical_review_message.application_metadata.application_name
+                        .toLowerCase()
+                        .includes(applicationName.toLowerCase())
+                )
+                    return item;
+            });
+            clinicalReviewTasks.data = crTasksData;
+        }
+
+        if (pageNumber !== null) {
+            clinicalReviewTasks.data = crTasksData.slice(
+                (parseInt(pageNumber) - 1) * 10,
+                clinicalReviewTasks.totalRecords < parseInt(pageNumber) * 10
+                    ? undefined
+                    : parseInt(pageNumber) * 10,
+            );
+            clinicalReviewTasks.pageNumber = parseInt(pageNumber);
+            clinicalReviewTasks.totalRecords = crTasksData.length;
+            clinicalReviewTasks.totalPages = crTasksData.length > 10 ? 2 : 1;
+        }
+
+        return res(ctx.json(clinicalReviewTasks));
     }),
     rest.put(`${window.FRONTEND_API_HOST}/clinical-review/:clinicalReviewId`, (_req, res, ctx) => {
         return res(ctx.status(201));

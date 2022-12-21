@@ -108,6 +108,7 @@ import { ClinicalReviewRecord } from "@/models/ClinicalReview/ClinicalReviewTask
 
 interface IClinicalReviewTaskListData {
     search: string;
+    previousSearch: string;
     loading: boolean;
     currentTask: string;
     currentPage: number;
@@ -123,6 +124,7 @@ export default defineComponent({
     data(): IClinicalReviewTaskListData {
         return {
             search: "",
+            previousSearch: "",
             loading: true,
             currentTask: "",
             currentPage: 1,
@@ -158,17 +160,24 @@ export default defineComponent({
         async getTasks() {
             this.loading = true;
 
-            const { data, pageNumber, totalPages } = await getClinicalReviewTasks({
-                pageNumber: this.currentPage,
+            const searchTextChanged = this.search.trim() !== this.previousSearch.trim();
+
+            const crTaskQueryParams = {
+                pageNumber: searchTextChanged === true ? 1 : this.currentPage,
                 pageSize: 10,
                 patientName: this.searchParameter === "patientName" ? this.search : "",
                 patientId: this.searchParameter === "patientId" ? this.search : "",
                 applicationName: this.searchParameter === "applicationName" ? this.search : "",
-            });
+            };
+
+            const { data, pageNumber, totalPages } = await getClinicalReviewTasks(
+                crTaskQueryParams,
+            );
 
             this.tasks = data;
             this.currentPage = pageNumber;
             this.totalPages = totalPages;
+            this.previousSearch = this.search;
 
             if (this.tasks.length > 0) {
                 this.currentTask = this.tasks[0].clinical_review_message.execution_id;
