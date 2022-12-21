@@ -147,7 +147,7 @@ export default class ExecutionTree extends Vue {
                         this.selectNodeByTaskExecution(task);
                         return;
                     } else {
-                        this.checkNextNode(task);
+                        this.checkNextTaskForExecution(task);
                     }
                 }
             }
@@ -179,14 +179,21 @@ export default class ExecutionTree extends Vue {
         }
     }
 
-    private checkNextNode(task: TaskExecution) {
-        task.next_task.map((nt) => {
-            if (nt.execution_id === this.selectedExecutionId) {
-                this.selectNodeByTaskExecution(nt);
+    private checkNextTaskForExecution(task: TaskExecution) {
+        if (task.execution_id === this.selectedExecutionId) {
+            this.selectNodeByTaskExecution(task);
+            return;
+        }
+        for (const nextTask of task.next_task) {
+            if (nextTask.execution_id === this.selectedExecutionId) {
+                this.selectNodeByTaskExecution(nextTask);
+                return;
             } else {
-                task.next_task.map((nextTask) => this.checkNextNode(nextTask));
+                for (const nextNextTask of nextTask.next_task) {
+                    this.checkNextTaskForExecution(nextNextTask);
+                }
             }
-        });
+        }
     }
 
     private async getPayloadExecutionsForTree(): Promise<void> {

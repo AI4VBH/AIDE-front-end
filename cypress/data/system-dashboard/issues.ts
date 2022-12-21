@@ -17,35 +17,10 @@
 import { IIssue } from "../../../src/models/Admin/IIssue";
 import ApiMocks from "../../fixtures/mockIndex";
 
-export class TaskData implements IIssue {
-    task_id: string;
-    payload_id: string;
-    status: string;
-    workflow_name: string;
-    model_name: string;
-    patient_name: string;
-    patient_id: string;
-    execution_time: string;
-    execution_id: string;
-    workflow_instance_id: string;
-    failure_reason?: string;
-
-    constructor(task: IIssue) {
-        this.task_id = task.task_id;
-        this.payload_id = task.payload_id;
-        this.status = task.status;
-        this.workflow_name = task.workflow_name;
-        this.model_name = task.model_name;
-        this.patient_name = task.patient_name;
-        this.patient_id = task.patient_id;
-        this.execution_time = task.execution_time;
-        this.failure_reason = task.failure_reason;
-        this.execution_id = task.execution_id;
-    }
-
-    public static TASK_DATA_1: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[0]);
-    public static TASK_DATA_2: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[1]);
-    public static TASK_DATA_3: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[2]);
-    public static TASK_DATA_4: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[3]);
-    public static TASK_DATA_5: TaskData = new TaskData(<IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[4]);
+export class TaskData {
+    public static TASK_DATA_1: IIssue = <IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[0];
+    public static TASK_DATA_2: IIssue = <IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[1];
+    public static TASK_DATA_3: IIssue = <IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[2];
+    public static TASK_DATA_4: IIssue = <IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[3];
+    public static TASK_DATA_5: IIssue = <IIssue>ApiMocks.ADMIN_DASHBOARD_TASKS[4];
 }
