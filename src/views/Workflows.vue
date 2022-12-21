@@ -38,8 +38,8 @@
                         :options.sync="tableOptions"
                         :footer-props="{ itemsPerPageOptions: [5, 10] }"
                     >
-                        <template v-slot:item="{ item, index }">
-                            <tr :data-cy="`workflow-table-row-${index}`">
+                        <template v-slot:item="{ item, index, isMobile, headers }">
+                            <tr v-if="!isMobile" :data-cy="`workflow-table-row-${index}`">
                                 <!-- name -->
                                 <td
                                     class="text-start font-weight-bold"
@@ -59,7 +59,7 @@
                                     class="text-start"
                                     :data-cy="`workflow-table-row-data-${index}`"
                                 >
-                                    {{ item.data_origins.join(", ") }}
+                                    {{ item.data_origins | commaSeparated }}
                                 </td>
                                 <!-- version -->
                                 <td
@@ -107,6 +107,58 @@
                                         Delete
                                         <v-icon small right> mdi-close </v-icon>
                                     </v-btn>
+                                </td>
+                            </tr>
+                            <tr
+                                v-else
+                                :data-cy="`workflow-table-row-${index}`"
+                                class="v-data-table__mobile-table-row"
+                            >
+                                <td
+                                    v-for="header in headers"
+                                    class="v-data-table__mobile-row"
+                                    :key="`${header.value}-${index}`"
+                                >
+                                    <div class="v-data-table__mobile-row__header">
+                                        {{ header.text }}
+                                    </div>
+                                    <div class="v-data-table__mobile-row__cell">
+                                        <template v-if="header.value === 'data_origins'">
+                                            {{ item.data_origins | commaSeparated }}
+                                        </template>
+                                        <template v-else-if="header.value === 'id'">
+                                            <v-btn
+                                                small
+                                                elevation="0"
+                                                class="mr-2 secondary-button"
+                                                aria-label="edit workflow"
+                                                data-cy="workflow-edit"
+                                                @click.stop="
+                                                    () =>
+                                                        navigateToWorkflowEditor(
+                                                            item.workflow_id,
+                                                            item.name,
+                                                        )
+                                                "
+                                            >
+                                                Edit
+                                            </v-btn>
+                                            <v-btn
+                                                small
+                                                elevation="0"
+                                                class="outlined-button"
+                                                aria-label="delete workflow"
+                                                data-cy="workflow-delete"
+                                                @click.stop="() => confirmDeletion(item)"
+                                            >
+                                                Delete
+                                                <v-icon small right> mdi-close </v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <template v-else>
+                                            {{ item[`${header.value}`] }}
+                                        </template>
+                                    </div>
                                 </td>
                             </tr>
                         </template>
@@ -159,6 +211,11 @@ import ConfirmationModal from "@/components/Shared/ConfirmationModal.vue";
     },
     components: {
         ConfirmationModal,
+    },
+    filters: {
+        commaSeparated(values: string[]): string {
+            return values.join(", ");
+        },
     },
 })
 export default class Workflows extends Vue {

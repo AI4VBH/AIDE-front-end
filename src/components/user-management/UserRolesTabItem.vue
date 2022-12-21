@@ -49,8 +49,8 @@
                         :footer-props="{ itemsPerPageOptions: [5, 10] }"
                         class="roles-table"
                     >
-                        <template v-slot:item="{ item, index }">
-                            <tr :data-cy="`role-table-row-${index}`">
+                        <template v-slot:item="{ item, index, isMobile, headers }">
+                            <tr v-if="!isMobile" :data-cy="`role-table-row-${index}`">
                                 <td
                                     class="text-start font-weight-bold"
                                     :data-cy="`role-table-row-name-${index}`"
@@ -97,6 +97,64 @@
                                     </v-btn>
                                 </td>
                                 <td v-else />
+                            </tr>
+                            <tr
+                                v-else
+                                :data-cy="`role-table-row-${index}`"
+                                class="v-data-table__mobile-table-row"
+                            >
+                                <td
+                                    v-for="header in headers"
+                                    class="v-data-table__mobile-row"
+                                    :key="`${header.value}-${index}`"
+                                >
+                                    <div class="v-data-table__mobile-row__header">
+                                        {{ header.text }}
+                                    </div>
+                                    <div
+                                        v-if="header.value === 'name'"
+                                        class="v-data-table__mobile-row__cell"
+                                    >
+                                        {{ item.name }}
+                                    </div>
+                                    <div v-else class="v-data-table__mobile-row__cell">
+                                        <template v-if="item.editable">
+                                            <v-btn
+                                                small
+                                                elevation="0"
+                                                class="mr-2 secondary-button"
+                                                aria-label="edit role"
+                                                data-cy="role-edit"
+                                                @click="
+                                                    editRoleDetails({
+                                                        id: item.id,
+                                                        name: item.name,
+                                                        editable: true,
+                                                    })
+                                                "
+                                            >
+                                                Edit
+                                            </v-btn>
+                                            <v-btn
+                                                small
+                                                elevation="0"
+                                                class="outlined-button"
+                                                aria-label="delete role"
+                                                data-cy="role-delete"
+                                                @click="
+                                                    confirmDeletion({
+                                                        id: item.id,
+                                                        name: item.name,
+                                                        editable: true,
+                                                    })
+                                                "
+                                            >
+                                                Delete
+                                                <v-icon small right> mdi-close </v-icon>
+                                            </v-btn>
+                                        </template>
+                                    </div>
+                                </td>
                             </tr>
                         </template>
 

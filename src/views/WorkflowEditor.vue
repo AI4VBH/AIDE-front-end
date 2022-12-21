@@ -250,7 +250,11 @@ div.jse-button.jse-action.jse-primary.svelte-kvi5ls {
     background: #b51c1c !important;
 }
 
-span.ͼq {
-    color: #a14600;
+.ͼq {
+    color: #a14600 !important;
+}
+
+.ͼp {
+    color: #ab2415 !important;
 }
 </style>

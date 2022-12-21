@@ -81,3 +81,13 @@ export default {
     },
 };
 </script>
+
+<style>
+.ͼq {
+    color: #a14600 !important;
+}
+
+.ͼp {
+    color: #ab2415 !important;
+}
+</style>
