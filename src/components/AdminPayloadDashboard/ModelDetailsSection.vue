@@ -23,7 +23,7 @@
             :text-color="selectedNode.status | statusChipText"
             data-cy="selected-node-status"
         >
-            <strong>{{ selectedNode.status }}</strong>
+            <strong>{{ selectedNode.status | statusDisplayText }}</strong>
         </v-chip>
         <p data-cy="selected-node-started">
             <strong class="mr-sm-7 mr-lg-0">Execution started: </strong>
@@ -113,6 +113,8 @@ import mimeTypes from "mime-types";
 
                 case "Failed":
                 case "failed":
+                case "PartialFail":
+                case "partialfail":
                     return "red lighten-4";
 
                 default:
@@ -127,10 +129,22 @@ import mimeTypes from "mime-types";
 
                 case "Failed":
                 case "failed":
+                case "PartialFail":
+                case "partialfail":
                     return "red darken-3";
 
                 default:
                     return "orange darken-3";
+            }
+        },
+        statusDisplayText: (status: string) => {
+            switch (status) {
+                case "PartialFail":
+                case "partialfail":
+                    return "Partial Fail";
+
+                default:
+                    return status;
             }
         },
     },
