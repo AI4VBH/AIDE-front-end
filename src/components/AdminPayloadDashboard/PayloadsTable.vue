@@ -139,6 +139,7 @@ export default class PayloadsTable extends Vue {
     renderKey = 0;
     searchParameter = "patientId";
     tableSearch = "";
+    previousTableSearch = "";
     tableOptions: DataOptions = {
         page: 1,
         itemsPerPage: 10,
@@ -205,12 +206,20 @@ export default class PayloadsTable extends Vue {
     }
 
     private async getPaginatedPayloads(): Promise<void> {
+        const searchTextChanged = this.tableSearch.trim() !== this.previousTableSearch.trim();
+
+        if (searchTextChanged === true) {
+            this.tableOptions.page = 1;
+        }
+
         this.paginatedPayloads = await getPayloads({
             patientName: this.searchParameter === "patientName" ? this.tableSearch : "",
             patientId: this.searchParameter === "patientId" ? this.tableSearch : "",
             ...this.tableOptions,
         });
         formatDateAndTimeOfArray(this.paginatedPayloads.data, "payload_received");
+
+        this.previousTableSearch = this.tableSearch;
 
         if (this.tableOptions.page == 1 && this.selectedPayloadID) {
             let selectedPayload = this.paginatedPayloads.data.find(

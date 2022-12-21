@@ -183,7 +183,7 @@ import ConfirmationModal from "../Shared/ConfirmationModal.vue";
     },
     computed: {
         userRoleCount(): string {
-            const count: number = this.$data.totalRoles;
+            const count: number = this.$data.totalFilteredRoles;
 
             if (count === 1) {
                 return "1 Role";
@@ -209,6 +209,7 @@ export default class UserRolesTabItem extends Vue {
     roleExists = false;
 
     tableSearch = "";
+    previousTableSearch = "";
     tableOptions: DataOptions = {
         page: 1,
         itemsPerPage: 10,
@@ -240,11 +241,16 @@ export default class UserRolesTabItem extends Vue {
     }
 
     private async fetchRolePage() {
+        const searchTextChanged = this.tableSearch.trim() !== this.previousTableSearch.trim();
+        if (searchTextChanged === true) {
+            this.tableOptions.page = 1;
+        }
         const { totalRolesCount, totalFilteredRolesCount, roles } = await getPaginatedRoles({
             search: this.tableSearch,
             ...this.tableOptions,
         });
 
+        this.previousTableSearch = this.tableSearch;
         this.totalRoles = totalRolesCount;
         this.totalFilteredRoles = totalFilteredRolesCount;
         this.rolesList = roles;
