@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
+import { IIssue } from "@/models/Admin/IIssue";
 import { rest } from "msw";
 
-const issuesData = [
+const issuesData: IIssue[] = [
     {
-        task_id: 1,
+        task_id: "1",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26111",
         workflow_name: "Test model 1",
         status: "partial_fail",
@@ -31,7 +32,7 @@ const issuesData = [
         failure_reason: "rejected",
     },
     {
-        task_id: 2,
+        task_id: "2",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26222",
         status: "Error",
         workflow_name: "Test model 2",
@@ -43,7 +44,7 @@ const issuesData = [
         execution_id: "45435342",
     },
     {
-        task_id: 3,
+        task_id: "3",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26333",
         status: "Error",
         workflow_name: "Test model 3",
@@ -55,7 +56,7 @@ const issuesData = [
         execution_id: "45435343",
     },
     {
-        task_id: 4,
+        task_id: "4",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26444",
         status: "Rejected",
         workflow_name: "Test model 4",
@@ -67,7 +68,7 @@ const issuesData = [
         execution_id: "45435344",
     },
     {
-        task_id: 5,
+        task_id: "5",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26555",
         status: "Error",
         workflow_name: "Test model 5",
@@ -76,10 +77,10 @@ const issuesData = [
         patient_id: "005",
         execution_time: "20310517T191115",
         workflow_instance_id: "345435",
-        execution_id: "45435345",
+        execution_id: "1f3d4b42-8a8f-41b1-9cc7-bfb19d9716de",
     },
     {
-        task_id: 6,
+        task_id: "6",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26666",
         status: "Rejected",
         workflow_name: "Test model 6",
@@ -91,7 +92,7 @@ const issuesData = [
         execution_id: "45435345",
     },
     {
-        task_id: 7,
+        task_id: "7",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26777",
         status: "Rejected",
         workflow_name: "Test model 7",
@@ -103,7 +104,7 @@ const issuesData = [
         execution_id: "45435345",
     },
     {
-        task_id: 8,
+        task_id: "8",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26888",
         status: "Error",
         workflow_name: "Test model 8",
@@ -115,7 +116,7 @@ const issuesData = [
         execution_id: "45435345",
     },
     {
-        task_id: 9,
+        task_id: "9",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26999",
         status: "Rejected",
         workflow_name: "Test model 9",
@@ -127,7 +128,7 @@ const issuesData = [
         execution_id: "45435345",
     },
     {
-        task_id: 10,
+        task_id: "10",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26010",
         status: "Error",
         workflow_name: "Test model 10",
@@ -139,7 +140,7 @@ const issuesData = [
         execution_id: "45435345",
     },
     {
-        task_id: 11,
+        task_id: "11",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26011",
         status: "Error",
         workflow_name: "Test model 11",
@@ -151,7 +152,7 @@ const issuesData = [
         execution_id: "45435345",
     },
     {
-        task_id: 12,
+        task_id: "12",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26012",
         status: "Rejected",
         workflow_name: "Test model 12",

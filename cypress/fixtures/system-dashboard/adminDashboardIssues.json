@@ -1,6 +1,6 @@
 [
     {
-        "task_id": 1,
+        "task_id": "1",
         "payload_id": "111293d0-ab97-4ea1-b967-42ec62f26111",
         "status": "Error",
         "workflow_name": "Test model 1",
@@ -13,7 +13,7 @@
         "failure_reason": "rejected"
     },
     {
-        "task_id": 2,
+        "task_id": "2",
         "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
         "status": "Error",
         "workflow_name": "Test model 2",
@@ -26,7 +26,7 @@
         "failure_reason": "Error"
     },
     {
-        "task_id": 3,
+        "task_id": "3",
         "payload_id": "041293d0-ab97-4ea1-b967-42ec62f26333",
         "status": "Error",
         "workflow_name": "Test model 3",
@@ -38,7 +38,7 @@
         "execution_id": "4543533"
     },
     {
-        "task_id": 4,
+        "task_id": "4",
         "payload_id": "041293d0-ab97-4ea1-b967-42ec62f26444",
         "status": "Error",
         "workflow_name": "Test model 4",
@@ -50,7 +50,7 @@
         "execution_id": "4543534"
     },
     {
-        "task_id": 5,
+        "task_id": "5",
         "payload_id": "041293d0-ab97-4ea1-b967-42ec62f26555",
         "status": "Error",
         "workflow_name": "Test model 5",

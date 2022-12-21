@@ -16,31 +16,23 @@
 
 import { TaskExecution, WorkflowInstance } from "@/models/Admin/IPayload";
 
-export interface ExecutionTreeFirstNode {
+export interface RootNode {
     id: string;
     name: string;
+    status: string;
+    children: (ExecutionTreeNode | ExecutionTreeFirstNode)[];
+}
+
+export interface ExecutionTreeFirstNode extends RootNode {
+    start_date: string;
+    workflow_instance_id: string;
     workflow_name: string;
-    workflow_instance_id: string;
-    status: string;
-    start_date: string;
-    children: ExecutionTreeNode[];
 }
 
-export interface ExecutionTreeNode {
-    id: string;
+export interface ExecutionTreeNode extends RootNode {
     execution_id: string;
-    workflow_instance_id: string;
-    name: string;
-    status: string;
     start_date: string;
-    children: ExecutionTreeNode[];
-}
-
-export interface ExecutionTreeRoot {
-    id: "root-node";
-    name: "Payload Received";
-    status: string;
-    children: ExecutionTreeFirstNode[];
+    workflow_instance_id: string;
 }
 
 export function mapToExecutionTreeFirstNode(instance: WorkflowInstance): ExecutionTreeFirstNode {
@@ -67,7 +59,7 @@ export function mapToExecutionTreeNode(task: TaskExecution): ExecutionTreeNode {
     };
 }
 
-export function mapToExecutionTree(instances: WorkflowInstance[]): ExecutionTreeRoot {
+export function mapToExecutionTree(instances: WorkflowInstance[]): RootNode {
     return {
         id: "root-node",
         name: "Payload Received",

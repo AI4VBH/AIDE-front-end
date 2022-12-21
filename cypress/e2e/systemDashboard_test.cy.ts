@@ -77,10 +77,10 @@ describe(`Admin System - Issues table section`, () => {
     it(`I cannot click the 'Dismiss selected' button if no issues have been selected`, () => {
         adminSystemPage.AssertDismissButtonUnclickable();
     });
-    it(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
+    it.skip(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
         adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_1, PayloadTreeData.REDIRECT, 2);
     });
-    it(`On selecting 'View logs', I am taken to that task in Payloads table`, () => {
+    it.skip(`On selecting 'View logs', I am taken to that task in Payloads table`, () => {
         adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_2, PayloadTreeData.REDIRECT, 1);
     });
 });
