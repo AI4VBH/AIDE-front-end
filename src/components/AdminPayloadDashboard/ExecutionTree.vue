@@ -105,7 +105,12 @@ import { getPayloadExecutions } from "@/api/Admin/payloads/PayloadService";
 import { formatDateAndTimeOfString } from "@/utils/date-utilities";
 import ModelDetailsSection from "./ModelDetailsSection.vue";
 import { Prop } from "vue-property-decorator";
-import { mapToExecutionTree } from "@/utils/workflow-instance-mapper";
+import {
+    ExecutionTreeFirstNode,
+    ExecutionTreeNode,
+    mapToExecutionTree,
+    RootNode,
+} from "@/utils/workflow-instance-mapper";
 import { TaskExecution, WorkflowInstance } from "@/models/Admin/IPayload";
 
 Vue.component("vue-tree", VueTree);
@@ -127,8 +132,8 @@ export default class ExecutionTree extends Vue {
     selectedExecutionId?: string;
 
     loading = false;
-    selectedNode: any = null;
-    payloadExecutions: object = {};
+    selectedNode: ExecutionTreeNode | null = null;
+    payloadExecutions = {} as RootNode;
     workflowInstances: WorkflowInstance[] = [];
     treeConfig = { nodeWidth: 115, nodeHeight: 70, levelHeight: 200 };
 
@@ -136,19 +141,62 @@ export default class ExecutionTree extends Vue {
         await this.getPayloadExecutionsForTree();
 
         if (this.selectedExecutionId) {
-            this.workflowInstances.map((workflowInstance: WorkflowInstance, index) => {
-                this.workflowInstances[index].tasks.map((task: TaskExecution) => {
+            for (const workflowInstance of this.workflowInstances) {
+                for (const task of workflowInstance.tasks) {
                     if (task.execution_id === this.selectedExecutionId) {
-                        this.selectedNode = task;
-                        this.selectedNode.id = task.execution_id;
+                        this.selectNodeByTaskExecution(task);
+                        return;
+                    } else {
+                        this.checkNextTaskForExecution(task);
                     }
-                    return;
-                });
-            });
+                }
+            }
         }
     }
 
-    async getPayloadExecutionsForTree(): Promise<void> {
+    private findNode(
+        nodes: (ExecutionTreeNode | ExecutionTreeFirstNode)[],
+        execution_id: string,
+    ): ExecutionTreeNode | undefined {
+        for (const node of nodes) {
+            if (node.id == "workflow-instance" || node.id == "root-node") {
+                return this.findNode(node.children, execution_id);
+            }
+            const etnNode = node as ExecutionTreeNode;
+            if (etnNode.execution_id === execution_id) {
+                return etnNode;
+            } else {
+                return this.findNode(etnNode.children, execution_id);
+            }
+        }
+    }
+
+    private selectNodeByTaskExecution(task: TaskExecution) {
+        const node = this.findNode(this.payloadExecutions.children, task.execution_id);
+        if (node && task.execution_id === node.execution_id) {
+            this.setSelectedNode(node);
+            return;
+        }
+    }
+
+    private checkNextTaskForExecution(task: TaskExecution) {
+        if (task.execution_id === this.selectedExecutionId) {
+            this.selectNodeByTaskExecution(task);
+            return;
+        }
+        for (const nextTask of task.next_task) {
+            if (nextTask.execution_id === this.selectedExecutionId) {
+                this.selectNodeByTaskExecution(nextTask);
+                return;
+            } else {
+                for (const nextNextTask of nextTask.next_task) {
+                    this.checkNextTaskForExecution(nextNextTask);
+                }
+            }
+        }
+    }
+
+    private async getPayloadExecutionsForTree(): Promise<void> {
         this.loading = true;
 
         this.workflowInstances = await getPayloadExecutions(this.payloadId);
@@ -157,7 +205,7 @@ export default class ExecutionTree extends Vue {
         this.loading = false;
     }
 
-    setSelectedNode(node: any): void {
+    setSelectedNode(node: ExecutionTreeNode): void {
         if (node.id === "root-node" || node.id === "workflow-instance") {
             return;
         }

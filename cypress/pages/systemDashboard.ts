@@ -22,7 +22,8 @@ import { ExecStatistics } from "data/system-dashboard/statistics";
 import { ModelDetailsData } from "../data/system-dashboard/graph";
 import moment from "moment";
 import { NhsDateTimeFormat } from "../../src/utils/date-utilities";
-import { IPagedResponse, IPayload, WorkflowInstance } from "../../src/models/Admin/IPayload";
+import { IPayload, WorkflowInstance } from "../../src/models/Admin/IPayload";
+import { IPagedResponse } from "../../src/models/common/IPagedResponse";
 
 export default class AdminSystemDashboardPage {
     //OVERVIEW
