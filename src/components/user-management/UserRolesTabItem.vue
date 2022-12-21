@@ -183,7 +183,7 @@ import ConfirmationModal from "../Shared/ConfirmationModal.vue";
     },
     computed: {
         userRoleCount(): string {
-            const count: number = this.$data.totalRoles;
+            const count: number = this.$data.totalFilteredRoles;
 
             if (count === 1) {
                 return "1 Role";

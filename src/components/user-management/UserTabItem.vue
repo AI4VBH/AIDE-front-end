@@ -223,11 +223,11 @@ import ConfirmationModal from "../Shared/ConfirmationModal.vue";
     },
     computed: {
         userCount(): string {
-            if (this.$data.totalUsers === 1) {
+            if (this.$data.totalFilteredUsers === 1) {
                 return "1 User";
             }
 
-            return `${this.$data.totalUsers} Users`;
+            return `${this.$data.totalFilteredUsers} Users`;
         },
     },
     filters: {
