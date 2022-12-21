@@ -80,7 +80,7 @@ const issuesData: IIssue[] = [
         execution_id: "1f3d4b42-8a8f-41b1-9cc7-bfb19d9716de",
     },
     {
-        task_id: 6,
+        task_id: "6",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26666",
         status: "Rejected",
         workflow_name: "Test model 6",
@@ -92,7 +92,7 @@ const issuesData: IIssue[] = [
         execution_id: "45435345",
     },
     {
-        task_id: 7,
+        task_id: "7",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26777",
         status: "Rejected",
         workflow_name: "Test model 7",
@@ -104,7 +104,7 @@ const issuesData: IIssue[] = [
         execution_id: "45435345",
     },
     {
-        task_id: 8,
+        task_id: "8",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26888",
         status: "Error",
         workflow_name: "Test model 8",
@@ -116,7 +116,7 @@ const issuesData: IIssue[] = [
         execution_id: "45435345",
     },
     {
-        task_id: 9,
+        task_id: "9",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26999",
         status: "Rejected",
         workflow_name: "Test model 9",
@@ -128,7 +128,7 @@ const issuesData: IIssue[] = [
         execution_id: "45435345",
     },
     {
-        task_id: 10,
+        task_id: "10",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26010",
         status: "Error",
         workflow_name: "Test model 10",
@@ -140,7 +140,7 @@ const issuesData: IIssue[] = [
         execution_id: "45435345",
     },
     {
-        task_id: 11,
+        task_id: "11",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26011",
         status: "Error",
         workflow_name: "Test model 11",
@@ -152,7 +152,7 @@ const issuesData: IIssue[] = [
         execution_id: "45435345",
     },
     {
-        task_id: 12,
+        task_id: "12",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26012",
         status: "Rejected",
         workflow_name: "Test model 12",
