@@ -68,8 +68,8 @@
                         :options.sync="tableOptions"
                         :footer-props="{ itemsPerPageOptions: [5, 10] }"
                     >
-                        <template v-slot:item="{ item, index }">
-                            <tr :data-cy="`user-table-row-${index}`">
+                        <template v-slot:item="{ item, index, isMobile, headers }">
+                            <tr v-if="!isMobile" :data-cy="`user-table-row-${index}`">
                                 <td
                                     class="text-start font-weight-bold"
                                     :data-cy="`user-table-row-firstname-${index}`"
@@ -127,6 +127,70 @@
                                         Delete
                                         <v-icon small right> mdi-close </v-icon>
                                     </v-btn>
+                                </td>
+                            </tr>
+                            <tr
+                                v-else
+                                :data-cy="`user-table-row-${index}`"
+                                class="v-data-table__mobile-table-row"
+                            >
+                                <td
+                                    v-for="header in headers"
+                                    class="v-data-table__mobile-row"
+                                    :key="`${header.value}-${index}`"
+                                >
+                                    <div class="v-data-table__mobile-row__header">
+                                        {{ header.text }}
+                                    </div>
+                                    <div class="v-data-table__mobile-row__cell">
+                                        <template v-if="header.value === 'status'">
+                                            <v-chip
+                                                :color="
+                                                    item.enabled
+                                                        ? 'light-green lighten-4'
+                                                        : 'red lighten-5'
+                                                "
+                                                :text-color="
+                                                    item.enabled
+                                                        ? 'light-green darken-4'
+                                                        : 'red darken-4'
+                                                "
+                                                :data-cy="`user-table-row-status-${index}`"
+                                                small
+                                            >
+                                                {{ item.enabled ? "Enabled" : "Disabled" }}
+                                            </v-chip>
+                                        </template>
+                                        <template v-else-if="header.value === 'roles'">
+                                            {{ item.realmRoles | commaSeparated }}
+                                        </template>
+                                        <template v-else-if="header.value === 'id'">
+                                            <v-btn
+                                                small
+                                                elevation="0"
+                                                class="mr-2 secondary-button"
+                                                aria-label="edit user"
+                                                data-cy="user-edit"
+                                                @click.stop="() => editUserDetails(item)"
+                                            >
+                                                Edit
+                                            </v-btn>
+                                            <v-btn
+                                                small
+                                                elevation="0"
+                                                class="outlined-button"
+                                                aria-label="delete user"
+                                                data-cy="user-delete"
+                                                @click.stop="() => confirmDeletion(item)"
+                                            >
+                                                Delete
+                                                <v-icon small right> mdi-close </v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <template v-else>
+                                            {{ item[`${header.value}`] }}
+                                        </template>
+                                    </div>
                                 </td>
                             </tr>
                         </template>
