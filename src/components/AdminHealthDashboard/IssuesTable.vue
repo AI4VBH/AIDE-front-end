@@ -37,7 +37,7 @@
                 elevation="0"
                 class="my-3 secondary-button"
                 data-cy="view-grafana-dashboard"
-                link="true"
+                link
                 :href="grafanaDashboardUrl"
                 width="250px"
                 target="_blank"

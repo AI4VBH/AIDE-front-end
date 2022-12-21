@@ -21,7 +21,7 @@
             <v-btn
                 class="secondary-button"
                 data-cy="view-workflow-spec"
-                link="true"
+                link
                 :href="workflowSpecUrl"
                 target="_blank"
             >

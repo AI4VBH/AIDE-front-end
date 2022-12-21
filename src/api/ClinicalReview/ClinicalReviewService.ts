@@ -77,7 +77,7 @@ export async function getClinicalReviewTasks(
 export async function updateClinicalReview(
     execution_uid: string,
     acceptance: boolean,
-    message: string,
+    message?: string,
     reason?: string,
 ) {
     const response = await http.put(`/clinical-review/${execution_uid}`, {

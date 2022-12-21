@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
+import { IIssue } from "@/models/Admin/IIssue";
 import { rest } from "msw";
 
-const issuesData = [
+const issuesData: IIssue[] = [
     {
-        task_id: 1,
+        task_id: "1",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26111",
         workflow_name: "Test model 1",
         status: "partial_fail",
@@ -31,7 +32,7 @@ const issuesData = [
         failure_reason: "rejected",
     },
     {
-        task_id: 2,
+        task_id: "2",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26222",
         status: "Error",
         workflow_name: "Test model 2",
@@ -43,7 +44,7 @@ const issuesData = [
         execution_id: "45435342",
     },
     {
-        task_id: 3,
+        task_id: "3",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26333",
         status: "Error",
         workflow_name: "Test model 3",
@@ -55,7 +56,7 @@ const issuesData = [
         execution_id: "45435343",
     },
     {
-        task_id: 4,
+        task_id: "4",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26444",
         status: "Error",
         workflow_name: "Test model 4",
@@ -67,7 +68,7 @@ const issuesData = [
         execution_id: "45435344",
     },
     {
-        task_id: 5,
+        task_id: "5",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26555",
         status: "Error",
         workflow_name: "Test model 5",
@@ -76,7 +77,7 @@ const issuesData = [
         patient_id: "111235999",
         execution_time: "20310517T191115",
         workflow_instance_id: "345435",
-        execution_id: "45435345",
+        execution_id: "1f3d4b42-8a8f-41b1-9cc7-bfb19d9716de",
     },
 ];
 
