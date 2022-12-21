@@ -253,6 +253,7 @@ export default class UserTabItem extends Vue {
 
     users: UserListItem[] = [];
     tableSearch = "";
+    previousTableSearch = "";
     selectedRole = "";
 
     userModal = false;
@@ -399,12 +400,17 @@ export default class UserTabItem extends Vue {
     }
 
     private async fetchAndSetUsers() {
+        const searchTextChanged = this.tableSearch.trim() !== this.previousTableSearch.trim();
+        if (searchTextChanged === true) {
+            this.tableOptions.page = 1;
+        }
         const { totalUserCount, totalFilteredUserCount, users } = await getAllUsers({
             search: this.tableSearch,
             role: this.selectedRole,
             ...this.tableOptions,
         });
 
+        this.previousTableSearch = this.tableSearch;
         this.totalUsers = totalUserCount;
         this.totalFilteredUsers = totalFilteredUserCount;
         this.users = users;
