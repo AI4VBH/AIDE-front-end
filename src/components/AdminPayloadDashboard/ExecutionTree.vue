@@ -214,7 +214,9 @@ export default class ExecutionTree extends Vue {
     background-color: orange;
 
     &.Failed,
-    &.failed {
+    &.failed,
+    &.PartialFail,
+    &.partialFail {
         background-color: red;
     }
 
