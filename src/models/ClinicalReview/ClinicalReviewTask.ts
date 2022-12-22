@@ -79,6 +79,7 @@ export interface ClinicalReviewSeries {
     series_uid: string;
     modality: string;
     files: string[];
+    total_frames: number;
 }
 
 export interface ClinicalReviewStudyDetails {

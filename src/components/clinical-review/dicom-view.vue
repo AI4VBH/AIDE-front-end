@@ -81,6 +81,8 @@ import DicomFooter from "./viewer/dicom-footer.vue";
 import MetadataList from "./metadata/metadata-list.vue";
 import SeriesList from "./series/series-list.vue";
 import { ClinicalReviewSeries } from "@/models/ClinicalReview/ClinicalReviewTask";
+import { getDicomFile } from "@/api/ClinicalReview/ClinicalReviewService";
+import { DicomMetadata, parseMetadata } from "@/utils/dicom-metadata-parser";
 
 type DicomViewData = {
     currentSeries?: ClinicalReviewSeries;
@@ -105,6 +107,20 @@ export default defineComponent({
     emits: ["study-selected"],
     computed: {
         imageIds: function (): string[] {
+            if (
+                this.currentSeries &&
+                this.currentSeries?.total_frames &&
+                this.currentSeries?.total_frames != 0
+            ) {
+                const newSlices = [];
+                for (let index = 0; index < this.currentSeries.total_frames; index++) {
+                    newSlices.push(
+                        `wadouri:${window.FRONTEND_API_HOST}/clinical-review/dicom?key=${this.imageSlices[0]}&frame=${index}`,
+                    );
+                }
+                return newSlices;
+            }
+
             return this.imageSlices.map(
                 (key) => `wadouri:${window.FRONTEND_API_HOST}/clinical-review/dicom?key=${key}`,
             );
@@ -118,7 +134,6 @@ export default defineComponent({
             if (!newSeries || newSeries.modality === "DOC") {
                 return;
             }
-
             this.imageSlices = newSeries.files;
         },
     },
@@ -130,6 +145,12 @@ export default defineComponent({
             this.$emit("study-selected", { study_date: "" });
 
             const study = await getStudy(taskExecutionId);
+
+            study.study.forEach(async (series) => {
+                if (series.files.length === 1 && series.modality !== "DOC") {
+                    series.files = await this.getNewFramesForEnhancedDicoms(series);
+                }
+            });
 
             this.study = study.study;
             this.currentSeries = study.study.find((series) => series.modality !== "DOC");
@@ -143,6 +164,24 @@ export default defineComponent({
         itemSelected(item: { modality: string; document?: { data: Uint8Array } }) {
             this.documentView = item.modality === "DOC";
             this.document = item.document;
+        },
+        async getNewFramesForEnhancedDicoms(series: ClinicalReviewSeries) {
+            const newSlices = [];
+            const buffer = await getDicomFile(series.files[0]);
+            const allMetadata = parseMetadata(new Uint8Array(buffer));
+            const noOfFramesValue = allMetadata.find((obj) => obj.name === "NumberOfFrames")?.value;
+
+            if (noOfFramesValue !== undefined) {
+                series.total_frames = +noOfFramesValue;
+            } else {
+                series.total_frames = 0;
+            }
+
+            for (let index = 0; index < series.total_frames; index++) {
+                newSlices.push(series.files[0]);
+            }
+
+            return newSlices;
         },
     },
     mounted() {

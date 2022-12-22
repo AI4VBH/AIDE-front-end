@@ -30,7 +30,7 @@ describe("<dicom-view />", () => {
         });
     });
 
-    it("renders the dicom viewer correctly", () => {
+    it.skip("renders the dicom viewer correctly", () => {
         cy.intercept("/clinical-review/5da2469c-df16-451a-a6f2-be94edc5a703", {
             study: [
                 {

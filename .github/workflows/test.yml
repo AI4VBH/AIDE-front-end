@@ -60,6 +60,17 @@ jobs:
           browser: chrome
           component: true
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: component-report
+          path: cypress/reports
+
   unit-tests:
     runs-on: ubuntu-latest
     steps:
