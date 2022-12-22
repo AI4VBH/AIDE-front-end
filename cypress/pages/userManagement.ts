@@ -201,7 +201,7 @@ export default class UserManagement extends AbstractPage {
     public searchRoleTable(text: string): void {
         cy.intercept(
             "GET",
-            `https://localhost:8000/roles?search=Clinician&first=0&max=10`,
+            `/roles?search=Clinician&first=0&max=10`,
             ApiMocks.USER_MANAGEMENT_ROLES_SEARCH,
         ).as("Clinician");
         cy.dataCy("role-search-input").clear().type(text);
@@ -348,7 +348,7 @@ export default class UserManagement extends AbstractPage {
     public paginationRequestRoles() {
         cy.intercept(
             "GET",
-            `https://localhost:8000/roles?search=&first=10&max=10`,
+            `/roles?search=&first=10&max=10`,
             ApiMocks.USER_MANAGEMENT_ROLES_PAGINATION,
         ).as("nextPage");
         cy.get(nextPage).last().click({ force: true });
@@ -361,7 +361,7 @@ export default class UserManagement extends AbstractPage {
     public paginationRequestFiveRolesPerPage() {
         cy.intercept(
             "GET",
-            `https://localhost:8000/roles?search=&first=0&max=5`,
+            `/roles?search=&first=0&max=5`,
             ApiMocks.USER_MANAGEMENT_ROLES_PAGINATION,
         ).as("fivePerPage");
         cy.get(paginationDropdown).last().click({ force: true });
@@ -539,7 +539,7 @@ export default class UserManagement extends AbstractPage {
         cy.intercept("PUT", `/roles/15`, ApiMocks.USER_MANAGEMENT_ROLES_EDIT).as("Put");
         cy.intercept(
             "GET",
-            "https://localhost:8000/roles?search=&first=0&max=10",
+            "/roles?search=&first=0&max=10",
             ApiMocks.USER_MANAGEMENT_ROLES_EDIT_TABLE,
         ).as("Get");
         this.clickDataCy("role-edit-confirm-continue");
@@ -600,11 +600,9 @@ export default class UserManagement extends AbstractPage {
 
     public errorAddingRole(statusCode: number) {
         cy.intercept("POST", "/roles", { statusCode: statusCode }).as("Post");
-        cy.intercept(
-            "GET",
-            "https://localhost:8000/roles?search=&first=0&max=10",
-            ApiMocks.USER_MANAGEMENT_ROLES_ADD,
-        ).as("Get");
+        cy.intercept("GET", "/roles?search=&first=0&max=10", ApiMocks.USER_MANAGEMENT_ROLES_ADD).as(
+            "Get",
+        );
         this.clickDataCy("role-modal-save");
         Cypress.on("uncaught:exception", () => {
             return false;
@@ -616,7 +614,7 @@ export default class UserManagement extends AbstractPage {
         cy.intercept("PUT", "/roles/15", { statusCode: statusCode }).as("Put");
         cy.intercept(
             "GET",
-            "https://localhost:8000/roles?search=&first=0&max=10",
+            "/roles?search=&first=0&max=10",
             ApiMocks.USER_MANAGEMENT_ROLES_EDIT,
         ).as("Get");
         this.clickDataCy("role-edit-confirm-continue");
@@ -630,7 +628,7 @@ export default class UserManagement extends AbstractPage {
         cy.intercept("DELETE", "/roles/15", { statusCode: statusCode }).as("Delete");
         cy.intercept(
             "GET",
-            "https://localhost:8000/roles?search=&first=0&max=10",
+            "/roles?search=&first=0&max=10",
             ApiMocks.USER_MANAGEMENT_ROLES_EDIT,
         ).as("Delete");
         this.clickDataCy("role-delete-continue");
@@ -642,11 +640,9 @@ export default class UserManagement extends AbstractPage {
 
     public assertPostedRoleCorrect() {
         cy.intercept("POST", "/roles", ApiMocks.USER_MANAGEMENT_ROLES_ADD).as("Post");
-        cy.intercept(
-            "GET",
-            "https://localhost:8000/roles?search=&first=0&max=10",
-            ApiMocks.USER_MANAGEMENT_ROLES_ADD,
-        ).as("Get");
+        cy.intercept("GET", "/roles?search=&first=0&max=10", ApiMocks.USER_MANAGEMENT_ROLES_ADD).as(
+            "Get",
+        );
         this.clickDataCy("role-modal-save");
         Cypress.on("uncaught:exception", () => {
             return false;
@@ -707,9 +703,7 @@ export default class UserManagement extends AbstractPage {
         cy.intercept("DELETE", `/users/${user.users[0].id}`, ApiMocks.USER_MANAGEMENT_EMPTY).as(
             "Delete",
         );
-        cy.intercept("GET", "https://localhost:8000/users?search=&role=&first=0&max=10", {}).as(
-            "Get",
-        );
+        cy.intercept("GET", "/users?search=&role=&first=0&max=10", {}).as("Get");
         this.clickDataCy("user-delete-continue");
         Cypress.on("uncaught:exception", () => {
             return false;
@@ -721,7 +715,7 @@ export default class UserManagement extends AbstractPage {
         cy.intercept("DELETE", `/roles/15`, ApiMocks.USER_MANAGEMENT_ROLES_EMPTY).as("Delete");
         cy.intercept(
             "GET",
-            "https://localhost:8000/roles?search=&first=0&max=10",
+            "/roles?search=&first=0&max=10",
             ApiMocks.USER_MANAGEMENT_ROLES_EMPTY,
         ).as("Get");
         this.clickDataCy("role-delete-continue");

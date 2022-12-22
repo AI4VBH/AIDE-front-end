@@ -24,6 +24,7 @@
             class="dicom-canvas"
             ref="dicomCanvas"
             data-cy="dicom-canvas"
+            id="dicomImage"
         />
 
         <slot
@@ -141,8 +142,10 @@ export default defineComponent({
             const updateCurrentImage = debounce((ev: any) => {
                 const { imageId, newImageIdIndex } = (ev as EventTypes.StackViewportScrollEvent)
                     .detail;
-                this.currentImageId = imageId;
-                this.currentImageIndex = newImageIdIndex;
+                if (imageId && newImageIdIndex) {
+                    this.currentImageId = imageId;
+                    this.currentImageIndex = newImageIdIndex;
+                }
             }, 250);
 
             const resizeCanvas = debounce(() => {
@@ -271,10 +274,19 @@ export default defineComponent({
             this.loading = true;
             await this.viewport?.setStack(this.imageIds, 0);
 
-            // TODO: only download other slices when users attempt to scroll through?
-            this.imageIds.forEach((_, index) => this.viewport?.setImageIdIndex(index));
-            await this.viewport?.setImageIdIndex(0);
+            // Not sure why we needed this. Leaving here for reference.
 
+            // loadAndCacheImage(this.imageIds[0]).then(
+            //     (image: unknown) => {
+            //         cornerstoneWADOImageLoader.wadouri.dataSetCacheManager.unload(this.imageIds[0]);
+            //         // cornerstone.displayImage(this.$refs.dicomCanvas as HTMLDivElement, image);
+            //     },
+            //     function (err) {
+            //         console.log(err);
+            //     },
+            // );
+
+            await this.viewport?.setImageIdIndex(0);
             this.loading = false;
         },
         toggleMetadataPanel() {

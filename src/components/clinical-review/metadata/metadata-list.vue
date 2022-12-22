@@ -87,10 +87,14 @@ export default defineComponent({
     },
     watch: {
         async currentImageIndex() {
-            await this.getDicomFile(this.currentImageIndex);
+            if (this.currentImageIndex >= 0) {
+                await this.getDicomFile(this.currentImageIndex);
+            }
         },
         async imageSlices() {
-            await this.getDicomFile(this.currentImageIndex);
+            if (this.currentImageIndex >= 0) {
+                await this.getDicomFile(this.currentImageIndex);
+            }
         },
         pinnedItemNames() {
             this.filterMetadata();

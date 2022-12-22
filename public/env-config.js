@@ -14,5 +14,5 @@
  *  limitations under the License.
  */
 
-window.FRONTEND_API_HOST = "https://localhost:8000";
+window.FRONTEND_API_HOST = "https://localhost:8080";
 window.KEYCLOAK_URL = "http://localhost:8443";

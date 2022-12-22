@@ -43,7 +43,7 @@ export default class ClinicalReviewPage extends AbstractPage {
     public initPage() {
         cy.intercept(
             "GET",
-            "https://localhost:8000/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
+            "/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
             ApiMocks.CLINICAL_REVIEW_TASKS,
         ).as("all-tasks");
         cy.intercept("GET", "clinical-review/001", ApiMocks.CLINICAL_REVIEW_EXECUTION_1).as(
@@ -55,12 +55,12 @@ export default class ClinicalReviewPage extends AbstractPage {
                 "content-type": "application/dicom",
             },
         }).as("ct-1");
-        cy.intercept("/clinical-review/dicom?key=CT000010.dcm", {
-            fixture: "clinical-review/CT000010.dcm,null",
-            headers: {
-                "content-type": "application/dicom",
-            },
-        }).as("ct-2");
+        // cy.intercept("/clinical-review/dicom?key=CT000010.dcm", {
+        //     fixture: "clinical-review/CT000010.dcm,null",
+        //     headers: {
+        //         "content-type": "application/dicom",
+        //     },
+        // }).as("ct-2");
         cy.intercept("/clinical-review/dicom?key=DO000000.dcm", {
             fixture: "clinical-review/DO000000.dcm,null",
             headers: {
@@ -68,7 +68,7 @@ export default class ClinicalReviewPage extends AbstractPage {
             },
         }).as("doc");
         cy.visit("clinical-review");
-        cy.wait(["@all-tasks", "@executions", "@ct-1", "@ct-2", "@doc"]);
+        cy.wait(["@all-tasks", "@executions", "@ct-1", "@doc"]);
         Cypress.on("uncaught:exception", () => {
             return false;
         });
@@ -77,7 +77,7 @@ export default class ClinicalReviewPage extends AbstractPage {
     public initPageNoTasks() {
         cy.intercept(
             "GET",
-            "https://localhost:8000/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
+            "/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
             ApiMocks.CLINICAL_REVIEW_NO_TASKS,
         ).as("no-tasks");
         cy.visit("clinical-review");
@@ -98,7 +98,7 @@ export default class ClinicalReviewPage extends AbstractPage {
     public assertRejectTask() {
         cy.intercept(
             "GET",
-            "https://localhost:8000/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
+            "/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
             ApiMocks.CLINICAL_REVIEW_TASKS,
         ).as("all-tasks");
 
@@ -115,7 +115,7 @@ export default class ClinicalReviewPage extends AbstractPage {
     public assertAcceptTask() {
         cy.intercept(
             "GET",
-            "https://localhost:8000/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
+            "/clinical-review?pageNumber=1&pageSize=10&patientId=&patientName=&applicationName=",
             ApiMocks.CLINICAL_REVIEW_TASKS,
         ).as("all-tasks");
 
@@ -376,7 +376,7 @@ export default class ClinicalReviewPage extends AbstractPage {
             },
         }).as("mri-3");
         cy.dataCy(task.clinical_review_message.patient_metadata.patient_id).click({ force: true });
-        cy.wait(["@executions", "@ct-1", "@ct-11", "@doc-1", "@mri-3"]);
+        cy.wait(["@executions", "@ct-1", "@doc-1", "@mri-3"]);
         Cypress.on("uncaught:exception", () => {
             return false;
         });
