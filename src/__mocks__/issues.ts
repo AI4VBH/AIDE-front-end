@@ -29,7 +29,7 @@ const issuesData: IIssue[] = [
         execution_time: "20220516T151114",
         workflow_instance_id: "345435",
         execution_id: "45435341",
-        failure_reason: "rejected",
+        failure_reason: "PartialFail",
     },
     {
         task_id: "2",
@@ -58,7 +58,7 @@ const issuesData: IIssue[] = [
     {
         task_id: "4",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26444",
-        status: "Rejected",
+        status: "PartialFail",
         workflow_name: "Test model 4",
         model_name: "Test model 4",
         patient_name: "Alexis John Bazin-Archer",
@@ -82,7 +82,7 @@ const issuesData: IIssue[] = [
     {
         task_id: "6",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26666",
-        status: "Rejected",
+        status: "PartialFail",
         workflow_name: "Test model 6",
         model_name: "Test model 6",
         patient_name: "Dr Khayam Amin",
@@ -94,7 +94,7 @@ const issuesData: IIssue[] = [
     {
         task_id: "7",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26777",
-        status: "Rejected",
+        status: "PartialFail",
         workflow_name: "Test model 7",
         model_name: "Test model 7",
         patient_name: "Jane Doe",
@@ -118,7 +118,7 @@ const issuesData: IIssue[] = [
     {
         task_id: "9",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26999",
-        status: "Rejected",
+        status: "PartialFail",
         workflow_name: "Test model 9",
         model_name: "Test model 9",
         patient_name: "Harry Kane",
@@ -154,7 +154,7 @@ const issuesData: IIssue[] = [
     {
         task_id: "12",
         payload_id: "041293d0-ab97-4ea1-b967-42ec62f26012",
-        status: "Rejected",
+        status: "PartialFail",
         workflow_name: "Test model 12",
         model_name: "Test model 12",
         patient_name: "Jordan Pickford",

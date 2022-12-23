@@ -28,6 +28,10 @@ export interface IIssue {
     failure_reason?: string;
 }
 
+export const PartialFail = `PartialFail`;
+
+export const PartialFailString = `Partial Fail`;
+
 export interface IIndexedIssue {
     index: number;
     issue: IIssue;
