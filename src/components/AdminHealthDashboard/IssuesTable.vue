@@ -172,7 +172,7 @@ import Component from "vue-class-component";
 import { dismissIssue, getIssues } from "@/api/Admin/AdminStatisticsService";
 import { Watch } from "vue-property-decorator";
 import { formatDateAndTimeOfArray } from "@/utils/date-utilities";
-import { IIndexedIssue, IIssue } from "@/models/Admin/IIssue";
+import { IIndexedIssue, IIssue, PartialFail, PartialFailString } from "@/models/Admin/IIssue";
 import ConfirmationModal from "../Shared/ConfirmationModal.vue";
 
 @Component({
@@ -210,6 +210,13 @@ export default class IssuesTable extends Vue {
 
         const executionIssues = await getIssues();
         formatDateAndTimeOfArray(executionIssues, "execution_time", false);
+
+        for (const issue of executionIssues) {
+            if (issue.status === PartialFail) {
+                issue.status = PartialFailString;
+            }
+        }
+
         this.issues = executionIssues;
 
         this.loading = false;
