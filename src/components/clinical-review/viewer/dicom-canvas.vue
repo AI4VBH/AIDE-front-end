@@ -117,6 +117,8 @@ export default defineComponent({
                 this.loadImages().then(() => {
                     this.resetView();
                 });
+
+                this.currentImageIndex = 0;
             },
             deep: true,
         },
@@ -142,7 +144,8 @@ export default defineComponent({
             const updateCurrentImage = debounce((ev: any) => {
                 const { imageId, newImageIdIndex } = (ev as EventTypes.StackViewportScrollEvent)
                     .detail;
-                if (imageId && newImageIdIndex) {
+
+                if (imageId) {
                     this.currentImageId = imageId;
                     this.currentImageIndex = newImageIdIndex;
                 }

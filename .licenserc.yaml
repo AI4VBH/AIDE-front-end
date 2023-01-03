@@ -41,6 +41,7 @@ header:
     - '.gitignore'
     - '.browserslistrc'
     - 'sonar-project.properties'
+    - '.nsprc'
 
   comment: never
 

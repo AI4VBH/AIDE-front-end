@@ -108,7 +108,7 @@ export default defineComponent({
             this.pinnedItemNames = this.pinnedItemNames.filter((n) => n !== name);
         },
         async getDicomFile(index: number) {
-            if (!this.imageSlices.length) {
+            if (!this.imageSlices.length || !this.imageSlices[index]) {
                 this.allMetadata = [];
                 this.pinned = [];
                 this.metadata = [];
