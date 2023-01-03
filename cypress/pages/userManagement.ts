@@ -201,7 +201,7 @@ export default class UserManagement extends AbstractPage {
     public searchRoleTable(text: string): void {
         cy.intercept(
             "GET",
-            `/roles?search=Clinician&first=0&max=10`,
+            `/roles?search=${text}&first=0&max=10`,
             ApiMocks.USER_MANAGEMENT_ROLES_SEARCH,
         ).as("Clinician");
         cy.dataCy("role-search-input").clear().type(text);

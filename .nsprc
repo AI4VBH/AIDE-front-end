@@ -1,0 +1,6 @@
+{
+    "GHSA-9c47-m6qq-7p4h": {
+        "active": true,
+        "notes": "Ignored since this is a dev dependency"
+    }
+}
