@@ -21,9 +21,18 @@ import { ExecStatistics } from "../data/system-dashboard/statistics";
 import { PayloadTreeData } from "data/payloads-dashboard/payloadTree";
 import AdminSystemDashboardPage from "../pages/systemDashboard";
 import { AbstractPage } from "pages/abstractPage";
+import ApiMocks from "fixtures/mockIndex";
 
 const adminSystemPage = new AdminSystemDashboardPage();
 const abstractPage = new AbstractPage();
+const payload1 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL1;
+const payload2 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL2;
+const payload3 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL3;
+const payload4 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL4;
+const payload5 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL5;
+const payload6 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL6;
+const payload7 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL7;
+const payload8 = ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL8;
 
 describe.skip(`Admin System - Overview section`, () => {
     it(`when I pass in data with failed models,
@@ -77,12 +86,25 @@ describe(`Admin System - Issues table section`, () => {
     it(`I cannot click the 'Dismiss selected' button if no issues have been selected`, () => {
         adminSystemPage.AssertDismissButtonUnclickable();
     });
-    it.skip(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
-        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_1, PayloadTreeData.REDIRECT, 2);
+    it(`On selecting 'View rejection', I am taken to that task in Payloads table`, () => {
+        adminSystemPage.assertTakenToCorrectTask(
+            TaskData.TASK_DATA_1,
+            PayloadTreeData.REDIRECT_REJECT,
+            ApiMocks.PAYLOAD_TASK_REDIRECT_REJECT,
+        );
     });
-    it.skip(`On selecting 'View logs', I am taken to that task in Payloads table`, () => {
-        adminSystemPage.assertTakenToCorrectTask(TaskData.TASK_DATA_2, PayloadTreeData.REDIRECT, 1);
-    });
+
+    [payload1, payload2, payload3, payload4, payload5, payload6, payload7, payload8].forEach(
+        (payload) => {
+            it.only(`On selecting 'View logs', I am taken to that task in the Payloads table`, () => {
+                adminSystemPage.assertTakenToCorrectTask(
+                    TaskData.TASK_DATA_2,
+                    PayloadTreeData.REDIRECT_FAIL,
+                    payload as any,
+                );
+            });
+        },
+    );
 });
 
 describe.skip(`Admin System - Graph section`, () => {

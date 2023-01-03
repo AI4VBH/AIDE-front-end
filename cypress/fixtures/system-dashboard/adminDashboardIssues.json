@@ -8,7 +8,7 @@
         "patient_name": "Test patient",
         "patient_id": "1",
         "execution_time": "20220516T151114",
-        "workflow_instance_id":"345435",
+        "workflow_instance_id":"e26bec36-9a22-4be2-8402-379cb96c22e5",
         "execution_id": "222293d0-ab97-4ea1-b967-42ec62f26222",
         "failure_reason": "rejected"
     },
@@ -21,8 +21,8 @@
         "patient_name": "Frederico McSullivan",
         "patient_id": "10",
         "execution_time": "20210417T151112",
-        "workflow_instance_id":"345435",
-        "execution_id": "444293d0-ab97-4ea1-b967-42ec62f26444",
+        "workflow_instance_id":"e26bec36-9a22-4be2-8402-379cb96c22e5",
+        "execution_id": "a15e87b1-894d-4c1d-bd24-88b2cb10c3ca",
         "failure_reason": "Error"
     },
     {

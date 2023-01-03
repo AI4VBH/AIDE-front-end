@@ -81,19 +81,16 @@ export default class AdminSystemDashboardPage {
         });
     }
 
-    public assertTakenToCorrectTask(task: IIssue, node: WorkflowInstance, array: number) {
+    public assertTakenToCorrectTask(task: IIssue, workflowInstance: WorkflowInstance, mock: any) {
         this.getTask(task.task_id).within(() => {
             cy.intercept(
                 `/payloads?pageNumber=1&pageSize=10&patientId=&patientName=`,
                 ApiMocks.ADMIN_DASHBOARD_PAYLOAD_TABLE,
             ).as(`payloadTable`);
+            cy.intercept(`/payloads/${task.payload_id}/executions`, mock).as(`executions`);
             cy.intercept(
-                `/payloads/${task.payload_id}/executions`,
-                ApiMocks.PAYLOAD_TASK_REDIRECT,
-            ).as(`executions`);
-            cy.intercept(
-                `executions/${node.tasks[array].workflow_instance_id}/tasks/${task.execution_id}/artifacts`,
-                ApiMocks.PAYLOAD_TASK_REDIRECT,
+                `executions/${workflowInstance.tasks[0].workflow_instance_id}/tasks/${task.execution_id}/artifacts`,
+                mock,
             ).as(`node`);
             cy.dataCy("view-logs-button").click();
             cy.wait([`@payloadTable`, `@executions`, `@node`]);
