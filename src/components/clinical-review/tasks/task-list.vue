@@ -170,13 +170,17 @@ export default defineComponent({
                 applicationName: this.searchParameter === "applicationName" ? this.search : "",
             };
 
-            const { data, pageNumber, totalPages } = await getClinicalReviewTasks(
-                crTaskQueryParams,
-            );
+            let clinicalReviewResult = await getClinicalReviewTasks(crTaskQueryParams);
 
-            this.tasks = data;
-            this.currentPage = pageNumber;
-            this.totalPages = totalPages;
+            if (clinicalReviewResult.pageNumber > clinicalReviewResult.totalPages) {
+                crTaskQueryParams.pageNumber = clinicalReviewResult.totalPages;
+
+                clinicalReviewResult = await getClinicalReviewTasks(crTaskQueryParams);
+            }
+
+            this.tasks = clinicalReviewResult.data;
+            this.currentPage = clinicalReviewResult.pageNumber;
+            this.totalPages = clinicalReviewResult.totalPages;
             this.previousSearch = this.search;
 
             if (this.tasks.length > 0) {
