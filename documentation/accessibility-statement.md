@@ -33,7 +33,6 @@ We know that some parts of this website are not fully accessible:
 For example:
 
 - Clinical Review DICOM viewer cannot be operated by Keyboard alone.
-- Unable to access some radio buttons and checkboxes across the site via Keyboard.
 - Some column headers are missing labels which may mean that a screen reader is ineffective on some tables.
 - Colour contrast is insufficient on some input fields and table headers.
 
@@ -69,9 +68,11 @@ Despite our best efforts to ensure accessibility of AIDE, there may be some limi
 | Payload dashboard - Payload table | No column header for the expansion icons column on the right side of the table | Explicit labelling / Screen reader | The screen reader can not describe that column |
 | Payload dashboard - Payload table | The expansion icons can be selected to open the payloads via the keyboard, however this cannot be done when using the keyboard whilst using a screen reader | Explicit labelling / Screen reader | Unable to use a screen reader and keyboard to open the payloads |
 | Workflows - Workflow editor | Two colour contrast issues on the page | Insufficient colour contrast | Insufficient colour contrast reduces the ability of vision impaired users to read the site |
-| Workflows - Workflow editor | Due to this being a JSON editor, the 'tab' button is used to edit rather than for navigation | Keyboard accessibility | Keyboard only users would not be able to exit the JSON editor |
+| Workflows - Workflow editor | Due to this being a JSON editor, the 'tab' button is used to edit rather than for navigation, and therefore cannot be used to exit the editor | Keyboard accessibility | Keyboard only users would not be able to exit the JSON editor |
 | All pages with a modal | Unable to add an aria-label on the whole modal component because vuetify does not allow it | Aria-dialog-name | Screen-readers may not describe the modal upon opening |
 | All pages with a dropdown | Unable to access any dropdown using only the keyboard because vuetify will not allow it | Keyboard accessibility | Keyboard-only users will not be able to access or select elements in drop-downs across the site |
+| All pages when zoomed in | Page title disappears when the page is zoomed in at 200% on a 1000px width screen. | Perceivability / vision-impaired users | Vision impaired users may not know the title of the page they are on |
+| Clinical review page when zoomed in | Usability of the page is highly degraded when zoomed in at 150% on a 1000px width screen. | Perceivability / vision-impaired users | Vision impaired users may not be able to use the clinical review screen |
 
 
 ##  Disproportionate burden
@@ -84,7 +85,7 @@ However, the accessibility regulations say that we don't need to make all elemen
 
 AIDE is designed to be compatible with the following browsers running on a minimum of 1000px width:
 
-- Sarafi
+- Safari
 - Edge
 - Chrome
 - Firefox
@@ -96,8 +97,8 @@ AIDE is not compatible with:
 
 ## Preparation of this accessibility statement
 
-This statement was prepared on 30-Nov-2022. It was last reviewed on 30-Nov-2022.
-This website was last tested on 30-Nov-2022. The test was carried out by the AI Centre for Value Based Healthcare. We tested all pages.
+This statement was prepared on 30-Nov-2022. It was last reviewed on 04-Jan-2023.
+This website was last tested on 04-Jan-2023. The test was carried out by the AI Centre for Value Based Healthcare. We tested all pages.
 
 We also carried out automated and technical testing to check the website’s code and content against the WCAG criteria.
 

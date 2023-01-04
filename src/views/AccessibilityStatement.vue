@@ -48,9 +48,6 @@
             <ul>
                 <li>Clinical Review DICOM viewer cannot be operated by Keyboard alone.</li>
                 <li>
-                    Unable to access some radio buttons and checkboxes across the site via Keyboard.
-                </li>
-                <li>
                     Some column headers are missing labels which may mean that a screen reader is
                     ineffective on some tables.
                 </li>
@@ -123,7 +120,7 @@
                         </td>
                     </tr> -->
                     <tr>
-                        <td>System dashboard - Issues table</td>
+                        <td>Issues table</td>
                         <td>Unable to access the checkboxes using a screen reader or a keyboard</td>
                         <td>Keyboard accessibility / Screen reader</td>
                         <td>
@@ -132,7 +129,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Payload dashboard - Payload table</td>
+                        <td>Payload table</td>
                         <td>
                             No column header for the expansion icons column on the right side of the
                             table
@@ -141,7 +138,7 @@
                         <td>The screen reader can not describe that column</td>
                     </tr>
                     <tr>
-                        <td>Payload dashboard - Payload table</td>
+                        <td>Payload table</td>
                         <td>
                             The expansion icons can be selected to open the payloads via the
                             keyboard, however this cannot be done when using the keyboard whilst
@@ -151,7 +148,7 @@
                         <td>Unable to use a screen reader and keyboard to open the payloads</td>
                     </tr>
                     <tr>
-                        <td>Workflows - Workflow editor</td>
+                        <td>Workflow editor</td>
                         <td>Two colour contrast issues on the page</td>
                         <td>Insufficient colour contrast</td>
                         <td>
@@ -160,12 +157,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Workflows - Workflow editor</td>
+                        <td>Workflow editor</td>
                         <td>
                             Due to this being a JSON editor, the 'tab' button is used to edit rather
-                            than for navigation
+                            than for navigation, and therefore cannot be used to exit the editor
                         </td>
-                        <td>Keyboard accessibility</td>
+                        <td>Keyboard</td>
                         <td>Keyboard-only users would not be able to exit the JSON editor</td>
                     </tr>
                     <tr>
@@ -183,10 +180,33 @@
                             Unable to access any dropdown using only the keyboard because Vuetify
                             will not allow it
                         </td>
-                        <td>Keyboard accessibility</td>
+                        <td>Keyboard</td>
                         <td>
                             Keyboard-only users will not be able to select elements in drop-downs
                             across the site
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>All pages when zoomed in</td>
+                        <td>
+                            Page title disappears when the page is zoomed in at 200% on a 1000px
+                            width screen.
+                        </td>
+                        <td>Perceivability / vision-impaired users</td>
+                        <td>
+                            Vision impaired users may not know the title of the page they are on
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Clinical review page when zoomed in</td>
+                        <td>
+                            Usability of the page is highly degraded when zoomed in at 150% on a
+                            1000px width screen.
+                        </td>
+                        <td>Perceivability / vision-impaired users</td>
+                        <td>
+                            Vision impaired users may not be able to use the clinical review screen
                         </td>
                     </tr>
                 </tbody>
@@ -258,8 +278,8 @@ export default defineComponent({
     data() {
         return {
             statementPreparedDate: "2022-11-30T00:00:00",
-            statementLastReviewedDate: "2022-11-30T00:00:00",
-            websiteLastTestedDate: "2022-11-30T00:00:00",
+            statementLastReviewedDate: "023-01-04T00:00:00",
+            websiteLastTestedDate: "2023-01-04T00:00:00",
         };
     },
 });
