@@ -28,12 +28,12 @@
                 able to:
             </p>
             <ul>
-                <li>Zoom in up to 300% without the text spilling off the screen</li>
+                <li>View all text when zoomed in up to 200% using a scroll</li>
                 <li>Navigate most of the website using just a keyboard</li>
                 <li>Navigate most of the website using speech recognition software</li>
                 <li>
-                    listen to most of the website using a screen reader (including the most recent
-                    versions of JAWS, NVDA and VoiceOver)
+                    Listen to most of the website using a screen reader (including the most recent
+                    version of NVDA)
                 </li>
             </ul>
             <p>
@@ -46,10 +46,7 @@
             <h2>How accessible this website is</h2>
             <p>We know that some parts of this website are not fully accessible. For example:</p>
             <ul>
-                <li>Clinical Review DICOM viewer cannot be operated by Keyboard alone.</li>
-                <li>
-                    Unable to access some radio buttons and checkboxes across the site via Keyboard.
-                </li>
+                <li>Clinical Review page is not accessible.</li>
                 <li>
                     Some column headers are missing labels which may mean that a screen reader is
                     ineffective on some tables.
@@ -112,56 +109,50 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Admin page - System Statistics</td>
-                        <td>
-                            No column header above the first column in the 'Issues' table containing
-                            the checkboxes
-                        </td>
-                        <td>Explicit labelling - WAVE</td>
-                        <td>
-                            Unable to use a screen reader to describe what this column is used for
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Admin page - System Statistics</td>
-                        <td>Unable to access the checkboxes by tabbing to them</td>
-                        <td>Keyboard accessibility - WAVE</td>
+                        <td>Issues table</td>
+                        <td>Unable to access the checkboxes using a screen reader or a keyboard</td>
+                        <td>Keyboard accessibility / Screen reader</td>
                         <td>
                             Individuals using only a keyboard will be unable to select or un-select
-                            any checkbox
+                            any checkbox or hear a screen reader describe them
                         </td>
                     </tr>
                     <tr>
-                        <td>Payload page - Payload table</td>
+                        <td>Payload table</td>
                         <td>
-                            No text on the far left column which contains the drop-down/expansion
-                            symbols
+                            No column header for the expansion icons column on the right side of the
+                            table
                         </td>
-                        <td>Explicit labelling - WAVE</td>
+                        <td>Explicit labelling / Screen reader</td>
+                        <td>The screen reader can not describe that column</td>
+                    </tr>
+                    <tr>
+                        <td>Payload table</td>
                         <td>
-                            Unable to use a screen reader to describe what this column is used for
+                            The expansion icons can be selected to open the payloads via the
+                            keyboard, however this cannot be done when using the keyboard whilst
+                            using a screen reader
+                        </td>
+                        <td>Explicit labelling / Screen reader</td>
+                        <td>Unable to use a screen reader and keyboard to open the payloads</td>
+                    </tr>
+                    <tr>
+                        <td>Workflow editor</td>
+                        <td>Two colour contrast issues on the page</td>
+                        <td>Insufficient colour contrast</td>
+                        <td>
+                            Insufficient colour contrast reduces the ability of vision impaired
+                            users to read the site
                         </td>
                     </tr>
                     <tr>
-                        <td>Payload page - Payload table</td>
+                        <td>Workflow editor</td>
                         <td>
-                            &quot;A button is empty or has no text&quot; - Error next to all three
-                            drop-down/expansion symbols
+                            Due to this being a JSON editor, the 'tab' button is used to edit rather
+                            than for navigation, and therefore cannot be used to exit the editor
                         </td>
-                        <td>Explicit labelling - WAVE</td>
-                        <td>
-                            Unable to use a screen reader to describe what this column is used for
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>All pages with pagination</td>
-                        <td>Pagination has a nested interactive element</td>
-                        <td>Nested-interactive - AXE</td>
-                        <td>
-                            Ensures interactive controls are not nested as they are not always
-                            announced by screen readers or can cause focus problems for assistive
-                            technologies
-                        </td>
+                        <td>Keyboard</td>
+                        <td>Keyboard-only users would not be able to exit the JSON editor</td>
                     </tr>
                     <tr>
                         <td>All pages with a modal</td>
@@ -169,48 +160,42 @@
                             Unable to add an aria-label on the whole modal component because Vuetify
                             does not allow it
                         </td>
-                        <td>Aria-dialog-name - Axe</td>
+                        <td>Aria-dialog-name</td>
+                        <td>Screen-readers may not describe the modal upon opening</td>
+                    </tr>
+                    <tr>
+                        <td>All pages with a dropdown</td>
                         <td>
-                            Serious - Ensures every ARIA dialog and alertdialog node has an
-                            accessible name
+                            Unable to access any dropdown using only the keyboard because Vuetify
+                            will not allow it
+                        </td>
+                        <td>Keyboard</td>
+                        <td>
+                            Keyboard-only users will not be able to select elements in drop-downs
+                            across the site
                         </td>
                     </tr>
                     <tr>
-                        <td>All pages</td>
-                        <td>Colour contrast - Placeholder text for input fields</td>
-                        <td>Insufficient color contrast - Axe</td>
-                        <td>Serious</td>
-                    </tr>
-                    <tr>
-                        <td>All pages with pagination</td>
-                        <td>Colour contrast on rows per page dropdown</td>
-                        <td>Insufficient color contrast - Axe</td>
-                        <td>Serious</td>
-                    </tr>
-                    <tr>
-                        <td>Workflow editor page</td>
+                        <td>All pages when zoomed in</td>
                         <td>
-                            Element contains only non-text characters - the error is shown for the
-                            little expansion arrows within the text editor
+                            Page title disappears when the page is zoomed in at 200% on a 1000px
+                            width screen.
                         </td>
-                        <td>Insufficient color contrast - Axe</td>
-                        <td>Serious</td>
-                    </tr>
-                    <tr>
-                        <td>Workflow editor page</td>
+                        <td>Perceivability / vision-impaired users</td>
                         <td>
-                            Aria-label error for the Editor - unable to change as it is an inbuilt
-                            Vuetify library which errors if we change
+                            Vision impaired users may not know the title of the page they are on
                         </td>
-                        <td>Aria-input-field-name</td>
-                        <td>Serious</td>
                     </tr>
+
                     <tr>
-                        <td>Payload page - Payload table</td>
-                        <td>Unable to access the radio buttons by tabbing to them</td>
-                        <td>Keyboard accessibility - WAVE</td>
+                        <td>Clinical review page when zoomed in</td>
                         <td>
-                            Individuals using only a keyboard will be unable to select radio buttons
+                            Usability of the page is highly degraded when zoomed in at 150% on a
+                            1000px width screen.
+                        </td>
+                        <td>Perceivability / vision-impaired users</td>
+                        <td>
+                            Vision impaired users may not be able to use the clinical review screen
                         </td>
                     </tr>
                 </tbody>
@@ -282,8 +267,8 @@ export default defineComponent({
     data() {
         return {
             statementPreparedDate: "2022-11-30T00:00:00",
-            statementLastReviewedDate: "2022-11-30T00:00:00",
-            websiteLastTestedDate: "2022-11-30T00:00:00",
+            statementLastReviewedDate: "023-01-04T00:00:00",
+            websiteLastTestedDate: "2023-01-04T00:00:00",
         };
     },
 });

@@ -275,7 +275,7 @@ import {
 } from "@/api/user-management/UserManagementService";
 import { UserListItem, UserRoleListItem } from "@/models/user-management/UserManagement";
 import { Prop, Watch } from "vue-property-decorator";
-import { throttle } from "underscore";
+import { debounce } from "underscore";
 import { isResultOk } from "@/utils/axios-helpers";
 import { AxiosError, AxiosResponse } from "axios";
 import ConfirmationModal from "../Shared/ConfirmationModal.vue";
@@ -339,7 +339,7 @@ export default class UserTabItem extends Vue {
     totalUsers = 0;
     totalFilteredUsers = 0;
 
-    private throttledFetchUsers = throttle(() => {
+    private throttledFetchUsers = debounce(() => {
         this.fetchAndSetUsers();
     }, 500);
 

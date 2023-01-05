@@ -229,7 +229,7 @@ import { Watch } from "vue-property-decorator";
 import { DataOptions, DataTableHeader } from "vuetify";
 import { UserRoleListItem } from "@/models/user-management/UserManagement";
 import RoleModal from "./RoleModal.vue";
-import { throttle } from "underscore";
+import { debounce } from "underscore";
 import { isResultOk } from "@/utils/axios-helpers";
 import { AxiosError, AxiosResponse } from "axios";
 import ConfirmationModal from "../Shared/ConfirmationModal.vue";
@@ -282,7 +282,7 @@ export default class UserRolesTabItem extends Vue {
     deleteConfirm = false;
     roleToDelete: UserRoleListItem | null = null;
 
-    private throttledFetchRoles = throttle(() => {
+    private throttledFetchRoles = debounce(() => {
         this.fetchRolePage();
     }, 500);
 
