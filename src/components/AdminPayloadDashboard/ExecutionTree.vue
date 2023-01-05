@@ -160,13 +160,21 @@ export default class ExecutionTree extends Vue {
     ): ExecutionTreeNode | undefined {
         for (const node of nodes) {
             if (node.id == "workflow-instance" || node.id == "root-node") {
-                return this.findNode(node.children, execution_id);
+                const executionNode = this.findNode(node.children, execution_id);
+
+                if (executionNode) {
+                    return executionNode;
+                }
             }
             const etnNode = node as ExecutionTreeNode;
             if (etnNode.execution_id === execution_id) {
                 return etnNode;
             } else {
-                return this.findNode(etnNode.children, execution_id);
+                const executionNode = this.findNode(etnNode.children, execution_id);
+
+                if (executionNode) {
+                    return executionNode;
+                }
             }
         }
     }
