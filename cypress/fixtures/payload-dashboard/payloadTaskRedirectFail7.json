@@ -1,0 +1,71 @@
+[
+    {
+        "ae_title": "MonaiSCU",
+        "id": "e26bec36-9a22-4be2-8402-379cb96c22e5",
+        "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+        "start_time": "2022-08-15T09:37:59.634Z",
+        "status": "Failed",
+        "workflow_id": "ba85e76a-f03e-4b54-b2ea-c7736afa8c13",
+        "workflow_name": "Workflow-test-1",
+        "tasks": [
+            {
+                "execution_id": "300f44b6-e86f-448a-83ba-8c5d70ca88ef",
+                "next_task": [
+                    {
+                        "execution_id": "02b28371-b786-4176-9ee0-944823cc092f",
+                        "next_task": [],
+                        "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+                        "status": "failed",
+                        "task_id": "child task 3",
+                        "task_start_time": "2022-09-16T09:37:59.634Z",
+                        "workflow_instance_id": "be9e92f8-ee5a-4cea-a195-93a25bc8e565"
+                    }
+                ],
+                "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+                "status": "failed",
+                "task_id": "parent task 1",
+                "task_start_time": "2022-11-03T09:37:59.634Z",
+                "workflow_instance_id": "e26bec36-9a22-4be2-8402-379cb96c22e5"
+            }
+        ]
+    },
+    {
+        "ae_title": "MonaiSCU",
+        "id": "be9e92f8-ee5a-4cea-a195-93a25bc8e565",
+        "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+        "start_time": "2022-08-15T09:37:59.634Z",
+        "status": "Failed",
+        "workflow_id": "ba85e76a-f03e-4b54-b2ea-c7736afa8c13",
+        "workflow_name": "Workflow-test-2",
+        "tasks": [
+            {
+                "execution_id": "b7fb8d72-450d-4625-823a-0636b6f8d948",
+                "next_task": [
+                    {
+                        "execution_id": "a15e87b1-894d-4c1d-bd24-88b2cb10c3ca",
+                        "next_task": [],
+                        "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+                        "status": "failed",
+                        "task_id": "child task 1",
+                        "task_start_time": "2022-09-16T09:37:59.634Z",
+                        "workflow_instance_id": "e26bec36-9a22-4be2-8402-379cb96c22e5"
+                    },
+                    {
+                        "execution_id": "72e9f7fb-4424-4259-a889-62160ab6e44a",
+                        "next_task": [],
+                        "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+                        "status": "failed",
+                        "task_id": "child task 2",
+                        "task_start_time": "2022-09-16T09:37:59.634Z",
+                        "workflow_instance_id": "e26bec36-9a22-4be2-8402-379cb96c22e5"
+                    }
+                ],
+                "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
+                "status": "failed",
+                "task_id": "parent task 2",
+                "task_start_time": "2022-09-16T09:37:59.634Z",
+                "workflow_instance_id": "be9e92f8-ee5a-4cea-a195-93a25bc8e565"
+            }
+        ]
+    }
+]

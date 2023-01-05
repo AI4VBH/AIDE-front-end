@@ -44,7 +44,10 @@ export class PayloadTreeData implements WorkflowInstance {
     public static TREE_DATA_2: PayloadTreeData = new PayloadTreeData(
         <WorkflowInstance>ApiMocks.ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS[1],
     );
-    public static REDIRECT: PayloadTreeData = new PayloadTreeData(
-        <WorkflowInstance>ApiMocks.PAYLOAD_TASK_REDIRECT[0],
+    public static REDIRECT_FAIL: PayloadTreeData = new PayloadTreeData(
+        <WorkflowInstance>ApiMocks.PAYLOAD_TASK_REDIRECT_FAIL1[0],
+    );
+    public static REDIRECT_REJECT: PayloadTreeData = new PayloadTreeData(
+        <WorkflowInstance>ApiMocks.PAYLOAD_TASK_REDIRECT_REJECT[0],
     );
 }

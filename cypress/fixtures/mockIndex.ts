@@ -31,7 +31,15 @@ export default class ApiMocks {
     public static ADMIN_DASHBOARD_PAYLOAD_EXECUTIONS = require("./payload-dashboard/payloadExecutions.json");
     public static PAYLOAD_SEARCH = require("./payload-dashboard/payloadSearch.json");
     public static PAYLOAD_METADATA = require("./payload-dashboard/payloadMetadata.json");
-    public static PAYLOAD_TASK_REDIRECT = require("./payload-dashboard/payloadTaskRedirect.json");
+    public static PAYLOAD_TASK_REDIRECT_REJECT = require("./payload-dashboard/payloadTaskRedirectReject.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL1 = require("./payload-dashboard/payloadTaskRedirectFail1.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL2 = require("./payload-dashboard/payloadTaskRedirectFail2.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL3 = require("./payload-dashboard/payloadTaskRedirectFail3.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL4 = require("./payload-dashboard/payloadTaskRedirectFail4.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL5 = require("./payload-dashboard/payloadTaskRedirectFail5.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL6 = require("./payload-dashboard/payloadTaskRedirectFail6.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL7 = require("./payload-dashboard/payloadTaskRedirectFail7.json");
+    public static PAYLOAD_TASK_REDIRECT_FAIL8 = require("./payload-dashboard/payloadTaskRedirectFail8.json");
     //User Management
     public static USER_MANAGEMENT_GET_USERS = require("./user-management/userManagement.json");
     public static USER_MANAGEMENT_ROLES = require("./user-management/userManagementRoles.json");
