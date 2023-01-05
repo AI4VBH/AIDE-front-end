@@ -28,12 +28,12 @@
                 able to:
             </p>
             <ul>
-                <li>Zoom in up to 200% without the text spilling off the screen</li>
+                <li>View all text when zoomed in up to 200% using a scroll</li>
                 <li>Navigate most of the website using just a keyboard</li>
                 <li>Navigate most of the website using speech recognition software</li>
                 <li>
-                    listen to most of the website using a screen reader (including the most recent
-                    versions of JAWS, NVDA and VoiceOver)
+                    Listen to most of the website using a screen reader (including the most recent
+                    version of NVDA)
                 </li>
             </ul>
             <p>
@@ -46,7 +46,7 @@
             <h2>How accessible this website is</h2>
             <p>We know that some parts of this website are not fully accessible. For example:</p>
             <ul>
-                <li>Clinical Review DICOM viewer cannot be operated by Keyboard alone.</li>
+                <li>Clinical Review page is not accessible.</li>
                 <li>
                     Some column headers are missing labels which may mean that a screen reader is
                     ineffective on some tables.
@@ -108,17 +108,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td>System dashboard - Issues table</td>
-                        <td>
-                            No column header above the first column in the 'Issues' table containing
-                            the checkboxes
-                        </td>
-                        <td>Explicit labelling - WAVE</td>
-                        <td>
-                            Unable to use a screen reader to describe what this column is used for
-                        </td>
-                    </tr> -->
                     <tr>
                         <td>Issues table</td>
                         <td>Unable to access the checkboxes using a screen reader or a keyboard</td>

@@ -20,10 +20,10 @@ This accessibility statement applies to the AI Centre for Value Based Healthcare
 
 This website is run by the AI Centre for Value Based Healthcare. We want as many people as possible to be able to use this website. For example, that means you are able to:
 
-- Zoom in up to 200% without the text spilling off the screen
+- View all text when zoomed in up to 200% using a scroll
 - Navigate most of the website using just a keyboard
 - Navigate most of the website using speech recognition software
-- Listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+- Listen to most of the website using a screen reader (including the most recent version of NVDA)
 
 [AbilityNet](https://mcmw.abilitynet.org.uk/) has advice on making your device easier to use if you have a disability.
 
@@ -32,8 +32,9 @@ This website is run by the AI Centre for Value Based Healthcare. We want as many
 We know that some parts of this website are not fully accessible:
 For example:
 
-- Clinical Review DICOM viewer cannot be operated by Keyboard alone.
+- Clinical Review page is not accessible.
 - Some column headers are missing labels which may mean that a screen reader is ineffective on some tables.
+- Some fields are inaccessible using only a keyboard
 - Colour contrast is insufficient on some input fields and table headers.
 
 
