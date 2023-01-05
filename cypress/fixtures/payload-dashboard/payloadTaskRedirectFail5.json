@@ -57,14 +57,14 @@
                         "status": "failed",
                         "task_id": "child task 3",
                         "task_start_time": "2022-09-16T09:37:59.634Z",
-                        "workflow_instance_id": "be9e92f8-ee5a-4cea-a195-93a25bc8e565"
+                        "workflow_instance_id": "e26bec36-9a22-4be2-8402-379cb96c22e5"
                     }
                 ],
                 "payload_id": "333293d0-ab97-4ea1-b967-42ec62f26333",
                 "status": "failed",
                 "task_id": "parent task 2",
                 "task_start_time": "2022-09-16T09:37:59.634Z",
-                "workflow_instance_id": "be9e92f8-ee5a-4cea-a195-93a25bc8e565"
+                "workflow_instance_id": "e26bec36-9a22-4be2-8402-379cb96c22e5"
             }
         ]
     }

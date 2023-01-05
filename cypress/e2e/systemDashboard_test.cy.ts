@@ -96,7 +96,7 @@ describe(`Admin System - Issues table section`, () => {
 
     [payload1, payload2, payload3, payload4, payload5, payload6, payload7, payload8].forEach(
         (payload) => {
-            it.only(`On selecting 'View logs', I am taken to that task in the Payloads table`, () => {
+            it(`On selecting 'View logs', I am taken to that task in the Payloads table`, () => {
                 adminSystemPage.assertTakenToCorrectTask(
                     TaskData.TASK_DATA_2,
                     PayloadTreeData.REDIRECT_FAIL,

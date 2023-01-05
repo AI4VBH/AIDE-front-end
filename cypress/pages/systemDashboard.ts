@@ -143,7 +143,7 @@ export default class AdminSystemDashboardPage {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
         cy.intercept(
-            `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
+            `/workflowinstances/${task.workflow_instance_id}/executions/${task.execution_id}/acknowledge`,
             {
                 statusCode: 200,
             },
@@ -167,7 +167,7 @@ export default class AdminSystemDashboardPage {
             cy.dataCy(AdminSystemDashboardPage.DISMISS_BUTTON).click();
         });
         cy.intercept(
-            `/workflowinstances/345435/executions/222293d0-ab97-4ea1-b967-42ec62f26222/acknowledge`,
+            `/workflowinstances/${task.workflow_instance_id}/executions/${task.execution_id}/acknowledge`,
             {
                 statusCode: statuscode,
             },
