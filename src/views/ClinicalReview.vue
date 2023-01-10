@@ -183,6 +183,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+$min-width: 1100px;
+
 .headerLabel {
     color: #424242;
     font-weight: bold;
@@ -193,7 +195,7 @@ export default defineComponent({
 .clinical-review-container {
     height: 100%;
     padding: 0;
-    overflow: hidden;
+    overflow: auto hidden;
     display: flex;
     flex-direction: column;
 
@@ -205,12 +207,13 @@ export default defineComponent({
 .patient-header {
     background-color: #fff;
     height: 80px;
+    min-width: $min-width;
 }
 
 .clinical-review {
     margin: 0;
     height: 100%;
-    min-width: 1000px;
+    min-width: $min-width;
 
     > .col {
         padding: 0;
