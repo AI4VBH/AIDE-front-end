@@ -39,6 +39,10 @@ export default defineComponent({
     },
     watch: {
         imageId() {
+            if (!this.imageId) {
+                return;
+            }
+
             this.configureDicomViewer();
         },
     },
