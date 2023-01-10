@@ -80,7 +80,7 @@ Despite our best efforts to ensure accessibility of AIDE, there may be some limi
 
 We believe that our approach to carrying out accessibility checks is reasonable.
 
-However, the accessibility regulations say that we don't need to make all elements on a website accessible, if doing so would impose a disproportionate burden on us. Under assessment we feel that the Clinical Review DICOM viewer falls under this section with regards to the technology it is built in and the additional effort it would take to extract that functionality to make it accessible.
+However, the accessibility regulations say that we don't need to make all elements on a website accessible, if doing so would impose a disproportionate burden on us. Under assessment we feel that the Clinical Review page falls under this section with regards to the components and technologies it is built in and the additional effort it would take to extract that functionality to make it accessible.
 
 ## Browser and device compatibility
 
