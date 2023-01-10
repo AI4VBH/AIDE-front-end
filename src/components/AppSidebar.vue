@@ -89,7 +89,8 @@ export default class AppSidebar extends Vue {
             datacy: "clinician-button",
             ...this.getRouteData("ClinicalReview"),
         },
-        this.getDefaultRoute(),
+        // Disable default route(Application Repository) until app store is ready
+        // this.getDefaultRoute(),
         {
             title: "Export Destinations",
             icon: "mdi-application-export",
