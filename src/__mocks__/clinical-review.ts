@@ -18,6 +18,7 @@ import { rest } from "msw";
 import ctSlice1 from "!url-loader!./fixtures/CT000000.dcm";
 import ctSlice2 from "!url-loader!./fixtures/CT000010.dcm";
 import docSlice from "!url-loader!./fixtures/DO000000.dcm";
+import segSlice from "!url-loader!./fixtures/SE000000.dcm";
 import enhancedSlice from "!url-loader!./fixtures/IM_0003.dcm";
 import { PagedClinicalReviewList } from "@/models/ClinicalReview/ClinicalReviewTask";
 
@@ -386,6 +387,32 @@ const tasks = [
         ready: true,
         received: "2022-11-12T11:11:00",
     },
+    {
+        execution_id: "681",
+        clinical_review_message: {
+            task_id: "",
+            reviewed_task_id: "cde",
+            execution_id: "681",
+            reviewed_execution_id: "abc",
+            correlation_id: "123",
+            workflow_name: "bobwf",
+            patient_metadata: {
+                patient_name: "Seg Be True",
+                patient_id: "1299-123-232-3555",
+                patient_sex: "M",
+                patient_dob: "2000-01-10T00:00:00",
+            },
+            files: [],
+            reviewer_roles: ["admin", "clinician"],
+            application_metadata: {
+                application_name: "Application 1",
+                application_version: "1.1",
+                mode: "CU",
+            },
+        },
+        ready: true,
+        received: "2022-11-12T11:11:00",
+    },
 ];
 
 const clinicalReviewTasks: PagedClinicalReviewList = {
@@ -418,6 +445,8 @@ export const clinicalReviewHandlers = [
             responseBuffer = await fetch(ctSlice2).then((resp) => resp.arrayBuffer());
         } else if (key.startsWith("EHCT0010")) {
             responseBuffer = await fetch(enhancedSlice).then((resp) => resp.arrayBuffer());
+        } else if (key.startsWith("SEG00010")) {
+            responseBuffer = await fetch(segSlice).then((resp) => resp.arrayBuffer());
         }
 
         if (!responseBuffer) {
@@ -473,7 +502,15 @@ export const clinicalReviewHandlers = [
             });
         }
 
-        return res(ctx.delay(500), ctx.json(study));
+        if (executionId === "681") {
+            study.study.push({
+                series_uid: `8244bd56-3f1f-4d3f-b9be-5d6d4c37b123-${executionId}`,
+                modality: "SEG",
+                files: [`SEG00010-${executionId}.dcm`],
+            });
+        }
+
+        return res(ctx.json(study));
     }),
     rest.get(`${window.FRONTEND_API_HOST}/clinical-review`, (_req, res, ctx) => {
         const patientId = _req.url.searchParams.get("patientId");

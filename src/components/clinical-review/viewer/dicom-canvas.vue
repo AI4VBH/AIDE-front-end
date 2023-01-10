@@ -47,6 +47,8 @@
 
         <slot name="pdf-viewer" />
 
+        <slot name="dicom-not-supported" v-if="!supportedDicom" />
+
         <v-overlay
             data-cy="dicom-viewer-loader"
             :value="loading"
@@ -57,7 +59,11 @@
             <v-progress-circular size="100" color="primary" indeterminate />
         </v-overlay>
 
-        <div data-cy="dicom-viewer-no-image" class="no-images" v-if="imageIds.length === 0"></div>
+        <div
+            data-cy="dicom-viewer-no-image"
+            class="no-images"
+            v-if="(imageIds.length === 0 && supportedDicom) || !currentSeries"
+        ></div>
     </div>
 </template>
 
@@ -79,6 +85,7 @@ import { IStackViewport, EventTypes, VOIRange } from "@cornerstonejs/core/dist/e
 import initCornerstoneWADOImageLoader from "@/utils/cornerstone-wado-image-loader";
 import { RotateTool } from "@/utils/cornerstone-tool/rotate-tool";
 import { debounce } from "underscore";
+import { ClinicalReviewSeries } from "@/models/ClinicalReview/ClinicalReviewTask";
 
 type ComponentData = {
     renderer?: RenderingEngine;
@@ -110,6 +117,8 @@ export default defineComponent({
     props: {
         activeTool: { default: PanTool.toolName as string },
         imageIds: { default: () => [], type: Array as PropType<string[]> },
+        supportedDicom: { default: false, type: Boolean },
+        currentSeries: { type: Object as PropType<ClinicalReviewSeries> },
     },
     watch: {
         imageIds: {

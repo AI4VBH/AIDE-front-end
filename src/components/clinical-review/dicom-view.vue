@@ -15,7 +15,11 @@
   -->
 
 <template>
-    <dicom-canvas :imageIds="imageIds">
+    <dicom-canvas
+        :imageIds="imageIds"
+        :supported-dicom="supportedDicom"
+        :current-series="currentSeries"
+    >
         <template
             v-slot:toolbar="{
                 setActiveTool,
@@ -32,14 +36,15 @@
                 @toggle-metadata-panel="toggleMetadataPanel"
                 @toggle-series-panel="toggleSeriesPanel"
                 :show-tools="!documentView"
-                :show-metadata="showMetadata && !documentView"
+                :show-metadata="showMetadata && !documentView && supportedDicom"
                 :show-series="showSeries"
+                :supported-dicom="supportedDicom"
             />
         </template>
 
         <template v-slot:footer="{ currentImageIndex, voiRange }">
             <dicom-footer
-                v-show="!documentView"
+                v-show="!documentView && supportedDicom"
                 :current-slice="currentImageIndex"
                 :total-slices="imageIds.length"
                 :voi-range="voiRange"
@@ -58,9 +63,17 @@
 
         <template v-slot:metadata="{ currentImageIndex, showMetadata }">
             <metadata-list
-                :show-metadata="showMetadata && !documentView"
+                :show-metadata="showMetadata && !documentView && supportedDicom"
                 :current-image-index="currentImageIndex"
                 :image-slices="imageSlices"
+            />
+        </template>
+
+        <template v-slot:dicom-not-supported>
+            <unsupported-dicom
+                v-if="!supportedDicom && currentSeries"
+                :modality="currentSeries?.modality"
+                :files="currentSeries?.files"
             />
         </template>
 
@@ -78,15 +91,18 @@ import pdf from "pdfvuer";
 import DicomCanvas from "./viewer/dicom-canvas.vue";
 import DicomTools from "./viewer/dicom-tools.vue";
 import DicomFooter from "./viewer/dicom-footer.vue";
+import UnsupportedDicom from "./viewer/dicom-not-supported.vue";
 import MetadataList from "./metadata/metadata-list.vue";
 import SeriesList from "./series/series-list.vue";
 import { ClinicalReviewSeries } from "@/models/ClinicalReview/ClinicalReviewTask";
 import { getDicomFile } from "@/api/ClinicalReview/ClinicalReviewService";
-import { DicomMetadata, parseMetadata } from "@/utils/dicom-metadata-parser";
+import { parseMetadata } from "@/utils/dicom-metadata-parser";
+import { dicomModalitySupported } from "@/utils/dicom-modality";
 
 type DicomViewData = {
     currentSeries?: ClinicalReviewSeries;
     documentView: boolean;
+    supportedDicom: boolean;
     document?: { data: Uint8Array };
     study: ClinicalReviewSeries[];
     imageSlices: string[];
@@ -97,6 +113,7 @@ export default defineComponent({
         DicomCanvas,
         DicomTools,
         DicomFooter,
+        UnsupportedDicom,
         MetadataList,
         SeriesList,
         pdf,
@@ -110,7 +127,8 @@ export default defineComponent({
             if (
                 this.currentSeries &&
                 this.currentSeries?.total_frames &&
-                this.currentSeries?.total_frames != 0
+                this.currentSeries?.total_frames != 0 &&
+                dicomModalitySupported(this.currentSeries?.modality)
             ) {
                 const newSlices = [];
                 for (let index = 0; index < this.currentSeries.total_frames; index++) {
@@ -119,6 +137,10 @@ export default defineComponent({
                     );
                 }
                 return newSlices;
+            }
+
+            if (!dicomModalitySupported(this.currentSeries?.modality)) {
+                return [];
             }
 
             return this.imageSlices.map(
@@ -134,6 +156,8 @@ export default defineComponent({
             if (!newSeries || newSeries.modality === "DOC") {
                 return;
             }
+
+            this.supportedDicom = dicomModalitySupported(newSeries?.modality);
             this.imageSlices = newSeries.files;
         },
     },
@@ -142,12 +166,17 @@ export default defineComponent({
             this.study = [];
             this.imageSlices = [];
             this.currentSeries = undefined;
+            this.supportedDicom = true;
             this.$emit("study-selected", { study_date: "" });
 
             const study = await getStudy(taskExecutionId);
 
             study.study.forEach(async (series) => {
-                if (series.files.length === 1 && series.modality !== "DOC") {
+                if (
+                    series.files.length === 1 &&
+                    series.modality !== "DOC" &&
+                    dicomModalitySupported(series.modality)
+                ) {
                     series.files = await this.getNewFramesForEnhancedDicoms(series);
                 }
             });
@@ -160,9 +189,11 @@ export default defineComponent({
             const series = this.study.find((series) => series.series_uid === seriesId);
             this.currentSeries = series;
             this.documentView = series?.modality === "DOC";
+            this.supportedDicom = dicomModalitySupported(series?.modality);
         },
         itemSelected(item: { modality: string; document?: { data: Uint8Array } }) {
             this.documentView = item.modality === "DOC";
+            this.supportedDicom = dicomModalitySupported(item.modality);
             this.document = item.document;
         },
         async getNewFramesForEnhancedDicoms(series: ClinicalReviewSeries) {
@@ -193,6 +224,7 @@ export default defineComponent({
             study: [],
             imageSlices: [],
             documentView: false,
+            supportedDicom: true,
             document: undefined,
         };
     },

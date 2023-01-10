@@ -50,7 +50,6 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
     "@golevelup/ts-jest": "^0.3.4",
     "@jest/globals": "^29.3.1",
     "@types/chai": "^4.3.0",

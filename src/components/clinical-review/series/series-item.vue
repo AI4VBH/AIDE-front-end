@@ -30,9 +30,13 @@
                 <pdf v-if="document" class="pdf-thumbnail" :src="document" :text="false" />
             </div>
             <DicomThumbnail
-                v-else-if="series.modality !== 'DOC'"
+                v-else-if="series.modality !== 'DOC' && series.modality !== 'SEG'"
                 :image-id="imageId"
                 :series-uid="series.series_uid"
+            />
+            <DicomUnsupportedThumbnail
+                v-else-if="series.modality !== 'DOC' && series.modality === 'SEG'"
+                :modality="series.modality"
             />
         </v-list-item-content>
     </v-list-item>
@@ -43,6 +47,7 @@ import { ClinicalReviewSeries } from "@/models/ClinicalReview/ClinicalReviewTask
 import { defineComponent, PropType } from "vue";
 import pdf from "pdfvuer";
 import DicomThumbnail from "./series-dicom-thumbnail.vue";
+import DicomUnsupportedThumbnail from "./series-unsupported-thumbnail.vue";
 import { getDicomFile } from "@/api/ClinicalReview/ClinicalReviewService";
 import { parseEncapsulatedPdf } from "@/utils/dicom-metadata-parser";
 
@@ -50,6 +55,7 @@ export default defineComponent({
     components: {
         pdf,
         DicomThumbnail,
+        DicomUnsupportedThumbnail,
     },
     props: {
         series: {

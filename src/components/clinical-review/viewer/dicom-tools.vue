@@ -30,7 +30,7 @@
             </v-layout>
         </v-col>
         <v-col cols="6">
-            <v-layout v-show="showTools" justify-center data-cy="dicom-tools">
+            <v-layout v-show="showTools && supportedDicom" justify-center data-cy="dicom-tools">
                 <!-- tools -->
                 <v-btn-toggle dark dense mandatory v-model="activeTool">
                     <v-tooltip v-for="tool of tools" bottom open-delay="500" :key="tool.name">
@@ -48,7 +48,7 @@
             </v-layout>
         </v-col>
         <v-col cols="3">
-            <v-layout justify-end v-show="showTools">
+            <v-layout justify-end v-show="showTools && supportedDicom">
                 <v-btn dark text @click="toggleMetadataPanel" data-cy="dicom-tool-toggle-metadata">
                     <v-icon v-if="!showMetadata">mdi-chevron-left</v-icon>
 
@@ -112,6 +112,7 @@ export default defineComponent({
         showMetadata: { default: false, type: Boolean },
         showSeries: { default: false, type: Boolean },
         showTools: { default: true, type: Boolean },
+        supportedDicom: { default: true, type: Boolean },
     },
     watch: {
         activeTool(toolIndex: number) {
