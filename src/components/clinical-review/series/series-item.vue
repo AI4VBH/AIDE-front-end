@@ -62,8 +62,12 @@ export default defineComponent({
         },
     },
     computed: {
-        imageId(): string {
-            return `wadouri:${window.FRONTEND_API_HOST}/clinical-review/dicom?key=${this.series?.files[0]}`;
+        imageId(): string | undefined {
+            const file = this.series?.files[0];
+
+            return file
+                ? `wadouri:${window.FRONTEND_API_HOST}/clinical-review/dicom?key=${file}`
+                : undefined;
         },
     },
     emits: ["item-selected"],

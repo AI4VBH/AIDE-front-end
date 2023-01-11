@@ -408,21 +408,16 @@ export const clinicalReviewHandlers = [
             return res(ctx.status(400));
         }
 
-        const ct1Buffer = await fetch(ctSlice1).then((resp) => resp.arrayBuffer());
-        const ct2Buffer = await fetch(ctSlice2).then((resp) => resp.arrayBuffer());
-        const docBuffer = await fetch(docSlice).then((resp) => resp.arrayBuffer());
-        const enhancedSliceBuffer = await fetch(enhancedSlice).then((resp) => resp.arrayBuffer());
-
         let responseBuffer: ArrayBuffer | undefined = undefined;
 
         if (key.startsWith("DO000000")) {
-            responseBuffer = docBuffer;
+            responseBuffer = await fetch(docSlice).then((resp) => resp.arrayBuffer());
         } else if (key.startsWith("CT000000")) {
-            responseBuffer = ct1Buffer;
+            responseBuffer = await fetch(ctSlice1).then((resp) => resp.arrayBuffer());
         } else if (key.startsWith("CT000010")) {
-            responseBuffer = ct2Buffer;
+            responseBuffer = await fetch(ctSlice2).then((resp) => resp.arrayBuffer());
         } else if (key.startsWith("EHCT0010")) {
-            responseBuffer = enhancedSliceBuffer;
+            responseBuffer = await fetch(enhancedSlice).then((resp) => resp.arrayBuffer());
         }
 
         if (!responseBuffer) {
@@ -478,7 +473,7 @@ export const clinicalReviewHandlers = [
             });
         }
 
-        return res(ctx.json(study));
+        return res(ctx.delay(500), ctx.json(study));
     }),
     rest.get(`${window.FRONTEND_API_HOST}/clinical-review`, (_req, res, ctx) => {
         const patientId = _req.url.searchParams.get("patientId");
