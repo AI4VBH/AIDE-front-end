@@ -98,7 +98,7 @@ AIDE is not compatible with:
 
 ## Preparation of this accessibility statement
 
-This statement was prepared on 30-Nov-2022. It was last reviewed on 04-Jan-2023.
+This statement was prepared on 30-Nov-2022. It was last reviewed on 11-Jan-2023.
 This website was last tested on 04-Jan-2023. The test was carried out by the AI Centre for Value Based Healthcare. We tested all pages.
 
 We also carried out automated and technical testing to check the website’s code and content against the WCAG criteria.
