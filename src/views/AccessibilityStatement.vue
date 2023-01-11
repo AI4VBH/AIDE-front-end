@@ -267,8 +267,8 @@ export default defineComponent({
     data() {
         return {
             statementPreparedDate: "2022-11-30T00:00:00",
-            statementLastReviewedDate: "023-01-04T00:00:00",
-            websiteLastTestedDate: "2023-01-04T00:00:00",
+            statementLastReviewedDate: "2023-01-11T00:00:00",
+            websiteLastTestedDate: "2023-01-11T00:00:00",
         };
     },
 });
