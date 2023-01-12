@@ -216,7 +216,7 @@ export default class WorkflowEditor extends Vue {
     }
 
     formatErrorMessages(workflowError: string): string[] {
-        return workflowError.split(",");
+        return workflowError.split(";");
     }
 }
 </script>
