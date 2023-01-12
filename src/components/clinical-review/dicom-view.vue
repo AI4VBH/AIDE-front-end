@@ -35,10 +35,12 @@
                 @reset-view="resetView"
                 @toggle-metadata-panel="toggleMetadataPanel"
                 @toggle-series-panel="toggleSeriesPanel"
+                @start-download-study="startDownloadStudy"
                 :show-tools="!documentView"
                 :show-metadata="showMetadata && !documentView && supportedDicom"
                 :show-series="showSeries"
                 :supported-dicom="supportedDicom"
+                :downloading="downloadingStudy"
             />
         </template>
 
@@ -73,7 +75,6 @@
             <unsupported-dicom
                 v-if="!supportedDicom && currentSeries"
                 :modality="currentSeries?.modality"
-                :files="currentSeries?.files"
             />
         </template>
 
@@ -85,7 +86,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { getStudy } from "@/api/ClinicalReview/ClinicalReviewService";
+import { downloadStudy, getStudy } from "@/api/ClinicalReview/ClinicalReviewService";
 
 import pdf from "pdfvuer";
 import DicomCanvas from "./viewer/dicom-canvas.vue";
@@ -106,6 +107,7 @@ type DicomViewData = {
     document?: { data: Uint8Array };
     study: ClinicalReviewSeries[];
     imageSlices: string[];
+    downloadingStudy: boolean;
 };
 
 export default defineComponent({
@@ -214,6 +216,35 @@ export default defineComponent({
 
             return newSlices;
         },
+        async startDownloadStudy() {
+            if (!this.study) {
+                return;
+            }
+
+            this.downloadingStudy = true;
+
+            const { status, data } = await downloadStudy(this.taskExecutionId);
+
+            if (status !== 200) {
+                this.downloadingStudy = false;
+                return;
+            }
+
+            const fileName = `${this.taskExecutionId}.zip`;
+
+            const url = URL.createObjectURL(new Blob([data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", fileName);
+            document.body.appendChild(link);
+            link.click();
+
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+                document.body.removeChild(link);
+                this.downloadingStudy = false;
+            }, 500);
+        },
     },
     mounted() {
         this.getTaskDetails(this.taskExecutionId);
@@ -226,6 +257,7 @@ export default defineComponent({
             documentView: false,
             supportedDicom: true,
             document: undefined,
+            downloadingStudy: false,
         };
     },
 });

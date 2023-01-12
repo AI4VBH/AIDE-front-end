@@ -19,41 +19,18 @@
         <div>
             <p>
                 The <strong>{{ modality }}</strong> modality is not supported by this viewer.
-                Download the series to view in an external viewer.
+                Download the study to view in an external viewer.
             </p>
-            <v-btn dark :disabled="downloading" @click="downloadSeries">
-                Download Series
-                <v-progress-circular v-if="downloading" class="ml-2" indeterminate size="15" />
-            </v-btn>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { getDicomFile } from "@/api/ClinicalReview/ClinicalReviewService";
-import { PropType } from "vue/types/v3-component-props";
 
 export default defineComponent({
     props: {
         modality: { type: String },
-        files: { default: () => [], type: Array as PropType<string[]> },
-    },
-    data() {
-        return {
-            downloading: false,
-        };
-    },
-    methods: {
-        async downloadSeries() {
-            this.downloading = true;
-
-            const file = await getDicomFile(this.files[0]);
-
-            console.log(file);
-
-            this.downloading = false;
-        },
     },
 });
 </script>

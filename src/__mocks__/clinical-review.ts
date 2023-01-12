@@ -19,7 +19,11 @@ import ctSlice1 from "!url-loader!./fixtures/CT000000.dcm";
 import ctSlice2 from "!url-loader!./fixtures/CT000010.dcm";
 import docSlice from "!url-loader!./fixtures/DO000000.dcm";
 import segSlice from "!url-loader!./fixtures/SE000000.dcm";
+import srSlice from "!url-loader!./fixtures/SR000000.dcm";
+import rtDoseSlice from "!url-loader!./fixtures/RTDOSE001.dcm";
+import rtStructSlice from "!url-loader!./fixtures/RTSTRUCT001.dcm";
 import enhancedSlice from "!url-loader!./fixtures/IM_0003.dcm";
+import studyZip from "!url-loader!./fixtures/STUDY-ZIP.zip";
 import { PagedClinicalReviewList } from "@/models/ClinicalReview/ClinicalReviewTask";
 
 const tasks = [
@@ -447,6 +451,12 @@ export const clinicalReviewHandlers = [
             responseBuffer = await fetch(enhancedSlice).then((resp) => resp.arrayBuffer());
         } else if (key.startsWith("SEG00010")) {
             responseBuffer = await fetch(segSlice).then((resp) => resp.arrayBuffer());
+        } else if (key.startsWith("SR000000")) {
+            responseBuffer = await fetch(srSlice).then((resp) => resp.arrayBuffer());
+        } else if (key.startsWith("RTDOSE001")) {
+            responseBuffer = await fetch(rtDoseSlice).then((resp) => resp.arrayBuffer());
+        } else if (key.startsWith("RTSTRUCT001")) {
+            responseBuffer = await fetch(rtStructSlice).then((resp) => resp.arrayBuffer());
         }
 
         if (!responseBuffer) {
@@ -496,7 +506,7 @@ export const clinicalReviewHandlers = [
 
         if (executionId === "680") {
             study.study.push({
-                series_uid: `8244bd56-3f1f-4d3f-b9be-5d6d4c37b123-${executionId}`,
+                series_uid: `f348527c-328b-4de8-ba51-33296b2e81f4-${executionId}`,
                 modality: "CT",
                 files: [`EHCT0010-${executionId}.dcm`],
             });
@@ -504,14 +514,41 @@ export const clinicalReviewHandlers = [
 
         if (executionId === "681") {
             study.study.push({
-                series_uid: `8244bd56-3f1f-4d3f-b9be-5d6d4c37b123-${executionId}`,
+                series_uid: `43456e7c-fa37-4075-ad6c-2a3fac06fd1c-${executionId}`,
                 modality: "SEG",
                 files: [`SEG00010-${executionId}.dcm`],
+            });
+            study.study.push({
+                series_uid: `ceb2b144-ce0a-473f-8484-ad192ba62833-${executionId}`,
+                modality: "SR",
+                files: [`SR000000-${executionId}.dcm`],
+            });
+            study.study.push({
+                series_uid: `c0565da5-4d56-4c9f-b6bb-af813c693280-${executionId}`,
+                modality: "RTDOSE",
+                files: [`RTDOSE001-${executionId}.dcm`],
+            });
+            study.study.push({
+                series_uid: `879b670c-d205-472c-8923-a7a4cea3a56f-${executionId}`,
+                modality: "RTSTRUCT",
+                files: [`RTSTRUCT001-${executionId}.dcm`],
             });
         }
 
         return res(ctx.json(study));
     }),
+    rest.get(
+        `${window.FRONTEND_API_HOST}/clinical-review/:taskExecutionId/study`,
+        async (req, res, ctx) => {
+            const responseBuffer = await fetch(studyZip).then((resp) => resp.arrayBuffer());
+
+            return res(
+                ctx.set("Content-Type", "application/zip"),
+                ctx.set("Content-Length", responseBuffer.byteLength.toString()),
+                ctx.body(responseBuffer),
+            );
+        },
+    ),
     rest.get(`${window.FRONTEND_API_HOST}/clinical-review`, (_req, res, ctx) => {
         const patientId = _req.url.searchParams.get("patientId");
         const patientName = _req.url.searchParams.get("patientName");

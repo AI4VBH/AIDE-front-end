@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-const unsupportedModalities = ["SEG"];
+const unsupportedModalities = ["SEG", "SR", "RTDOSE", "RTSTRUCT", "RTIMAGE", "RTPLAN", "RTRECORD"];
 
 export function dicomModalitySupported(modality?: string): boolean {
     if (!modality || modality.trim() === "") {

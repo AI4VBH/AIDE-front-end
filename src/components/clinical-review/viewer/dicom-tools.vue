@@ -30,9 +30,15 @@
             </v-layout>
         </v-col>
         <v-col cols="6">
-            <v-layout v-show="showTools && supportedDicom" justify-center data-cy="dicom-tools">
+            <v-layout justify-center data-cy="dicom-tools">
                 <!-- tools -->
-                <v-btn-toggle dark dense mandatory v-model="activeTool">
+                <v-btn-toggle
+                    v-show="showTools && supportedDicom"
+                    dark
+                    dense
+                    mandatory
+                    v-model="activeTool"
+                >
                     <v-tooltip v-for="tool of tools" bottom open-delay="500" :key="tool.name">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn v-bind="attrs" v-on="on">
@@ -44,7 +50,28 @@
                     </v-tooltip>
                 </v-btn-toggle>
 
-                <v-btn dark class="ml-4" @click="resetView">Reset View</v-btn>
+                <v-btn v-show="showTools && supportedDicom" dark class="ml-4" @click="resetView"
+                    >Reset View</v-btn
+                >
+
+                <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                            class="ml-4"
+                            data-cy="download-study"
+                            :disabled="downloading"
+                            @click="startDownloadStudy"
+                        >
+                            <v-icon v-if="!downloading">mdi-download</v-icon>
+                            <v-progress-circular v-else indeterminate width="3" size="15" />
+                            <span class="d-sr-only">Download Study</span>
+                        </v-btn>
+                    </template>
+                    <span>Download Study</span>
+                </v-tooltip>
             </v-layout>
         </v-col>
         <v-col cols="3">
@@ -107,12 +134,19 @@ export default defineComponent({
             ],
         };
     },
-    emits: ["set-active-tool", "reset-view", "toggle-metadata-panel", "toggle-series-panel"],
+    emits: [
+        "set-active-tool",
+        "reset-view",
+        "toggle-metadata-panel",
+        "toggle-series-panel",
+        "start-download-study",
+    ],
     props: {
         showMetadata: { default: false, type: Boolean },
         showSeries: { default: false, type: Boolean },
         showTools: { default: true, type: Boolean },
         supportedDicom: { default: true, type: Boolean },
+        downloading: { default: false, type: Boolean },
     },
     watch: {
         activeTool(toolIndex: number) {
@@ -130,6 +164,9 @@ export default defineComponent({
         },
         toggleSeriesPanel() {
             this.$emit("toggle-series-panel");
+        },
+        startDownloadStudy() {
+            this.$emit("start-download-study");
         },
     },
 });

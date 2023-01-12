@@ -30,12 +30,12 @@
                 <pdf v-if="document" class="pdf-thumbnail" :src="document" :text="false" />
             </div>
             <DicomThumbnail
-                v-else-if="series.modality !== 'DOC' && series.modality !== 'SEG'"
+                v-else-if="series.modality !== 'DOC' && supportedDicom"
                 :image-id="imageId"
                 :series-uid="series.series_uid"
             />
             <DicomUnsupportedThumbnail
-                v-else-if="series.modality !== 'DOC' && series.modality === 'SEG'"
+                v-else-if="series.modality !== 'DOC' && !supportedDicom"
                 :modality="series.modality"
             />
         </v-list-item-content>
@@ -50,6 +50,7 @@ import DicomThumbnail from "./series-dicom-thumbnail.vue";
 import DicomUnsupportedThumbnail from "./series-unsupported-thumbnail.vue";
 import { getDicomFile } from "@/api/ClinicalReview/ClinicalReviewService";
 import { parseEncapsulatedPdf } from "@/utils/dicom-metadata-parser";
+import { dicomModalitySupported } from "@/utils/dicom-modality";
 
 export default defineComponent({
     components: {
@@ -74,6 +75,9 @@ export default defineComponent({
             return file
                 ? `wadouri:${window.FRONTEND_API_HOST}/clinical-review/dicom?key=${file}`
                 : undefined;
+        },
+        supportedDicom(): boolean {
+            return this.series ? dicomModalitySupported(this.series?.modality) : true;
         },
     },
     emits: ["item-selected"],
