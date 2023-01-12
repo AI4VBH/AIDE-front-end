@@ -239,15 +239,11 @@
                 This statement was prepared on {{ statementPreparedDate | formatDate }}. It was last
                 reviewed on {{ statementLastReviewedDate | formatDate }}. This website was last
                 tested on {{ websiteLastTestedDate | formatDate }}. The test was carried out by the
-                AI Centre for Value Based Healthcare. We tested all pages.
+                AI Centre for Value Based Healthcare.
             </p>
             <p>
-                We also carried out automated and technical testing to check the website's code and
-                content against the WCAG criteria.
-            </p>
-            <p>
-                We carried out usability testing to make sure the website can be navigated using a
-                keyboard and the following assistive technologies: Voiceover, NVDA and Zoomtext.
+                We carried out automated and technical testing on all pages to check the website’s
+                code and content against the WCAG criteria.
             </p>
         </section>
     </v-container>
