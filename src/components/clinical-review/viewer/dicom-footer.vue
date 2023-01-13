@@ -24,7 +24,11 @@
                         <span>Slice {{ currentSlice + 1 }}/{{ totalSlices }}</span>
                     </v-btn>
                     <v-btn disabled data-cy="dicom-footer-windowing">
-                        <span>WW/WC {{ windowing.windowWidth }}/{{ windowing.windowCenter }}</span>
+                        <span
+                            >WW/WC {{ windowing.windowWidth | roundValue }}/{{
+                                windowing.windowCenter | roundValue
+                            }}</span
+                        >
                     </v-btn>
                 </v-btn-toggle>
             </v-layout>
@@ -44,6 +48,9 @@ type Windowing = {
 };
 
 export default defineComponent({
+    filters: {
+        roundValue: (value: number) => Math.round(value ?? 0),
+    },
     props: {
         currentSlice: { default: 0, type: Number },
         totalSlices: { default: 0, type: Number },
