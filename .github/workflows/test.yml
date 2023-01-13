@@ -27,7 +27,7 @@ jobs:
             fetch-depth: 0
 
       - name: Cypress E2E tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
           build: npm run build:cypress
@@ -55,7 +55,7 @@ jobs:
           fetch-depth: 0
 
       - name: Cypress component tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
           component: true
