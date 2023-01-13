@@ -26,6 +26,7 @@ import {
     isResultOk,
     provideDefaultResult,
 } from "@/utils/axios-helpers";
+import { AxiosResponse } from "axios";
 
 const clinicalReviewErrorMessages: ErrorMessageMap = {
     get: "Something unexpected went wrong retrieving clinical review tasks",
@@ -56,6 +57,14 @@ export async function getDicomFile(key: string): Promise<ArrayBuffer> {
     });
 
     return response.data;
+}
+
+export async function downloadStudy(taskExecutionId: string): Promise<AxiosResponse<ArrayBuffer>> {
+    const response = await http.get<ArrayBuffer>(`/clinical-review/${taskExecutionId}/study`, {
+        responseType: "arraybuffer",
+    });
+
+    return response;
 }
 
 export async function getClinicalReviewTasks(
